@@ -1,0 +1,36 @@
+NETVERSE - O UNIVERSO VIVO DAS REDES
+
+1. Extraia TODO o ZIP para uma pasta. Nao abra dentro do ZIP.
+2. Tenha Node.js 24 LTS instalado.
+3. Clique duas vezes em INICIAR-NETVERSE.bat.
+4. O navegador abre a versao compilada automaticamente.
+
+A versao compilada incluida no ZIP nao precisa de npm install.
+Nao precisa de internet para a apresentacao. Mantenha o terminal aberto.
+Ctrl+C no terminal encerra o servidor local.
+
+PARA EDITAR NO VS CODE
+Abra ABRIR-NO-VSCODE.bat ou a pasta pelo VS Code.
+No terminal integrado execute:
+  npm install
+  npm run dev
+Abra o endereco Local exibido (normalmente http://127.0.0.1:5173).
+
+Depois de editar, atualize a versao compilada com:
+  npm run build
+
+TESTES
+  npm test
+  npm run typecheck
+  npm run lint
+
+COMECE POR AQUI
+- Inicio: configure os nomes reais dos integrantes.
+- Viagem da web: clique Perder fragmento HTTP, depois Acessar pagina.
+- Use 4x para demonstracao rapida ou Proximo passo para explicar.
+- Clique em equipamentos ou pacotes; use os logs para rever decisoes.
+- Modo apresentacao oferece roteiro de nove cenarios.
+- Se o 3D for pesado, Preferencias > Baixo ou alterne o mapa 2D.
+
+Consulte README.md, APRESENTACAO.md, REQUISITOS.md e TESTING.md.
+E uma simulacao didatica, nao uma pilha TCP/IP real.
