@@ -67,3 +67,7 @@ Para testar o build usando somente o servidor estático nativo, defina `NETVERSE
 Não houve auditoria WCAG completa, teste manual com leitor de tela, comparação entre todos os navegadores, ensaio em projetor físico ou garantia de 60 FPS. Os testes de estabilidade são ciclos automatizados, não uma sessão ininterrupta de várias horas. A física, TLS e algoritmos de redes são modelos simplificados, descritos em SIMULATION.md. Os iniciadores Windows são wrappers simples; o servidor Node é verificado diretamente.
 
 O grupo ainda deve testar na máquina da apresentação, preencher seus nomes e ensaiar as falas. Uma suíte aprovada não substitui a compreensão do código.
+
+## Reformulação visual
+
+36 testes de motor, nove jornadas de navegador sobre o build isolado, typecheck, lint e build aprovados. A abertura inicia tráfego automaticamente e utiliza Motion e atlas gerado de equipamentos. O build desta atualização transforma 2.957 módulos.
