@@ -94,3 +94,7 @@ O projeto prioriza o conteúdo acadêmico e a causalidade. Não há promessa de 
 - [Assets, créditos e referências](ASSETS.md) e [alterações](CHANGELOG.md)
 
 O código, a revisão e uma arte decorativa foram desenvolvidos com auxílio de IA (Codex e geração de imagem). Isso deve ser informado na apresentação. O grupo deve estudar, testar e compreender a implementação. Os integrantes reais são cadastrados no Início; nenhum nome foi inventado. As capturas de tela acima e em `docs/screenshots` são capturas do programa funcionando, não imagens geradas.
+
+## Abertura cinematográfica
+
+O Início usa equipamentos em arte 3D gerada, Motion, conexões SVG e tráfego automático derivado do motor. Use Pausar ambiente para parar a demonstração. As aulas preservam a câmera 3D orbital.
