@@ -30,3 +30,7 @@ O PDF “Trabalho Prático - Redes Vivas”, sete páginas fornecidas pelo usuá
 - [Documentação do Vite](https://vite.dev/guide/)
 
 Não foi adicionada uma licença geral de código em nome do usuário sem escolher explicitamente os termos de distribuição. Visibilidade pública no GitHub, por si só, não equivale a licença de uso irrestrito.
+
+## Atualização visual · 13/11/2026
+
+A abertura agora usa um atlas original gerado por Imagegen (`public/assets/devices-cinematic.png`), com laptop azul, switch ciano, roteador violeta e servidor verde, sobre fundo preto. Prompt: quatro equipamentos isolados em colunas iguais, renderização 3D isométrica cinematográfica, metal detalhado, luz controlada, sem texto ou marcas. O arquivo original foi preservado sem recorte; CSS seleciona cada coluna. Motion anima os equipamentos; SVG desenha conexões e pacotes calculados a partir do motor. São representações 2.5D interativas, não uma captura de uma cena física. A exploração 3D orbital continua nas aulas.
