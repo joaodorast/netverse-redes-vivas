@@ -106,7 +106,7 @@ test("tamanhos notebook, tablet e celular preservam a largura", async ({
   for (const width of [320, 768, 1024, 1366, 1920]) {
     await page.setViewportSize({ width, height: 768 });
     await page.goto("/");
-    await expect(page.locator("canvas")).toBeVisible();
+    await expect(page.locator(".cinematic-stage")).toBeVisible();
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth <= innerWidth,
@@ -132,6 +132,10 @@ test("WebGL indisponível oferece mapa funcional", async ({ page }) => {
     } as typeof original;
   });
   await page.goto("/");
+  await page
+    .getByRole("navigation")
+    .getByRole("button", { name: /Camadas OSI/ })
+    .click();
   await expect(
     page.getByRole("img", { name: "Mapa 2D interativo da rede" }),
   ).toBeVisible();
@@ -193,7 +197,7 @@ test("mobile sem overflow, navegação e modo apresentação", async ({ page }) 
       () => document.documentElement.scrollWidth <= window.innerWidth,
     ),
   ).toBe(true);
-  await expect(page.locator("canvas")).toBeVisible();
+  await expect(page.locator(".cinematic-stage")).toBeVisible();
   await page.waitForTimeout(1500);
   await page.screenshot({
     path: "docs/screenshots/home-mobile.png",
@@ -234,12 +238,16 @@ test("recursos locais, mapa 2D e screenshot inicial", async ({ page }) => {
     return route.continue();
   });
   await page.goto("/");
-  await expect(page.locator("canvas")).toBeVisible();
+  await expect(page.locator(".cinematic-stage")).toBeVisible();
   await page.waitForTimeout(1500);
   await page.screenshot({
     path: "docs/screenshots/home-desktop.png",
     fullPage: true,
   });
+  await page
+    .getByRole("navigation")
+    .getByRole("button", { name: /Camadas OSI/ })
+    .click();
   await page.getByRole("button", { name: "Alternar mapa 2D" }).click();
   await expect(
     page.getByRole("img", { name: "Mapa 2D interativo da rede" }),
