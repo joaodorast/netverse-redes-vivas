@@ -1,3 +1,4 @@
+import CinematicNetwork from "../scenes/CinematicNetwork";
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import {
   Activity,
@@ -157,7 +158,7 @@ function Home({
           <Suspense
             fallback={<div className="scene-loading">Preparando a rede…</div>}
           >
-            <NetworkScene hero />
+            <CinematicNetwork />
           </Suspense>
           <div className="hero-visual-caption">
             <span>
