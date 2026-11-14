@@ -197,6 +197,20 @@ function Device({ d }: { d: NetworkDevice }) {
           </mesh>
         </>
       )}
+      <mesh position={[0, -0.06, 0]}>
+        <cylinderGeometry args={[0.94, 1.04, 0.12, 64]} />
+        <meshStandardMaterial color="#102334" metalness={0.85} roughness={0.22} />
+      </mesh>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.008, 0]}>
+        <ringGeometry args={[0.94, 0.96, 80]} />
+        <meshBasicMaterial color={color} transparent opacity={0.8} />
+      </mesh>
+      {d.type === "router" && [-0.44, 0.44].map(x => <group key={x} position={[x, 0.8, -0.25]} rotation={[0,0,x * -0.3]}>
+        <RoundedBox args={[0.07, 0.85, 0.07]} radius={0.025} position={[0,0.22,0]}><meshStandardMaterial color="#24344b" metalness={0.8} roughness={0.2}/></RoundedBox>
+        <mesh position={[0,0.63,0]}><sphereGeometry args={[0.045,12,8]}/><meshBasicMaterial color={color}/></mesh>
+      </group>)}
+      {d.type === "server" && Array.from({length:12},(_,i) => <mesh key={i} position={[0.405,0.42+i*0.105,0]}><boxGeometry args={[0.015,0.025,0.6]}/><meshStandardMaterial color="#080f1e"/></mesh>)}
+      {d.type === "pc" && Array.from({length:24},(_,i) => <mesh key={i} position={[-0.29+(i%8)*0.083,0.298,0.24+Math.floor(i/8)*0.065]}><boxGeometry args={[0.06,0.009,0.045]}/><meshStandardMaterial color="#81bdcf" emissive={color} emissiveIntensity={0.2}/></mesh>)}
       {(selected || receiving) && (
         <pointLight
           position={[0, 1, 0]}
@@ -360,7 +374,7 @@ function OpeningCamera({ active }: { active: boolean }) {
     elapsed.current += delta;
     const t = Math.min(1, elapsed.current / 1.8),
       ease = 1 - (1 - t) ** 3;
-    camera.position.set(14 - 6 * ease, 13 - 5 * ease, 20 - 8 * ease);
+    camera.position.set(14 - 8 * ease, 13 - 7 * ease, 20 - 11 * ease);
     camera.lookAt(0, 0, 0);
   });
   return null;
@@ -377,7 +391,7 @@ function World({
     <>
       <color attach="background" args={["#080e19"]} />
       <fog attach="fog" args={["#080e19", 20, 45]} />
-      <ambientLight intensity={0.8} />
+      <ambientLight intensity={1.35} />
       <directionalLight position={[3, 9, 4]} intensity={2.5} color="#b7d7ff" />
       <pointLight position={[-5, 5, -3]} intensity={18} color="#00aaff" />
       <pointLight position={[6, 4, 2]} intensity={14} color="#8458ff" />
@@ -431,6 +445,8 @@ function World({
           <Packet key={p.id} p={p} />
         ))}
       <OrbitControls
+        autoRotate={state.scenario === "home" && !window.matchMedia("(prefers-reduced-motion: reduce)").matches}
+        autoRotateSpeed={0.3}
         makeDefault
         minDistance={6}
         maxDistance={25}
