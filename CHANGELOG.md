@@ -13,3 +13,6 @@ As simplificações e diferenças em relação ao escopo ideal constam em REQUIS
 ## Atualização visual da abertura
 
 A tela inicial passa a iniciar tráfego automaticamente, com repetição ao terminar a jornada, controle de pausa do ambiente, equipamentos gerados em alta definição, animações Motion, conexões luminosas, órbitas e inspeção ligada aos pacotes reais. O painel exibe a explicação e a quantidade de entregas do motor. As demais áreas mantêm o laboratório 3D orbital.
+
+## Cena espacial
+A abertura agora utiliza equipamentos modelados em Three.js, bases luminosas, detalhes de portas, antenas e racks, câmera orbital e tráfego automático.
