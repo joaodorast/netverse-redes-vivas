@@ -19,3 +19,6 @@ A abertura agora utiliza equipamentos modelados em Three.js, bases luminosas, de
 
 ## Interface refinada
 Sistema visual unificado: abertura com composição editorial e cena 3D, indicadores reais de atividade, navegação com estados mais claros, painéis e controles padronizados, contraste e layouts responsivos revisados.
+
+## Experiências distintas e OSI dimensional
+OSI com origem/destino, sete camadas em perspectiva, inspeção independente e PDU sincronizada ao motor. TCP/UDP prioriza comparação; web, o navegador; diagnóstico, o terminal; segurança, regras; desempenho, gráficos; meios, escolhas físicas. Three.js carrega em um chunk separado; renderização suspensa fora da tela e em aba oculta; equipamentos estáticos usam memoização. Pacotes ganharam rastros e o ambiente 3D recebeu estrelas estáticas leves.
