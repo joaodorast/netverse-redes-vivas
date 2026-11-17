@@ -16,3 +16,6 @@ A tela inicial passa a iniciar tráfego automaticamente, com repetição ao term
 
 ## Cena espacial
 A abertura agora utiliza equipamentos modelados em Three.js, bases luminosas, detalhes de portas, antenas e racks, câmera orbital e tráfego automático.
+
+## Interface refinada
+Sistema visual unificado: abertura com composição editorial e cena 3D, indicadores reais de atividade, navegação com estados mais claros, painéis e controles padronizados, contraste e layouts responsivos revisados.
