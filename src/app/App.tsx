@@ -46,20 +46,42 @@ import {
   Metrics,
   PacketTray,
 } from "../components/Panels";
-import {
-  DiagnosticLesson,
-  GlossaryLesson,
-  Laboratory,
-  MediaLesson,
-  OsiLesson,
-  PerformanceLesson,
-  RoutingLesson,
-  SecurityLesson,
-  TcpLesson,
-  TopologyLesson,
-  TrendsLesson,
-  WebLesson,
-} from "../features/Lessons";
+const DiagnosticLesson = lazy(() =>
+  import("../features/Lessons").then((m) => ({ default: m.DiagnosticLesson })),
+);
+const GlossaryLesson = lazy(() =>
+  import("../features/Lessons").then((m) => ({ default: m.GlossaryLesson })),
+);
+const Laboratory = lazy(() =>
+  import("../features/Lessons").then((m) => ({ default: m.Laboratory })),
+);
+const MediaLesson = lazy(() =>
+  import("../features/Lessons").then((m) => ({ default: m.MediaLesson })),
+);
+const OsiLesson = lazy(() =>
+  import("../features/Lessons").then((m) => ({ default: m.OsiLesson })),
+);
+const PerformanceLesson = lazy(() =>
+  import("../features/Lessons").then((m) => ({ default: m.PerformanceLesson })),
+);
+const RoutingLesson = lazy(() =>
+  import("../features/Lessons").then((m) => ({ default: m.RoutingLesson })),
+);
+const SecurityLesson = lazy(() =>
+  import("../features/Lessons").then((m) => ({ default: m.SecurityLesson })),
+);
+const TcpLesson = lazy(() =>
+  import("../features/Lessons").then((m) => ({ default: m.TcpLesson })),
+);
+const TopologyLesson = lazy(() =>
+  import("../features/Lessons").then((m) => ({ default: m.TopologyLesson })),
+);
+const TrendsLesson = lazy(() =>
+  import("../features/Lessons").then((m) => ({ default: m.TrendsLesson })),
+);
+const WebLesson = lazy(() =>
+  import("../features/Lessons").then((m) => ({ default: m.WebLesson })),
+);
 const NetworkScene = lazy(() => import("../scenes/NetworkScene"));
 const icons = [
   Compass,
@@ -669,7 +691,10 @@ export default function App() {
             </div>
           </div>
         )}
-        <main id="main-content">
+        <main
+          id="main-content"
+          className={`experience experience-${state.scenario}`}
+        >
           {mission && (
             <MissionBar
               mission={mission}
@@ -704,9 +729,24 @@ export default function App() {
                 </p>
               </div>
               {state.scenario === "glossary" ? (
-                <GlossaryLesson />
+                <Suspense
+                  fallback={
+                    <div className="scene-loading">Abrindo o conhecimento…</div>
+                  }
+                >
+                  <GlossaryLesson />
+                </Suspense>
               ) : (
-                <>
+                <div className="experience-layout">
+                  {state.scenario === "osi" && (
+                    <div className="osi-main-controls">
+                      <Controls />
+                      <p>
+                        Inicie para acompanhar o percurso. Clique em uma camada
+                        para explorar sua função.
+                      </p>
+                    </div>
+                  )}
                   <div className="simulation-layout">
                     <div className="simulation-main">
                       <div className="scene-container">
@@ -720,7 +760,7 @@ export default function App() {
                           <NetworkScene />
                         </Suspense>
                         <Legend />
-                        <Controls />
+                        {state.scenario !== "osi" && <Controls />}
                         <PacketTray />
                       </div>
                       <Metrics />
@@ -730,9 +770,21 @@ export default function App() {
                       <Experiments />
                     </div>
                   </div>
-                  <Lesson />
-                  <Logs />
-                </>
+                  <div className="experience-content">
+                    <Suspense
+                      fallback={
+                        <div className="scene-loading">
+                          Preparando a experiência…
+                        </div>
+                      }
+                    >
+                      <Lesson />
+                    </Suspense>
+                  </div>
+                  <div className="experience-events">
+                    <Logs />
+                  </div>
+                </div>
               )}
             </>
           )}
