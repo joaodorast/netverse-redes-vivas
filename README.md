@@ -98,3 +98,6 @@ O código, a revisão e uma arte decorativa foram desenvolvidos com auxílio de 
 ## Interface e abertura 3D
 
 O Início combina apresentação, cena Three.js orbital e tráfego automático derivado do motor. A faixa de atividade mostra dispositivos e entregas reais. Use Pausar ambiente para interromper a demonstração ou arraste a cena para explorar os equipamentos. A interface compartilha estilos de navegação, controles, cartões e painéis, com composições próprias para desktop, tablet e celular e respeito à preferência por movimento reduzido.
+
+## Exploração das camadas
+Na tela OSI, use os controles no topo para acompanhar a mensagem entre origem e destino. Selecione uma camada para inspecioná-la; Seguir mensagem retoma o acompanhamento do motor. Os blocos de PDU são didáticos. As outras telas priorizam a ferramenta relevante para sua tarefa. O código 3D é carregado separadamente, com pausa de desenho fora da área visível.
