@@ -5,10 +5,17 @@ import {
   useState,
   useMemo,
   useEffect,
+  memo,
   type ReactNode,
 } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Grid, Line, OrbitControls, RoundedBox } from "@react-three/drei";
+import {
+  Grid,
+  Line,
+  OrbitControls,
+  RoundedBox,
+  Stars,
+} from "@react-three/drei";
 import { Vector3, CanvasTexture, SRGBColorSpace, type Group } from "three";
 import { Crosshair, Expand, Layers, RotateCcw } from "lucide-react";
 import { engine, useSimulation } from "../stores/useSimulation";
@@ -63,171 +70,231 @@ function Label({
     </sprite>
   );
 }
-function Device({ d }: { d: NetworkDevice }) {
-  const selected = useSimulation((s) => s.selected === d.id),
-    select = useSimulation((s) => s.select);
-  const receiving = useSimulation((s) =>
-    s.state.packets.some((p) => p.status === "transit" && p.to === d.id),
-  );
-  const color = d.active ? deviceColors[d.type] : "#6b4655";
-  return (
-    <group
-      position={d.position}
-      onClick={(e) => {
-        e.stopPropagation();
-        select(d.id);
-      }}
-    >
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.015, 0]}>
-        <ringGeometry args={[0.72, 0.75, 48]} />
-        <meshBasicMaterial
-          color={color}
-          transparent
-          opacity={selected || receiving ? 0.9 : 0.25}
-        />
-      </mesh>
-      <RoundedBox
-        args={[1.35, 0.16, 1.1]}
-        radius={0.06}
-        position={[0, 0.16, 0]}
+const Device = memo(
+  function Device({ d }: { d: NetworkDevice }) {
+    const selected = useSimulation((s) => s.selected === d.id),
+      select = useSimulation((s) => s.select);
+    const receiving = useSimulation((s) =>
+      s.state.packets.some((p) => p.status === "transit" && p.to === d.id),
+    );
+    const color = d.active ? deviceColors[d.type] : "#6b4655";
+    return (
+      <group
+        position={d.position}
+        onClick={(e) => {
+          e.stopPropagation();
+          select(d.id);
+        }}
       >
-        <meshStandardMaterial
-          color="#172739"
-          metalness={0.65}
-          roughness={0.35}
-        />
-      </RoundedBox>
-      {d.type === "pc" ? (
-        <>
-          <RoundedBox
-            args={[1.1, 0.75, 0.12]}
-            radius={0.04}
-            position={[0, 0.82, 0]}
-          >
-            <meshStandardMaterial
-              color="#26364a"
-              metalness={0.6}
-              roughness={0.3}
-            />
-          </RoundedBox>
-          <mesh position={[0, 0.83, 0.07]}>
-            <planeGeometry args={[0.92, 0.57]} />
-            <meshStandardMaterial
-              color="#0b293b"
-              emissive={color}
-              emissiveIntensity={d.active ? 0.32 : 0}
-            />
-          </mesh>
-          <mesh position={[0, 0.42, 0]}>
-            <boxGeometry args={[0.12, 0.4, 0.12]} />
-            <meshStandardMaterial color="#345066" />
-          </mesh>
-          <RoundedBox
-            args={[0.75, 0.04, 0.3]}
-            radius={0.02}
-            position={[0, 0.27, 0.33]}
-          >
-            <meshStandardMaterial color="#344a60" />
-          </RoundedBox>
-        </>
-      ) : d.type === "server" ? (
-        <>
-          <RoundedBox
-            args={[0.8, 1.6, 0.85]}
-            radius={0.06}
-            position={[0, 1, 0]}
-          >
-            <meshStandardMaterial
-              color="#1e263e"
-              metalness={0.65}
-              roughness={0.28}
-            />
-          </RoundedBox>
-          {[0.5, 0.8, 1.1, 1.4].map((y) => (
-            <group key={y}>
-              <mesh position={[0, y, 0.44]}>
-                <boxGeometry args={[0.65, 0.18, 0.03]} />
-                <meshStandardMaterial color="#35405b" />
-              </mesh>
-              <mesh position={[-0.22, y, 0.46]}>
-                <boxGeometry args={[0.05, 0.04, 0.02]} />
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.015, 0]}>
+          <ringGeometry args={[0.72, 0.75, 48]} />
+          <meshBasicMaterial
+            color={color}
+            transparent
+            opacity={selected || receiving ? 0.9 : 0.25}
+          />
+        </mesh>
+        <RoundedBox
+          args={[1.35, 0.16, 1.1]}
+          radius={0.06}
+          position={[0, 0.16, 0]}
+        >
+          <meshStandardMaterial
+            color="#172739"
+            metalness={0.65}
+            roughness={0.35}
+          />
+        </RoundedBox>
+        {d.type === "pc" ? (
+          <>
+            <RoundedBox
+              args={[1.1, 0.75, 0.12]}
+              radius={0.04}
+              position={[0, 0.82, 0]}
+            >
+              <meshStandardMaterial
+                color="#26364a"
+                metalness={0.6}
+                roughness={0.3}
+              />
+            </RoundedBox>
+            <mesh position={[0, 0.83, 0.07]}>
+              <planeGeometry args={[0.92, 0.57]} />
+              <meshStandardMaterial
+                color="#0b293b"
+                emissive={color}
+                emissiveIntensity={d.active ? 0.32 : 0}
+              />
+            </mesh>
+            <mesh position={[0, 0.42, 0]}>
+              <boxGeometry args={[0.12, 0.4, 0.12]} />
+              <meshStandardMaterial color="#345066" />
+            </mesh>
+            <RoundedBox
+              args={[0.75, 0.04, 0.3]}
+              radius={0.02}
+              position={[0, 0.27, 0.33]}
+            >
+              <meshStandardMaterial color="#344a60" />
+            </RoundedBox>
+          </>
+        ) : d.type === "server" ? (
+          <>
+            <RoundedBox
+              args={[0.8, 1.6, 0.85]}
+              radius={0.06}
+              position={[0, 1, 0]}
+            >
+              <meshStandardMaterial
+                color="#1e263e"
+                metalness={0.65}
+                roughness={0.28}
+              />
+            </RoundedBox>
+            {[0.5, 0.8, 1.1, 1.4].map((y) => (
+              <group key={y}>
+                <mesh position={[0, y, 0.44]}>
+                  <boxGeometry args={[0.65, 0.18, 0.03]} />
+                  <meshStandardMaterial color="#35405b" />
+                </mesh>
+                <mesh position={[-0.22, y, 0.46]}>
+                  <boxGeometry args={[0.05, 0.04, 0.02]} />
+                  <meshBasicMaterial color={color} />
+                </mesh>
+                <mesh position={[0.12, y, 0.46]}>
+                  <boxGeometry args={[0.23, 0.025, 0.02]} />
+                  <meshBasicMaterial color={color} />
+                </mesh>
+              </group>
+            ))}
+          </>
+        ) : d.type === "firewall" ? (
+          <>
+            <RoundedBox
+              args={[0.3, 1.4, 1]}
+              radius={0.04}
+              position={[0, 0.9, 0]}
+            >
+              <meshStandardMaterial color="#50372c" metalness={0.5} />
+            </RoundedBox>
+            {[0.45, 0.75, 1.05, 1.35].map((y) => (
+              <mesh key={y} position={[0.17, y, 0]}>
+                <boxGeometry args={[0.02, 0.025, 0.85]} />
                 <meshBasicMaterial color={color} />
               </mesh>
-              <mesh position={[0.12, y, 0.46]}>
-                <boxGeometry args={[0.23, 0.025, 0.02]} />
+            ))}
+          </>
+        ) : (
+          <>
+            <RoundedBox
+              args={[1.12, 0.4, 0.8]}
+              radius={0.07}
+              position={[0, 0.5, 0]}
+            >
+              <meshStandardMaterial
+                color="#213044"
+                metalness={0.7}
+                roughness={0.3}
+              />
+            </RoundedBox>
+            {[-0.38, -0.13, 0.13, 0.38].map((x) => (
+              <mesh key={x} position={[x, 0.5, 0.41]}>
+                <boxGeometry args={[0.12, 0.08, 0.025]} />
+                <meshBasicMaterial color={color} />
+              </mesh>
+            ))}
+            <mesh position={[0, 0.715, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+              <ringGeometry args={[0.13, 0.18, 4]} />
+              <meshBasicMaterial color={color} />
+            </mesh>
+          </>
+        )}
+        <mesh position={[0, -0.06, 0]}>
+          <cylinderGeometry args={[0.94, 1.04, 0.12, 64]} />
+          <meshStandardMaterial
+            color="#102334"
+            metalness={0.85}
+            roughness={0.22}
+          />
+        </mesh>
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.008, 0]}>
+          <ringGeometry args={[0.94, 0.96, 80]} />
+          <meshBasicMaterial color={color} transparent opacity={0.8} />
+        </mesh>
+        {d.type === "router" &&
+          [-0.44, 0.44].map((x) => (
+            <group
+              key={x}
+              position={[x, 0.8, -0.25]}
+              rotation={[0, 0, x * -0.3]}
+            >
+              <RoundedBox
+                args={[0.07, 0.85, 0.07]}
+                radius={0.025}
+                position={[0, 0.22, 0]}
+              >
+                <meshStandardMaterial
+                  color="#24344b"
+                  metalness={0.8}
+                  roughness={0.2}
+                />
+              </RoundedBox>
+              <mesh position={[0, 0.63, 0]}>
+                <sphereGeometry args={[0.045, 12, 8]} />
                 <meshBasicMaterial color={color} />
               </mesh>
             </group>
           ))}
-        </>
-      ) : d.type === "firewall" ? (
-        <>
-          <RoundedBox args={[0.3, 1.4, 1]} radius={0.04} position={[0, 0.9, 0]}>
-            <meshStandardMaterial color="#50372c" metalness={0.5} />
-          </RoundedBox>
-          {[0.45, 0.75, 1.05, 1.35].map((y) => (
-            <mesh key={y} position={[0.17, y, 0]}>
-              <boxGeometry args={[0.02, 0.025, 0.85]} />
-              <meshBasicMaterial color={color} />
+        {d.type === "server" &&
+          Array.from({ length: 12 }, (_, i) => (
+            <mesh key={i} position={[0.405, 0.42 + i * 0.105, 0]}>
+              <boxGeometry args={[0.015, 0.025, 0.6]} />
+              <meshStandardMaterial color="#080f1e" />
             </mesh>
           ))}
-        </>
-      ) : (
-        <>
-          <RoundedBox
-            args={[1.12, 0.4, 0.8]}
-            radius={0.07}
-            position={[0, 0.5, 0]}
-          >
-            <meshStandardMaterial
-              color="#213044"
-              metalness={0.7}
-              roughness={0.3}
-            />
-          </RoundedBox>
-          {[-0.38, -0.13, 0.13, 0.38].map((x) => (
-            <mesh key={x} position={[x, 0.5, 0.41]}>
-              <boxGeometry args={[0.12, 0.08, 0.025]} />
-              <meshBasicMaterial color={color} />
+        {d.type === "pc" &&
+          Array.from({ length: 24 }, (_, i) => (
+            <mesh
+              key={i}
+              position={[
+                -0.29 + (i % 8) * 0.083,
+                0.298,
+                0.24 + Math.floor(i / 8) * 0.065,
+              ]}
+            >
+              <boxGeometry args={[0.06, 0.009, 0.045]} />
+              <meshStandardMaterial
+                color="#81bdcf"
+                emissive={color}
+                emissiveIntensity={0.2}
+              />
             </mesh>
           ))}
-          <mesh position={[0, 0.715, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-            <ringGeometry args={[0.13, 0.18, 4]} />
-            <meshBasicMaterial color={color} />
-          </mesh>
-        </>
-      )}
-      <mesh position={[0, -0.06, 0]}>
-        <cylinderGeometry args={[0.94, 1.04, 0.12, 64]} />
-        <meshStandardMaterial color="#102334" metalness={0.85} roughness={0.22} />
-      </mesh>
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.008, 0]}>
-        <ringGeometry args={[0.94, 0.96, 80]} />
-        <meshBasicMaterial color={color} transparent opacity={0.8} />
-      </mesh>
-      {d.type === "router" && [-0.44, 0.44].map(x => <group key={x} position={[x, 0.8, -0.25]} rotation={[0,0,x * -0.3]}>
-        <RoundedBox args={[0.07, 0.85, 0.07]} radius={0.025} position={[0,0.22,0]}><meshStandardMaterial color="#24344b" metalness={0.8} roughness={0.2}/></RoundedBox>
-        <mesh position={[0,0.63,0]}><sphereGeometry args={[0.045,12,8]}/><meshBasicMaterial color={color}/></mesh>
-      </group>)}
-      {d.type === "server" && Array.from({length:12},(_,i) => <mesh key={i} position={[0.405,0.42+i*0.105,0]}><boxGeometry args={[0.015,0.025,0.6]}/><meshStandardMaterial color="#080f1e"/></mesh>)}
-      {d.type === "pc" && Array.from({length:24},(_,i) => <mesh key={i} position={[-0.29+(i%8)*0.083,0.298,0.24+Math.floor(i/8)*0.065]}><boxGeometry args={[0.06,0.009,0.045]}/><meshStandardMaterial color="#81bdcf" emissive={color} emissiveIntensity={0.2}/></mesh>)}
-      {(selected || receiving) && (
-        <pointLight
-          position={[0, 1, 0]}
+        {(selected || receiving) && (
+          <pointLight
+            position={[0, 1, 0]}
+            color={color}
+            intensity={2}
+            distance={3}
+          />
+        )}
+        <Label
+          title={d.name}
+          subtitle={d.ip}
           color={color}
-          intensity={2}
-          distance={3}
+          position={[0, -0.2, 1]}
         />
-      )}
-      <Label
-        title={d.name}
-        subtitle={d.ip}
-        color={color}
-        position={[0, -0.2, 1]}
-      />
-    </group>
-  );
-}
+      </group>
+    );
+  },
+  (a, b) =>
+    a.d.id === b.d.id &&
+    a.d.active === b.d.active &&
+    a.d.name === b.d.name &&
+    a.d.ip === b.d.ip &&
+    a.d.type === b.d.type &&
+    a.d.position.every((v, i) => v === b.d.position[i]),
+);
 function Packet({ p }: { p: NetworkPacket }) {
   const ref = useRef<Group>(null);
   const select = useSimulation((s) => s.select);
@@ -284,6 +351,12 @@ function Packet({ p }: { p: NetworkPacket }) {
           emissiveIntensity={2}
         />
       </mesh>
+      {[1, 2, 3, 4].map((i) => (
+        <mesh key={i} position={[0, 0, -i * 0.12]}>
+          <sphereGeometry args={[0.075 / i, 8, 6]} />
+          <meshBasicMaterial color={color} transparent opacity={0.5 / i} />
+        </mesh>
+      ))}
       {p.label === "RÁDIO" &&
         [0.25, 0.4, 0.55].map((r) => (
           <mesh key={r} rotation={[-Math.PI / 2, 0, 0]}>
@@ -391,6 +464,15 @@ function World({
     <>
       <color attach="background" args={["#080e19"]} />
       <fog attach="fog" args={["#080e19", 20, 45]} />
+      <Stars
+        radius={65}
+        depth={30}
+        count={350}
+        factor={2}
+        saturation={0}
+        fade
+        speed={0}
+      />
       <ambientLight intensity={1.35} />
       <directionalLight position={[3, 9, 4]} intensity={2.5} color="#b7d7ff" />
       <pointLight position={[-5, 5, -3]} intensity={18} color="#00aaff" />
@@ -445,7 +527,10 @@ function World({
           <Packet key={p.id} p={p} />
         ))}
       <OrbitControls
-        autoRotate={state.scenario === "home" && !window.matchMedia("(prefers-reduced-motion: reduce)").matches}
+        autoRotate={
+          state.scenario === "home" &&
+          !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        }
         autoRotateSpeed={0.3}
         makeDefault
         minDistance={6}
@@ -580,6 +665,25 @@ class SceneBoundary extends Component<
   }
 }
 export default function NetworkScene({ hero = false }: { hero?: boolean }) {
+  const container = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(true);
+  useEffect(() => {
+    let intersecting = true;
+    const update = () => setVisible(intersecting && !document.hidden);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        intersecting = entry.isIntersecting;
+        update();
+      },
+      { rootMargin: "80px" },
+    );
+    if (container.current) observer.observe(container.current);
+    document.addEventListener("visibilitychange", update);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", update);
+    };
+  }, []);
   const [flat, setFlat] = useState(false),
     [cameraKey, setCameraKey] = useState(0);
   const [opening, setOpening] = useState(
@@ -592,7 +696,10 @@ export default function NetworkScene({ hero = false }: { hero?: boolean }) {
   }, [opening]);
   const { quality, follow, setFollow, selected, state } = useSimulation();
   return (
-    <div className={`network-scene ${hero ? "hero-scene" : ""}`}>
+    <div
+      ref={container}
+      className={`network-scene ${hero ? "hero-scene" : ""}`}
+    >
       <div className="scene-heading">
         <span>
           <i className="status-dot" /> REDE VIRTUAL AO VIVO
@@ -611,6 +718,7 @@ export default function NetworkScene({ hero = false }: { hero?: boolean }) {
             }
           >
             <Canvas
+              frameloop={visible ? "always" : "never"}
               key={cameraKey}
               camera={{ position: [8, 8, 12], fov: hero ? 60 : 42 }}
               dpr={
