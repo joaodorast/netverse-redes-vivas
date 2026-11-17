@@ -95,6 +95,6 @@ O projeto prioriza o conteúdo acadêmico e a causalidade. Não há promessa de 
 
 O código, a revisão e uma arte decorativa foram desenvolvidos com auxílio de IA (Codex e geração de imagem). Isso deve ser informado na apresentação. O grupo deve estudar, testar e compreender a implementação. Os integrantes reais são cadastrados no Início; nenhum nome foi inventado. As capturas de tela acima e em `docs/screenshots` são capturas do programa funcionando, não imagens geradas.
 
-## Abertura cinematográfica
+## Interface e abertura 3D
 
-O Início usa equipamentos em arte 3D gerada, Motion, conexões SVG e tráfego automático derivado do motor. Use Pausar ambiente para parar a demonstração. As aulas preservam a câmera 3D orbital.
+O Início combina apresentação, cena Three.js orbital e tráfego automático derivado do motor. A faixa de atividade mostra dispositivos e entregas reais. Use Pausar ambiente para interromper a demonstração ou arraste a cena para explorar os equipamentos. A interface compartilha estilos de navegação, controles, cartões e painéis, com composições próprias para desktop, tablet e celular e respeito à preferência por movimento reduzido.
