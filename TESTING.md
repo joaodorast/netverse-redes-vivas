@@ -71,3 +71,5 @@ O grupo ainda deve testar na máquina da apresentação, preencher seus nomes e 
 ## Reformulação visual
 
 36 testes de motor, nove jornadas de navegador sobre o build isolado, typecheck, lint e build aprovados. A abertura inicia tráfego automaticamente e utiliza Motion e atlas gerado de equipamentos. O build desta atualização transforma 2.957 módulos.
+## Revisão da interface — 17/11/2026
+Build e lint aprovados. As sete jornadas funcionais passaram; após corrigir uma largura herdada do palco, passaram também as verificações em 320, 768, 1024, 1366 e 1920 pixels e a jornada mobile. Capturas de desktop, notebook e celular atualizadas. A simulação não foi alterada nesta revisão.
