@@ -16,100 +16,16 @@ import {
   Plus,
   Trash2,
   Search,
-  ArrowDown,
-  ArrowUp,
   Download,
   Upload,
   Move,
 } from "lucide-react";
 import { act, engine, useSimulation } from "../stores/useSimulation";
-import { layers, glossary, questions } from "../data/content";
+import { glossary, questions } from "../data/content";
 import { MacTable, ProtocolSelect } from "../components/Panels";
 import { device } from "../engine/network";
 import type { DeviceType, FirewallRule } from "../engine/types";
-export function OsiLesson() {
-  const { state, technical } = useSimulation();
-  const [selected, setSelected] = useState(7);
-  const layer = layers.find((l) => l.n === selected)!;
-  return (
-    <section className="panel lesson">
-      <div className="panel-header">
-        <h3>Uma mensagem, duas formas de organizar</h3>
-        <span className="chip">
-          {state.osiDirection === "down" ? (
-            <ArrowDown size={13} />
-          ) : (
-            <ArrowUp size={13} />
-          )}{" "}
-          {state.osiDirection === "down"
-            ? "Encapsulamento"
-            : "Desencapsulamento"}
-        </span>
-      </div>
-      <div className="osi-layout">
-        <div>
-          <div className="model-head">
-            <span>MODELO OSI</span>
-            <span>TCP / IP</span>
-          </div>
-          <div className="osi-columns">
-            <div className="osi-model">
-              {layers.map((l) => (
-                <button
-                  key={l.n}
-                  className={`${state.osiLayer === l.n ? "current" : ""} ${selected === l.n ? "chosen" : ""}`}
-                  onClick={() => setSelected(l.n)}
-                >
-                  <b>{l.n}</b>
-                  <span>
-                    {l.name}
-                    <small>{l.pdu}</small>
-                  </span>
-                </button>
-              ))}
-            </div>
-            <div className="tcp-model">
-              <span className={state.osiLayer >= 5 ? "current" : ""}>
-                Aplicação<small>OSI 5–7</small>
-              </span>
-              <span className={state.osiLayer === 4 ? "current" : ""}>
-                Transporte<small>OSI 4</small>
-              </span>
-              <span className={state.osiLayer === 3 ? "current" : ""}>
-                Internet<small>OSI 3</small>
-              </span>
-              <span className={state.osiLayer <= 2 ? "current" : ""}>
-                Acesso à rede<small>OSI 1–2</small>
-              </span>
-            </div>
-          </div>
-        </div>
-        <div className="layer-detail">
-          <span className="eyebrow">CAMADA {layer.n}</span>
-          <h2>{layer.name}</h2>
-          <p>{technical ? layer.text : layer.analogy}</p>
-          {!technical && <p className="micro">{layer.text}</p>}
-          <span className="micro cyan">{layer.protocol}</span>
-          <div className="encapsulation">
-            {state.osiLayer <= 2 && <span>Ethernet</span>}
-            {state.osiLayer <= 3 && <span>IP</span>}
-            {state.osiLayer <= 4 && <span>TCP</span>}
-            <b>{state.config.message}</b>
-          </div>
-          {state.osiLayer === 1 && (
-            <code className="bit-stream">
-              01001111 01101100 11000011 10100001
-            </code>
-          )}
-          <p className="micro">
-            Estrutura ilustrativa no fio. Cabeçalhos são acrescentados pelas
-            camadas pertinentes; bits representam o quadro como sinais.
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
+export { OsiWorkbench as OsiLesson } from "./OsiWorkbench";
 export function TcpLesson() {
   const { state, select } = useSimulation();
   return (
