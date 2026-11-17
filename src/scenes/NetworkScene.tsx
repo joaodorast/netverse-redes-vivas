@@ -612,7 +612,7 @@ export default function NetworkScene({ hero = false }: { hero?: boolean }) {
           >
             <Canvas
               key={cameraKey}
-              camera={{ position: [8, 8, 12], fov: 42 }}
+              camera={{ position: [8, 8, 12], fov: hero ? 60 : 42 }}
               dpr={
                 quality === "Baixo" ? 1 : quality === "Alto" ? [1, 2] : [1, 1.5]
               }
