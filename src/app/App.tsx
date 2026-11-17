@@ -153,6 +153,23 @@ function Home({
             <span className="tiny-network">◇—◇—◇</span>
             <span>Explore. Conecte. Transmita. Descubra.</span>
           </div>
+          <div
+            className="experience-facts"
+            aria-label="Recursos do laboratório"
+          >
+            <div>
+              <b>12</b>
+              <span>áreas de conhecimento</span>
+            </div>
+            <div>
+              <b>06</b>
+              <span>missões para resolver</span>
+            </div>
+            <div>
+              <b>3D</b>
+              <span>exploração em tempo real</span>
+            </div>
+          </div>
         </div>
         <div className="hero-visual">
           <Suspense
