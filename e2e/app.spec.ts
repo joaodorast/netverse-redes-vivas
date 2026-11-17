@@ -290,3 +290,40 @@ test("missões verificam resultado, oferecem dicas e preservam pontuação", asy
     "1/6 concluídos · 100 pontos verificados",
   );
 });
+
+test("OSI tem origem e destino, inspeção independente e acompanhamento do motor", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page
+    .getByRole("navigation")
+    .getByRole("button", { name: /Camadas OSI/ })
+    .click();
+  await expect(page.locator(".osi-slab")).toHaveCount(14);
+  await page
+    .getByRole("button", { name: "Origem: camada 3 Rede", exact: true })
+    .click();
+  await expect(page.locator(".osi-detail-title h3")).toHaveText("Rede");
+  await page.getByRole("button", { name: "Seguir mensagem" }).click();
+  await page
+    .getByRole("button", { name: "Próximo passo", exact: true })
+    .click();
+  await expect(page.locator(".osi-slab.is-active")).toHaveCount(1);
+  await expect(page.locator(".osi-inspector-top")).toContainText(
+    "ACOMPANHANDO",
+  );
+  await page.screenshot({
+    path: "docs/screenshots/osi-desktop.png",
+    fullPage: true,
+  });
+  await page.setViewportSize({ width: 390, height: 844 });
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+  await page.screenshot({
+    path: "docs/screenshots/osi-mobile.png",
+    fullPage: true,
+  });
+});
