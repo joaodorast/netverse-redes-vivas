@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import NetworkScene from "./NetworkScene";
+import { lazy, Suspense, useEffect, useState } from "react";
+const NetworkScene = lazy(() => import("./NetworkScene"));
 import { act, engine, useSimulation } from "../stores/useSimulation";
 export default function CinematicNetwork() {
   const [automatic, setAutomatic] = useState(true);
@@ -18,7 +18,13 @@ export default function CinematicNetwork() {
   }, [automatic]);
   return (
     <div className="cinematic-stage spatial-stage">
-      <NetworkScene hero />
+      <Suspense
+        fallback={
+          <div className="scene-loading">Preparando o laboratório 3D…</div>
+        }
+      >
+        <NetworkScene hero />
+      </Suspense>
       <div className="scene-telemetry" aria-label="Estado atual da rede">
         <span>
           <i className={state.running ? "status-dot" : ""} />
