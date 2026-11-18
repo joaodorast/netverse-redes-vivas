@@ -106,3 +106,7 @@ Na tela OSI, use os controles no topo para acompanhar a mensagem entre origem e 
 No Início, use **Entrar no laboratório** para abrir a exploração imersiva. Arraste para orientar a câmera, role para aproximar e, no computador, use W/A/S/D para se deslocar. Selecione equipamentos diretamente na cena ou na faixa inferior para comparar IP, MAC e função. A missão acompanha três inspeções e uma entrega real do motor. Esc ou Sair do laboratório retorna à interface. A cena ao fundo suspende seu desenho enquanto o modo está aberto.
 
 As jornadas da página inicial permitem escolher um objetivo e explorar suas três áreas. A busca no topo aceita Ctrl+K e navegação por teclado. OSI inclui perguntas com feedback e acesso direto à camada pertinente.
+
+## Prévia do mundo persistente
+
+O mundo oferece navegação por zonas, WASD/setas, arraste, aproximação e pointer lock opcional (Esc libera o mouse). Use Terminal da zona para acessar experiências e controles completos; Voltar ao mundo fecha o terminal. Visão simplificada retorna ao layout acessível existente. P mostra instrumentação real. Controles de movimento também aparecem por toque. A etapa ainda é um protótipo: veja WORLD_PROGRESS.md para as funcionalidades e verificações pendentes.
