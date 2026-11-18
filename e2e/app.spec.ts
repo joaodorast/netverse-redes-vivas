@@ -1,5 +1,11 @@
 import { test, expect } from "@playwright/test";
 import { readFile } from "node:fs/promises";
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() =>
+    localStorage.setItem("netverse-view", "simple"),
+  );
+});
+
 test("12 áreas, controles, inspeção, terminal e quiz", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
@@ -399,3 +405,56 @@ test("previsão OSI dá feedback e conecta a resposta à camada", async ({
   await quiz.getByRole("button", { name: /Próxima pergunta/ }).click();
   await expect(quiz).toContainText("2 DE 3");
 });
+
+test("mundo mantém um Canvas entre as 12 zonas e preserva terminais", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page
+    .getByRole("button", { name: "Entrar no mundo 3D", exact: true })
+    .click();
+  await expect(page.locator(".world-lab canvas")).toHaveCount(1);
+  const original = await page.locator(".world-lab canvas").elementHandle();
+  const nav = page.getByRole("navigation", { name: "Áreas do simulador" });
+  for (const name of [
+    "Camadas OSI",
+    "TCP × UDP",
+    "Viagem da web",
+    "Switch e roteador",
+    "Topologias",
+    "Meios físicos",
+    "Diagnóstico",
+    "Segurança",
+    "Desempenho",
+    "Tendências",
+    "Glossário e quiz",
+  ]) {
+    await nav.getByRole("button", { name: new RegExp(name) }).click();
+    await expect(page.locator(".world-lab canvas")).toHaveCount(1);
+    expect(await original?.evaluate((e) => e.isConnected)).toBe(true);
+  }
+  await page
+    .getByRole("button", { name: "Terminal da zona", exact: true })
+    .click();
+  await expect(page.locator(".knowledge-layout")).toBeVisible();
+  await page
+    .getByRole("button", { name: "Voltar ao mundo", exact: true })
+    .click();
+  await page.screenshot({ path: "docs/screenshots/world-glossary.png" });
+});
+
+test("instrumenta as 12 zonas com contadores reais do renderer",async({page})=>{
+ await page.goto('/');await page.getByRole('button',{name:'Entrar no mundo 3D',exact:true}).click();await page.getByRole('button',{name:'P / Métricas 3D',exact:true}).click();
+ const results=[];
+ const nav=page.getByRole('navigation',{name:'Áreas do simulador'});
+ const names=await nav.getByRole('button').allTextContents();
+ for(let i=0;i<names.length;i++){
+  await nav.getByRole('button').nth(i).click();
+  await page.waitForTimeout(1800);
+  results.push({zone:names[i].trim(),renderer:await page.locator('.world-profiler').innerText()});
+  await page.screenshot({path:`docs/screenshots/world-zone-${i}.png`});
+ }
+ const {writeFile}=await import('node:fs/promises');await writeFile('docs/audit/world-renderer.json',JSON.stringify({environment:'Chrome headless local, hardware não certificado, amostra curta por zona; não é benchmark mobile nem estabilidade de 30 minutos',results},null,2));
+});
+
+test("mundo sem WebGL mantém fallback e relógio funcional",async({page})=>{await page.addInitScript(()=>{const get=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(type:string,...args:unknown[]){if(type.includes('webgl'))return null;return Reflect.apply(get,this,[type,...args]);} as typeof get;});await page.goto('/');await page.getByRole('button',{name:'Entrar no mundo 3D',exact:true}).click();await expect(page.locator('.world-fallback')).toBeVisible();await page.getByRole('navigation').getByRole('button',{name:/Camadas OSI/}).click();await page.getByRole('button',{name:'Executar experiência',exact:true}).click();await expect(page.locator('.world-task')).not.toContainText('Sua rede está pronta');});
