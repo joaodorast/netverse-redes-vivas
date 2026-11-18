@@ -1,3 +1,6 @@
+import { Matrix4, type InstancedMesh } from "three";
+import { useContext } from "react";
+import { WorldMode } from "../world/mode";
 import {
   Component,
   Suspense,
@@ -68,6 +71,33 @@ function Label({
     <sprite position={position} scale={[2.25, 0.56, 1]}>
       <spriteMaterial map={texture} transparent depthTest={false} />
     </sprite>
+  );
+}
+function InstanceBoxes({
+  positions,
+  size,
+  color,
+}: {
+  positions: [number, number, number][];
+  size: [number, number, number];
+  color: string;
+}) {
+  const ref = useRef<InstancedMesh>(null);
+  useEffect(() => {
+    if (!ref.current) return;
+    const m = new Matrix4();
+    positions.forEach((p, i) => {
+      m.makeTranslation(...p);
+      ref.current!.setMatrixAt(i, m);
+    });
+    ref.current.instanceMatrix.needsUpdate = true;
+    ref.current.computeBoundingSphere();
+  }, [positions]);
+  return (
+    <instancedMesh ref={ref} args={[undefined, undefined, positions.length]}>
+      <boxGeometry args={size} />
+      <meshStandardMaterial color={color} metalness={0.35} roughness={0.5} />
+    </instancedMesh>
   );
 }
 const Device = memo(
@@ -262,31 +292,28 @@ const Device = memo(
               </mesh>
             </group>
           ))}
-        {d.type === "server" &&
-          Array.from({ length: 12 }, (_, i) => (
-            <mesh key={i} position={[0.405, 0.42 + i * 0.105, 0]}>
-              <boxGeometry args={[0.015, 0.025, 0.6]} />
-              <meshStandardMaterial color="#080f1e" />
-            </mesh>
-          ))}
-        {d.type === "pc" &&
-          Array.from({ length: 24 }, (_, i) => (
-            <mesh
-              key={i}
-              position={[
-                -0.29 + (i % 8) * 0.083,
-                0.298,
-                0.24 + Math.floor(i / 8) * 0.065,
-              ]}
-            >
-              <boxGeometry args={[0.06, 0.009, 0.045]} />
-              <meshStandardMaterial
-                color="#81bdcf"
-                emissive={color}
-                emissiveIntensity={0.2}
-              />
-            </mesh>
-          ))}
+        {d.type === "server" && (
+          <InstanceBoxes
+            positions={Array.from({ length: 12 }, (_, i) => [
+              0.405,
+              0.42 + i * 0.105,
+              0,
+            ])}
+            size={[0.015, 0.025, 0.6]}
+            color="#080f1e"
+          />
+        )}
+        {d.type === "pc" && (
+          <InstanceBoxes
+            positions={Array.from({ length: 24 }, (_, i) => [
+              -0.29 + (i % 8) * 0.083,
+              0.298,
+              0.24 + Math.floor(i / 8) * 0.065,
+            ])}
+            size={[0.06, 0.009, 0.045]}
+            color="#81bdcf"
+          />
+        )}
         {(selected || receiving) && (
           <pointLight
             position={[0, 1, 0]}
@@ -822,7 +849,7 @@ function WalkCamera() {
   });
   return null;
 }
-export default function NetworkScene({
+function LegacyNetworkScene({
   hero = false,
   immersive = false,
 }: {
@@ -972,4 +999,13 @@ export default function NetworkScene({
       </div>
     </div>
   );
+}
+
+export { Device, Packet, Label, Fallback, SceneBoundary };
+export default function NetworkScene(props: {
+  hero?: boolean;
+  immersive?: boolean;
+}) {
+  const world = useContext(WorldMode);
+  return world ? <Fallback /> : <LegacyNetworkScene {...props} />;
 }

@@ -1,0 +1,2007 @@
+{
+  "files": [
+    {
+      "file": "APRESENTACAO.md",
+      "lines": 33,
+      "bytes": 3567,
+      "sha256": "000760fe37d34005207a196fe14fe61254c2a08fca073c7cd028d45e22c77fc3",
+      "exports": [],
+      "headings": [
+        "Apresentação · 18/11/2026",
+        "Preparação na máquina da sala",
+        "Perguntas prováveis"
+      ]
+    },
+    {
+      "file": "ARCHITECTURE.md",
+      "lines": 39,
+      "bytes": 3150,
+      "sha256": "3c8508b4b84004dd5f49907076184bb2ebdcb94ec96fc8b1faeb9721f7a52a90",
+      "exports": [],
+      "headings": [
+        "Arquitetura",
+        "Módulos",
+        "Invariantes",
+        "Limites de recursos"
+      ]
+    },
+    {
+      "file": "ASSETS.md",
+      "lines": 36,
+      "bytes": 3596,
+      "sha256": "1579c1a8bccb0dbe7fad60f0b4b20bd85420e0b4c3078d43824749b2ccc21074",
+      "exports": [],
+      "headings": [
+        "Assets, dependências e créditos",
+        "Arte original de apoio",
+        "Código visual",
+        "Bibliotecas",
+        "Referências",
+        "Atualização visual · 13/11/2026"
+      ]
+    },
+    {
+      "file": "CHANGELOG.md",
+      "lines": 27,
+      "bytes": 2463,
+      "sha256": "c62115fc6328019dddb52cc6f9955e4c9e8b8558136d6cd43944ee93984ebf2c",
+      "exports": [],
+      "headings": [
+        "Alterações",
+        "1.0.0 · 2026-11-13",
+        "Atualização visual da abertura",
+        "Cena espacial",
+        "Interface refinada",
+        "Experiências distintas e OSI dimensional",
+        "Laboratório imersivo e participação"
+      ]
+    },
+    {
+      "file": "CONTRIBUTING.md",
+      "lines": 20,
+      "bytes": 1454,
+      "sha256": "20fd1321296128ddbe621c6b69e1a1021b1d89b62cba54b42063b3e9117da585",
+      "exports": [],
+      "headings": [
+        "Contribuição",
+        "Regra de histórico"
+      ]
+    },
+    {
+      "file": "e2e/app.spec.ts",
+      "lines": 401,
+      "bytes": 14626,
+      "sha256": "1b176cbfce9414feed0fa2f484dd71757787c1c28dd7a6b62858154eaa4194e7",
+      "exports": [],
+      "headings": []
+    },
+    {
+      "file": "eslint.config.js",
+      "lines": 12,
+      "bytes": 401,
+      "sha256": "69dc733756bd4674f8d957d0dbdd1edcaf741f3576be82d09810b8cf68391718",
+      "exports": [],
+      "headings": []
+    },
+    {
+      "file": "GUIA-DO-GRUPO.md",
+      "lines": 29,
+      "bytes": 2291,
+      "sha256": "39473483d7cdd1a8b73ceaede2a76985d7dd6a28de4a046148532e6d9a265e98",
+      "exports": [],
+      "headings": [
+        "Como compreender e explicar o código",
+        "Percurso de leitura",
+        "Exercícios de domínio",
+        "Vocabulário para a apresentação"
+      ]
+    },
+    {
+      "file": "index.html",
+      "lines": 17,
+      "bytes": 523,
+      "sha256": "37464587f8b80aec27d123a9680ae9632723c442e31783f20603c3669c559509",
+      "exports": [],
+      "headings": []
+    },
+    {
+      "file": "INOVACOES.md",
+      "lines": 17,
+      "bytes": 1955,
+      "sha256": "1c9ef94a50cc956d7f92b0c04d2d3cdc147690a642d104c8b3307d7b7c2d3969",
+      "exports": [],
+      "headings": [
+        "Inovações implementadas",
+        "Propostas futuras, não entregues como funcionalidades"
+      ]
+    },
+    {
+      "file": "package.json",
+      "lines": 47,
+      "bytes": 1315,
+      "sha256": "3868531df60bda3f31a627790fce510a8f6915340669dea4c86a3800a2b08038",
+      "exports": [],
+      "headings": []
+    },
+    {
+      "file": "playwright.config.ts",
+      "lines": 32,
+      "bytes": 940,
+      "sha256": "eb5b1d5e4d5b1fc68b425c5d6b7359b42d8b8e3f8b9b7acb9add8a6608accf58",
+      "exports": [],
+      "headings": []
+    },
+    {
+      "file": "README.md",
+      "lines": 108,
+      "bytes": 8301,
+      "sha256": "f50712c4b51385b1466e0781d8e613f9ba08af00987c3587836cf0cbcf34d2bd",
+      "exports": [],
+      "headings": [
+        "NETVERSE · O universo vivo das redes",
+        "Abrir a entrega ZIP",
+        "Desenvolver no VS Code",
+        "O que explorar",
+        "Como usar",
+        "Arquitetura e stack",
+        "Precisão e limites",
+        "Documentação e transparência",
+        "Interface e abertura 3D",
+        "Exploração das camadas",
+        "Entre no laboratório"
+      ]
+    },
+    {
+      "file": "REQUISITOS.md",
+      "lines": 60,
+      "bytes": 8115,
+      "sha256": "8182e16db62f2aeff14760bfdd793f097981be603ebbbef6dc67d56333076345",
+      "exports": [],
+      "headings": [
+        "Matriz de requisitos e rastreabilidade",
+        "Decisões de interpretação",
+        "Contrato acadêmico",
+        "Ampliações do prompt"
+      ]
+    },
+    {
+      "file": "SIMULATION.md",
+      "lines": 59,
+      "bytes": 7192,
+      "sha256": "fa913c9ab9e2e7f3162b883e54309fd6bc9c15723d968d4b10725f7b632698a4",
+      "exports": [],
+      "headings": [
+        "Modelo de simulação e simplificações",
+        "Relógio e unidades",
+        "DNS, TCP, UDP e HTTP",
+        "OSI e TCP/IP",
+        "Comutação e roteamento",
+        "Topologias",
+        "Meios",
+        "Diagnóstico",
+        "Segurança",
+        "Nuvem, IoT e SDN",
+        "Referências primárias"
+      ]
+    },
+    {
+      "file": "src/app/App.tsx",
+      "lines": 799,
+      "bytes": 25797,
+      "sha256": "7caee066c09f888c6cb602228c73e4ba5508c40f747ef2ce176095ed56ff7888",
+      "exports": [
+        "App"
+      ],
+      "headings": []
+    },
+    {
+      "file": "src/components/Missions.tsx",
+      "lines": 104,
+      "bytes": 2779,
+      "sha256": "08ad571b6068719a072791dbe3a2980b73ea139990ab3cca0207305034f4b5ba",
+      "exports": [
+        "MissionPicker",
+        "MissionBar"
+      ],
+      "headings": []
+    },
+    {
+      "file": "src/components/Panels.tsx",
+      "lines": 785,
+      "bytes": 23642,
+      "sha256": "0e6109dbbb9066f741bbe79e685fbc8c29b4c0bf9c99655c084321c47b1ea205",
+      "exports": [
+        "Controls",
+        "Explanation",
+        "Slider",
+        "Toggle",
+        "Experiments",
+        "Metrics",
+        "Logs",
+        "PacketTray",
+        "Legend",
+        "Inspector",
+        "MacTable",
+        "ProtocolSelect"
+      ],
+      "headings": []
+    },
+    {
+      "file": "src/components/StudioInteractions.tsx",
+      "lines": 257,
+      "bytes": 8049,
+      "sha256": "561bb1e3609c3eceb120459c5542b6aa7f9984a8661d9a0452302e98d13f024e",
+      "exports": [
+        "PathExplorer",
+        "QuickSearch"
+      ],
+      "headings": []
+    },
+    {
+      "file": "src/data/content.ts",
+      "lines": 611,
+      "bytes": 16574,
+      "sha256": "90416dca624484fee0e0c12d19f7ad4ee1d180fe9aff361a1a4a24dbee4f8d56",
+      "exports": [
+        "sections",
+        "layers",
+        "glossary",
+        "questions",
+        "protocolColors"
+      ],
+      "headings": []
+    },
+    {
+      "file": "src/design.css",
+      "lines": 3345,
+      "bytes": 63455,
+      "sha256": "30fd9ece7dcfc10d126d5bfdf7fa627234abe7c37603cb3897c6e52d2fcf9b54",
+      "exports": [],
+      "headings": []
+    },
+    {
+      "file": "src/engine/network.ts",
+      "lines": 229,
+      "bytes": 6869,
+      "sha256": "c0261f56944c37b69ab3cc53912787511c2d33771bc74403d03e65f43d06d246",
+      "exports": [
+        "defaults",
+        "device",
+        "network",
+        "findPath",
+        "validIPv4",
+        "matchesNetwork",
+        "lookupRoute"
+      ],
+      "headings": []
+    },
+    {
+      "file": "src/engine/Simulation.ts",
+      "lines": 1344,
+      "bytes": 41352,
+      "sha256": "71c29a1bc213026b5409c014829f1c5dce8c65f71f5eb5a52116fb8f6cc4c96f",
+      "exports": [
+        "Simulation"
+      ],
+      "headings": []
+    },
+    {
+      "file": "src/engine/types.ts",
+      "lines": 160,
+      "bytes": 3264,
+      "sha256": "4200d0b88f821a4464aea3c9ec801192f407b5130ea743c192485f7e0b577e97",
+      "exports": [
+        "DeviceType",
+        "Protocol",
+        "Scenario",
+        "NetworkDevice",
+        "NetworkLink",
+        "NetworkPacket",
+        "SimulationEvent",
+        "FirewallRule",
+        "Config",
+        "Metrics",
+        "Sample",
+        "SimulationState"
+      ],
+      "headings": []
+    },
+    {
+      "file": "src/features/Lessons.tsx",
+      "lines": 1240,
+      "bytes": 39799,
+      "sha256": "11f57a6c9921a3bf6b11f5f3af4a03b3cb0561ba57fb63e68cd3fba1edd4ca04",
+      "exports": [
+        "TcpLesson",
+        "WebLesson",
+        "RoutingLesson",
+        "TopologyLesson",
+        "MediaLesson",
+        "DiagnosticLesson",
+        "SecurityLesson",
+        "PerformanceLesson",
+        "TrendsLesson",
+        "GlossaryLesson",
+        "Laboratory"
+      ],
+      "headings": []
+    },
+    {
+      "file": "src/features/missions.ts",
+      "lines": 103,
+      "bytes": 3182,
+      "sha256": "a640c3707f6512c03f0bf7fa709c6829410065ccdf3533c2e4abedb51a45c40f",
+      "exports": [
+        "Mission",
+        "missions"
+      ],
+      "headings": []
+    },
+    {
+      "file": "src/features/OsiWorkbench.tsx",
+      "lines": 285,
+      "bytes": 9760,
+      "sha256": "0ee6efe66613b09a035335e079333acf56566f80aba704131f4c9203384ab2ad",
+      "exports": [
+        "OsiWorkbench"
+      ],
+      "headings": []
+    },
+    {
+      "file": "src/main.tsx",
+      "lines": 10,
+      "bytes": 264,
+      "sha256": "137ef6f1996c88f63af2c79c39c55e16c0dd8c2f3e12b49403e79ad87c45634b",
+      "exports": [],
+      "headings": []
+    },
+    {
+      "file": "src/scenes/CinematicNetwork.tsx",
+      "lines": 63,
+      "bytes": 2035,
+      "sha256": "c82855e22a2d63b3c7886190b2af4f38e45021505c62e0545879c216fc354784",
+      "exports": [
+        "CinematicNetwork"
+      ],
+      "headings": []
+    },
+    {
+      "file": "src/scenes/ImmersiveLab.tsx",
+      "lines": 228,
+      "bytes": 7352,
+      "sha256": "ab62808dd054cbfca897791b32f819adfe2edecebf63c1c217793d985edbd2df",
+      "exports": [
+        "ImmersiveLab"
+      ],
+      "headings": []
+    },
+    {
+      "file": "src/scenes/NetworkScene.tsx",
+      "lines": 975,
+      "bytes": 29364,
+      "sha256": "2573eca9bf6fe451e9f8b8740dfebb3bc7514abfb53ec4b42a29685957919a5a",
+      "exports": [
+        "NetworkScene"
+      ],
+      "headings": []
+    },
+    {
+      "file": "src/stores/useSimulation.ts",
+      "lines": 31,
+      "bytes": 969,
+      "sha256": "be89dad9885afdbff6c611dec2a32854dce5e19ac74548a579babcc78f961691",
+      "exports": [
+        "engine",
+        "useSimulation",
+        "act"
+      ],
+      "headings": []
+    },
+    {
+      "file": "src/styles.css",
+      "lines": 4247,
+      "bytes": 77359,
+      "sha256": "1a9365a21de619845f2c92f6a96cdcd1cb0c40c03e49426010928085c3ce8416",
+      "exports": [],
+      "headings": []
+    },
+    {
+      "file": "src/tests/engine.test.ts",
+      "lines": 428,
+      "bytes": 15538,
+      "sha256": "b838c75e89b09374e1033c708252e98d85bd3fe8fa7a92159059ce40f4db3692",
+      "exports": [],
+      "headings": []
+    },
+    {
+      "file": "TESTING.md",
+      "lines": 79,
+      "bytes": 6557,
+      "sha256": "f077721b312d8bef291c2d27e4bfdb8522479f1eaaa9c7bee9dfc8a79042d50c",
+      "exports": [],
+      "headings": [
+        "Validação e evidências",
+        "Verificações executadas",
+        "Motor: 36 testes",
+        "Navegador: 9 jornadas",
+        "Como repetir",
+        "Escopo e limites da validação",
+        "Reformulação visual",
+        "Revisão da interface — 17/11/2026",
+        "Experiências e otimização — 17/11/2026",
+        "Laboratório imersivo — 18/11/2026"
+      ]
+    },
+    {
+      "file": "tsconfig.json",
+      "lines": 18,
+      "bytes": 449,
+      "sha256": "7a4785ff5d62d7d4ab13d7676d7b125e2a6621678b6fb1534cdaca68ce26f256",
+      "exports": [],
+      "headings": []
+    },
+    {
+      "file": "vercel.json",
+      "lines": 7,
+      "bytes": 224,
+      "sha256": "eb2d970c07034fa90c3d3782ed3960ca1e06a04f9ff249859437d8bf4d725a56",
+      "exports": [],
+      "headings": []
+    },
+    {
+      "file": "vite.config.ts",
+      "lines": 8,
+      "bytes": 251,
+      "sha256": "98e49ca703ba420c45e6e9605edc0dc44fec9e1229bc181fb34b00071c55d8bc",
+      "exports": [],
+      "headings": []
+    },
+    {
+      "file": "vitest.config.ts",
+      "lines": 4,
+      "bytes": 150,
+      "sha256": "e6e02f4466d8e0c6ecc6e06d7d2a1f8a3711bdd66a9550152601d7783cd8c7b9",
+      "exports": [],
+      "headings": []
+    }
+  ],
+  "css": {
+    "src/styles.css": {
+      "rules": 888,
+      "repeated": [
+        [
+          ".hero-copy h1",
+          10
+        ],
+        [
+          ".hero-copy",
+          9
+        ],
+        [
+          ".home-hero",
+          8
+        ],
+        [
+          ".hero-copy p",
+          8
+        ],
+        [
+          ".hero-actions",
+          8
+        ],
+        [
+          ".hero-caption",
+          8
+        ],
+        [
+          ".discovery-card h3",
+          7
+        ],
+        [
+          ".metric-strip small",
+          7
+        ],
+        [
+          ".hero-copy > .eyebrow",
+          6
+        ],
+        [
+          ".hero-visual",
+          6
+        ],
+        [
+          ".card-index",
+          6
+        ],
+        [
+          ".discovery-card p",
+          6
+        ],
+        [
+          ".nav-item",
+          5
+        ],
+        [
+          ".topbar",
+          5
+        ],
+        [
+          ".network-scene",
+          5
+        ],
+        [
+          ".scene-heading",
+          5
+        ],
+        [
+          ".scene-bottom",
+          5
+        ],
+        [
+          ".discovery-card",
+          5
+        ],
+        [
+          ".log-line",
+          5
+        ],
+        [
+          ".log-type",
+          5
+        ],
+        [
+          ".osi-model button",
+          5
+        ],
+        [
+          ".hero-actions .primary",
+          5
+        ],
+        [
+          ".hero-actions .text-button",
+          5
+        ],
+        [
+          ".cinematic-caption",
+          5
+        ],
+        [
+          ".workspace-label",
+          4
+        ],
+        [
+          ".sidebar-footer",
+          4
+        ],
+        [
+          ".app-shell",
+          4
+        ],
+        [
+          ".topbar-actions",
+          4
+        ],
+        [
+          ".hero-visual-caption",
+          4
+        ],
+        [
+          ".playback",
+          4
+        ],
+        [
+          ".control-button",
+          4
+        ],
+        [
+          ".time-controls",
+          4
+        ],
+        [
+          ".legend",
+          4
+        ],
+        [
+          ".discovery-icon",
+          4
+        ],
+        [
+          ".home-bottom",
+          4
+        ],
+        [
+          ".home-live",
+          4
+        ],
+        [
+          ".page-footer",
+          4
+        ],
+        [
+          ".page-footer > span:last-child",
+          4
+        ],
+        [
+          ".simulation-aside",
+          4
+        ],
+        [
+          ".panel-kicker",
+          4
+        ],
+        [
+          ".event-phase",
+          4
+        ],
+        [
+          ".explanation p",
+          4
+        ],
+        [
+          ".experiment-note",
+          4
+        ],
+        [
+          ".metric-strip > div",
+          4
+        ],
+        [
+          ".osi-layout",
+          4
+        ],
+        [
+          ".presentation-bar",
+          4
+        ],
+        [
+          ".cinematic-stage",
+          4
+        ],
+        [
+          ".brand",
+          3
+        ],
+        [
+          ".brand small",
+          3
+        ],
+        [
+          ".sidebar nav",
+          3
+        ],
+        [
+          ".local-badge",
+          3
+        ],
+        [
+          ".breadcrumbs > b",
+          3
+        ],
+        [
+          ".level-switch button",
+          3
+        ],
+        [
+          "main",
+          3
+        ],
+        [
+          ".hero-art",
+          3
+        ],
+        [
+          ".home-control-wrap",
+          3
+        ],
+        [
+          ".section-title h2",
+          3
+        ],
+        [
+          ".discovery-grid",
+          3
+        ],
+        [
+          ".card-action",
+          3
+        ],
+        [
+          ".guide > div",
+          3
+        ],
+        [
+          ".page-heading > .eyebrow",
+          3
+        ],
+        [
+          ".page-heading h1",
+          3
+        ],
+        [
+          ".page-heading p",
+          3
+        ],
+        [
+          ".simulation-layout",
+          3
+        ],
+        [
+          ".metric-strip svg",
+          3
+        ],
+        [
+          ".log-line time",
+          3
+        ],
+        [
+          ".compare-grid",
+          3
+        ],
+        [
+          ".compare-metrics",
+          3
+        ],
+        [
+          ".osi-model .tcp-layer",
+          3
+        ],
+        [
+          ".media-cards",
+          3
+        ],
+        [
+          ".media-card",
+          3
+        ],
+        [
+          ".media-card h3",
+          3
+        ],
+        [
+          ".diagnostic-layout",
+          3
+        ],
+        [
+          ".knowledge-layout",
+          3
+        ],
+        [
+          ".quiz h2",
+          3
+        ],
+        [
+          ".quiz-options button",
+          3
+        ],
+        [
+          ".slider-label > span, .slider-label b, .toggle-label",
+          3
+        ],
+        [
+          ".cinematic-device",
+          3
+        ],
+        [
+          ".cinematic-device-name",
+          3
+        ],
+        [
+          ".sidebar",
+          2
+        ],
+        [
+          ".brand-symbol",
+          2
+        ],
+        [
+          ".nav-item small",
+          2
+        ],
+        [
+          ".nav-item.active:before",
+          2
+        ],
+        [
+          ".sidebar-extra",
+          2
+        ],
+        [
+          ".nav-group-label",
+          2
+        ],
+        [
+          ".sidebar-footer b",
+          2
+        ],
+        [
+          ".sidebar-footer div span",
+          2
+        ],
+        [
+          ".breadcrumbs",
+          2
+        ],
+        [
+          ".top-divider",
+          2
+        ],
+        [
+          ".hero-copy h1 span",
+          2
+        ],
+        [
+          ".hero-scene .scene-heading",
+          2
+        ],
+        [
+          ".hero-scene .scene-tools",
+          2
+        ],
+        [
+          ".hero-visual-caption > span",
+          2
+        ],
+        [
+          ".hero-visual-caption b",
+          2
+        ],
+        [
+          ".controls",
+          2
+        ],
+        [
+          ".time-controls small",
+          2
+        ],
+        [
+          ".speed",
+          2
+        ],
+        [
+          ".speed select",
+          2
+        ],
+        [
+          ".discovery-section",
+          2
+        ],
+        [
+          ".section-title > .micro",
+          2
+        ],
+        [
+          ".guide > div > span",
+          2
+        ],
+        [
+          ".team",
+          2
+        ],
+        [
+          ".team button",
+          2
+        ],
+        [
+          ".page-heading",
+          2
+        ],
+        [
+          ".simulation-label",
+          2
+        ],
+        [
+          ".panel-header",
+          2
+        ],
+        [
+          ".panel-header h3",
+          2
+        ],
+        [
+          ".explanation h3",
+          2
+        ],
+        [
+          ".event-counter",
+          2
+        ],
+        [
+          ".experiments .panel-kicker",
+          2
+        ],
+        [
+          ".toggle-label",
+          2
+        ],
+        [
+          ".danger-outline",
+          2
+        ],
+        [
+          ".metric-strip",
+          2
+        ],
+        [
+          ".metric-strip strong",
+          2
+        ],
+        [
+          ".lesson",
+          2
+        ],
+        [
+          ".chip",
+          2
+        ],
+        [
+          ".logs > .panel-header",
+          2
+        ],
+        [
+          ".search.compact",
+          2
+        ],
+        [
+          ".search.compact input",
+          2
+        ],
+        [
+          ".inspector",
+          2
+        ],
+        [
+          ".inspector .panel-kicker",
+          2
+        ],
+        [
+          ".inspector dl",
+          2
+        ],
+        [
+          ".data-table",
+          2
+        ],
+        [
+          ".protocol-card",
+          2
+        ],
+        [
+          ".protocol-title",
+          2
+        ],
+        [
+          ".protocol-title small",
+          2
+        ],
+        [
+          ".handshake",
+          2
+        ],
+        [
+          ".handshake > span",
+          2
+        ],
+        [
+          ".compare-metrics span",
+          2
+        ],
+        [
+          ".protocol-card p",
+          2
+        ],
+        [
+          ".layer-detail",
+          2
+        ],
+        [
+          ".browser-toolbar",
+          2
+        ],
+        [
+          ".window-dots",
+          2
+        ],
+        [
+          ".browser-toolbar input",
+          2
+        ],
+        [
+          ".browser-toolbar button",
+          2
+        ],
+        [
+          ".page-progress",
+          2
+        ],
+        [
+          ".page-progress > span",
+          2
+        ],
+        [
+          ".browser-note",
+          2
+        ],
+        [
+          ".loaded-page",
+          2
+        ],
+        [
+          ".loaded-page h2",
+          2
+        ],
+        [
+          ".loaded-page p",
+          2
+        ],
+        [
+          ".success-icon",
+          2
+        ],
+        [
+          ".loaded-grid",
+          2
+        ],
+        [
+          ".media-icon",
+          2
+        ],
+        [
+          ".media-card p",
+          2
+        ],
+        [
+          ".terminal pre",
+          2
+        ],
+        [
+          ".security-comparison",
+          2
+        ],
+        [
+          ".security-comparison > div:first-child",
+          2
+        ],
+        [
+          ".throughput",
+          2
+        ],
+        [
+          ".performance-stats",
+          2
+        ],
+        [
+          ".performance-stats b",
+          2
+        ],
+        [
+          ".knowledge-layout .lesson",
+          2
+        ],
+        [
+          ".glossary-list",
+          2
+        ],
+        [
+          ".glossary summary > span",
+          2
+        ],
+        [
+          ".settings",
+          2
+        ],
+        [
+          ".presentation-bar > span",
+          2
+        ],
+        [
+          ".presentation-bar > p",
+          2
+        ],
+        [
+          ".presentation-bar > div",
+          2
+        ],
+        [
+          ".presentation-bar button",
+          2
+        ],
+        [
+          ".presentation .explanation h3",
+          2
+        ],
+        [
+          ".presentation .simulation-layout",
+          2
+        ],
+        [
+          ".presentation .network-scene",
+          2
+        ],
+        [
+          ".achievement",
+          2
+        ],
+        [
+          ".lab-controls",
+          2
+        ],
+        [
+          ".lab-controls select",
+          2
+        ],
+        [
+          ".lab-map svg",
+          2
+        ],
+        [
+          ".lab-device-config",
+          2
+        ],
+        [
+          ".lab-device-config .field",
+          2
+        ],
+        [
+          ".skip-link",
+          2
+        ],
+        [
+          ".nav-backdrop",
+          2
+        ],
+        [
+          ".hero-scene.network-scene",
+          2
+        ],
+        [
+          ".home-hero .hero-scene",
+          2
+        ],
+        [
+          ".presentation .simulation-aside",
+          2
+        ],
+        [
+          ".desktop-break",
+          2
+        ],
+        [
+          ".osi-columns",
+          2
+        ],
+        [
+          ".tcp-model > span",
+          2
+        ],
+        [
+          ".packet-tray",
+          2
+        ],
+        [
+          ".packet-tray > span",
+          2
+        ],
+        [
+          ".packet-tray button",
+          2
+        ],
+        [
+          ".mission-modal",
+          2
+        ],
+        [
+          ".mission-modal h2",
+          2
+        ],
+        [
+          ".mission-picker-grid",
+          2
+        ],
+        [
+          ".mission-picker-grid p",
+          2
+        ],
+        [
+          ".mission-bar",
+          2
+        ],
+        [
+          ".mission-bar > div",
+          2
+        ],
+        [
+          ".mission-bar h3",
+          2
+        ],
+        [
+          ".skip-opening",
+          2
+        ],
+        [
+          ".hero-copy h1 br",
+          2
+        ],
+        [
+          ".cinematic-device-name small",
+          2
+        ],
+        [
+          ".cinematic-status",
+          2
+        ],
+        [
+          ".cinematic-status button",
+          2
+        ],
+        [
+          ".cinematic-caption > span",
+          2
+        ],
+        [
+          ".cinematic-caption p",
+          2
+        ],
+        [
+          ".cinematic-caption b",
+          2
+        ],
+        [
+          ".spatial-stage .network-scene",
+          2
+        ],
+        [
+          ".spatial-caption",
+          2
+        ],
+        [
+          ".spatial-caption small",
+          2
+        ]
+      ]
+    },
+    "src/design.css": {
+      "rules": 626,
+      "repeated": [
+        [
+          ".spatial-stage",
+          5
+        ],
+        [
+          ".immersive-inspector",
+          5
+        ],
+        [
+          ".hero-copy h1",
+          4
+        ],
+        [
+          ".hero-visual",
+          4
+        ],
+        [
+          ".experience-osi .experience-content",
+          4
+        ],
+        [
+          ".immersive-mission",
+          4
+        ],
+        [
+          ".immersive-mission h2",
+          4
+        ],
+        [
+          ".hero-copy",
+          3
+        ],
+        [
+          ".hero-copy p",
+          3
+        ],
+        [
+          ".experience-facts",
+          3
+        ],
+        [
+          ".spatial-stage .scene-heading",
+          3
+        ],
+        [
+          ".spatial-pause",
+          3
+        ],
+        [
+          ".discovery-card",
+          3
+        ],
+        [
+          ".discovery-card h3",
+          3
+        ],
+        [
+          ".hero-actions .text-button",
+          3
+        ],
+        [
+          "to",
+          3
+        ],
+        [
+          ".experience-osi .simulation-layout",
+          3
+        ],
+        [
+          ".experience-osi .experience-events",
+          3
+        ],
+        [
+          ".osi-workbench-heading",
+          3
+        ],
+        [
+          ".osi-workbench-heading h2",
+          3
+        ],
+        [
+          ".osi-live-phase",
+          3
+        ],
+        [
+          ".osi-slab",
+          3
+        ],
+        [
+          ".osi-slab small",
+          3
+        ],
+        [
+          ".osi-inspector, .osi-pdu",
+          3
+        ],
+        [
+          ".path-layout",
+          3
+        ],
+        [
+          ".path-choices",
+          3
+        ],
+        [
+          ".path-choices > button",
+          3
+        ],
+        [
+          ".path-number",
+          3
+        ],
+        [
+          ".path-choices small",
+          3
+        ],
+        [
+          ".path-choices b",
+          3
+        ],
+        [
+          ".path-choices > button > svg",
+          3
+        ],
+        [
+          ".path-map",
+          3
+        ],
+        [
+          ".prediction-card",
+          3
+        ],
+        [
+          ".prediction-feedback",
+          3
+        ],
+        [
+          ".immersive-header > div",
+          3
+        ],
+        [
+          ".immersive-header b",
+          3
+        ],
+        [
+          ".immersive-header small",
+          3
+        ],
+        [
+          ".immersive-mission > p",
+          3
+        ],
+        [
+          ".immersive-mission > div",
+          3
+        ],
+        [
+          ".immersive-mission > div > span",
+          3
+        ],
+        [
+          ".immersive-inspector h2",
+          3
+        ],
+        [
+          ".immersive-inspector dl",
+          3
+        ],
+        [
+          ".immersive-inspector dl > div",
+          3
+        ],
+        [
+          ".immersive-inspector dd",
+          3
+        ],
+        [
+          ".immersive-instructions",
+          3
+        ],
+        [
+          ".sidebar",
+          2
+        ],
+        [
+          ".topbar",
+          2
+        ],
+        [
+          "main",
+          2
+        ],
+        [
+          ".home-hero",
+          2
+        ],
+        [
+          ".hero-copy > .eyebrow",
+          2
+        ],
+        [
+          ".hero-actions",
+          2
+        ],
+        [
+          ".hero-caption",
+          2
+        ],
+        [
+          ".experience-facts > div",
+          2
+        ],
+        [
+          ".experience-facts b",
+          2
+        ],
+        [
+          ".experience-facts span",
+          2
+        ],
+        [
+          ".spatial-stage .network-scene",
+          2
+        ],
+        [
+          ".spatial-caption",
+          2
+        ],
+        [
+          ".spatial-caption p",
+          2
+        ],
+        [
+          ".spatial-caption small",
+          2
+        ],
+        [
+          ".spatial-stage .scene-bottom",
+          2
+        ],
+        [
+          ".spatial-stage .scene-tools",
+          2
+        ],
+        [
+          ".home-control-wrap",
+          2
+        ],
+        [
+          ".controls",
+          2
+        ],
+        [
+          ".control-button",
+          2
+        ],
+        [
+          ".time-controls",
+          2
+        ],
+        [
+          ".packet-tray",
+          2
+        ],
+        [
+          ".home-control-wrap .legend",
+          2
+        ],
+        [
+          ".section-title",
+          2
+        ],
+        [
+          ".section-title h2",
+          2
+        ],
+        [
+          ".section-title .micro",
+          2
+        ],
+        [
+          ".discovery-grid",
+          2
+        ],
+        [
+          ".discovery-card p",
+          2
+        ],
+        [
+          ".home-bottom",
+          2
+        ],
+        [
+          ".home-live",
+          2
+        ],
+        [
+          ".page-footer",
+          2
+        ],
+        [
+          ".page-heading h1",
+          2
+        ],
+        [
+          ".page-heading p",
+          2
+        ],
+        [
+          ".panel",
+          2
+        ],
+        [
+          ".panel-header",
+          2
+        ],
+        [
+          ".lesson > h3",
+          2
+        ],
+        [
+          ".hero-actions .primary",
+          2
+        ],
+        [
+          ".scene-telemetry span:first-child",
+          2
+        ],
+        [
+          ".scene-telemetry b",
+          2
+        ],
+        [
+          ".spatial-stage .network-scene.hero-scene",
+          2
+        ],
+        [
+          ".experience-layout",
+          2
+        ],
+        [
+          ".experience-osi .osi-layout",
+          2
+        ],
+        [
+          ".experience-osi .layer-detail",
+          2
+        ],
+        [
+          ".experience-tcp .compare-grid",
+          2
+        ],
+        [
+          ".experience-web .page-progress",
+          2
+        ],
+        [
+          ".experience-diagnostics .terminal pre",
+          2
+        ],
+        [
+          ".experience-diagnostics .diagnostic-layout",
+          2
+        ],
+        [
+          ".experience-security .rules td",
+          2
+        ],
+        [
+          ".experience-performance .chart",
+          2
+        ],
+        [
+          ".experience-performance .throughput",
+          2
+        ],
+        [
+          ".experience-performance .performance-stats",
+          2
+        ],
+        [
+          ".experience-performance .performance-stats > div",
+          2
+        ],
+        [
+          ".experience-media .media-cards",
+          2
+        ],
+        [
+          ".experience-media .media-card",
+          2
+        ],
+        [
+          ".experience-media .media-icon",
+          2
+        ],
+        [
+          ".experience-topology .network-scene, .experience-lab .network-scene",
+          2
+        ],
+        [
+          ".osi-workbench-heading p",
+          2
+        ],
+        [
+          ".osi-dual-stage",
+          2
+        ],
+        [
+          ".osi-tower > header",
+          2
+        ],
+        [
+          ".tower-device",
+          2
+        ],
+        [
+          ".osi-tower > header small",
+          2
+        ],
+        [
+          ".osi-tower > header h3",
+          2
+        ],
+        [
+          ".osi-tower > header > svg",
+          2
+        ],
+        [
+          ".osi-stack-3d",
+          2
+        ],
+        [
+          ".destination .osi-slab",
+          2
+        ],
+        [
+          ".osi-slab > b",
+          2
+        ],
+        [
+          ".osi-slab > span",
+          2
+        ],
+        [
+          ".osi-slab em",
+          2
+        ],
+        [
+          ".osi-tower > footer",
+          2
+        ],
+        [
+          ".osi-tower > footer > span",
+          2
+        ],
+        [
+          ".osi-bridge",
+          2
+        ],
+        [
+          ".osi-bridge > small",
+          2
+        ],
+        [
+          ".osi-inspection",
+          2
+        ],
+        [
+          ".osi-inspector",
+          2
+        ],
+        [
+          ".osi-inspector-top > .eyebrow",
+          2
+        ],
+        [
+          ".osi-inspector-top button",
+          2
+        ],
+        [
+          ".osi-detail-title > b",
+          2
+        ],
+        [
+          ".osi-detail-title h3",
+          2
+        ],
+        [
+          ".osi-inspector > p",
+          2
+        ],
+        [
+          ".osi-pdu h3",
+          2
+        ],
+        [
+          ".pdu-assembly > span, .pdu-assembly > b",
+          2
+        ],
+        [
+          ".osi-pdu-state",
+          2
+        ],
+        [
+          ".osi-pdu-state > strong",
+          2
+        ],
+        [
+          ".path-orbit",
+          2
+        ],
+        [
+          ".path-orbit > span",
+          2
+        ],
+        [
+          ".path-map b",
+          2
+        ],
+        [
+          ".path-map small",
+          2
+        ],
+        [
+          ".path-preview-footer",
+          2
+        ],
+        [
+          ".path-preview-footer p",
+          2
+        ],
+        [
+          ".path-preview-footer .primary",
+          2
+        ],
+        [
+          ".path-mission",
+          2
+        ],
+        [
+          ".quick-search-trigger",
+          2
+        ],
+        [
+          ".quick-search-dialog footer",
+          2
+        ],
+        [
+          ".quick-search-dialog .quick-search-results button",
+          2
+        ],
+        [
+          ".quick-search-results small",
+          2
+        ],
+        [
+          ".prediction-question h3",
+          2
+        ],
+        [
+          ".prediction-answers",
+          2
+        ],
+        [
+          ".prediction-answers > button",
+          2
+        ],
+        [
+          ".prediction-feedback > div",
+          2
+        ],
+        [
+          ".prediction-feedback button",
+          2
+        ],
+        [
+          ".immersive-entry",
+          2
+        ],
+        [
+          ".immersive-header",
+          2
+        ],
+        [
+          ".immersive-header > div > svg",
+          2
+        ],
+        [
+          ".immersive-mission b",
+          2
+        ],
+        [
+          ".immersive-inspector > div",
+          2
+        ],
+        [
+          ".immersive-inspector p",
+          2
+        ],
+        [
+          ".immersive-inspector dt",
+          2
+        ],
+        [
+          ".immersive-tip",
+          2
+        ],
+        [
+          ".immersive-dock",
+          2
+        ],
+        [
+          ".immersive-device-list",
+          2
+        ],
+        [
+          ".immersive-device-list > button",
+          2
+        ],
+        [
+          ".immersive-playback",
+          2
+        ],
+        [
+          ".immersive-playback > .primary",
+          2
+        ],
+        [
+          ".immersive-stream",
+          2
+        ],
+        [
+          ".immersive-playback > strong",
+          2
+        ],
+        [
+          ".immersive-close",
+          2
+        ],
+        [
+          ".immersive-help",
+          2
+        ]
+      ]
+    }
+  },
+  "sharedSelectors": [
+    ".app-shell",
+    ".brand",
+    ".brand-symbol",
+    ".breadcrumbs",
+    ".card-action",
+    ".card-index",
+    ".control-button",
+    ".control-button:hover",
+    ".controls",
+    ".controls .primary",
+    ".discovery-card",
+    ".discovery-card h3",
+    ".discovery-card p",
+    ".discovery-card:hover",
+    ".discovery-grid",
+    ".discovery-icon",
+    ".discovery-section",
+    ".eyebrow",
+    ".hero-actions",
+    ".hero-actions .primary",
+    ".hero-actions .text-button",
+    ".hero-art",
+    ".hero-caption",
+    ".hero-copy",
+    ".hero-copy > .eyebrow",
+    ".hero-copy h1",
+    ".hero-copy h1 br",
+    ".hero-copy h1 span",
+    ".hero-copy p",
+    ".hero-visual",
+    ".hero-visual-caption",
+    ".home-bottom",
+    ".home-control-wrap",
+    ".home-control-wrap .legend",
+    ".home-hero",
+    ".home-live",
+    ".icon-button",
+    ".icon-button:hover",
+    ".lesson",
+    ".lesson > h3",
+    ".lesson > p",
+    ".level-switch",
+    ".level-switch button",
+    ".level-switch button.active",
+    ".local-badge",
+    ".nav-group-label",
+    ".nav-item",
+    ".nav-item.active",
+    ".nav-item.active:before",
+    ".nav-item:hover",
+    ".network-scene",
+    ".outline:hover",
+    ".packet-tray",
+    ".page-footer",
+    ".page-heading",
+    ".page-heading h1",
+    ".page-heading p",
+    ".panel",
+    ".panel-header",
+    ".panel-header h3",
+    ".panel-kicker",
+    ".playback",
+    ".primary",
+    ".primary:hover:not(:disabled)",
+    ".scene-tools button",
+    ".section-title",
+    ".section-title h2",
+    ".settings",
+    ".sidebar",
+    ".sidebar-footer",
+    ".simulation-label",
+    ".spatial-caption",
+    ".spatial-caption p",
+    ".spatial-caption small",
+    ".spatial-caption span",
+    ".spatial-pause",
+    ".spatial-stage",
+    ".spatial-stage .network-scene",
+    ".spatial-stage .scene-bottom",
+    ".team button",
+    ".text-button",
+    ".time-controls",
+    ".tiny-network",
+    ".topbar",
+    ".topbar-actions",
+    ".workspace-label",
+    ":root",
+    "body",
+    "button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible",
+    "input, select",
+    "main",
+    "to"
+  ],
+  "note": "Inventário por leitura integral de bytes; duplicação lexical inclui regras legítimas de media queries e não prova CSS morto."
+}

@@ -1,0 +1,1836 @@
+{
+  "files": {
+    "src/styles.css": {
+      "rules": 905,
+      "duplicateSameContext": [
+        {
+          "key": "|.sidebar",
+          "lines": [
+            145,
+            3649
+          ]
+        },
+        {
+          "key": "|.workspace-label",
+          "lines": [
+            181,
+            3316
+          ]
+        },
+        {
+          "key": "|.nav-group-label",
+          "lines": [
+            252,
+            3408
+          ]
+        },
+        {
+          "key": "|.sidebar-footer b",
+          "lines": [
+            279,
+            3414
+          ]
+        },
+        {
+          "key": "|.sidebar-footer div span",
+          "lines": [
+            285,
+            3417
+          ]
+        },
+        {
+          "key": "|.local-badge",
+          "lines": [
+            291,
+            3411
+          ]
+        },
+        {
+          "key": "|.home-hero",
+          "lines": [
+            374,
+            3855,
+            4245
+          ]
+        },
+        {
+          "key": "|.hero-art",
+          "lines": [
+            383,
+            3862
+          ]
+        },
+        {
+          "key": "|.hero-copy",
+          "lines": [
+            392,
+            3800,
+            3865
+          ]
+        },
+        {
+          "key": "|.hero-copy > .eyebrow",
+          "lines": [
+            398,
+            3323,
+            3872
+          ]
+        },
+        {
+          "key": "|.hero-copy h1",
+          "lines": [
+            403,
+            3875,
+            4245
+          ]
+        },
+        {
+          "key": "|.hero-copy h1 span",
+          "lines": [
+            411,
+            3884
+          ]
+        },
+        {
+          "key": "|.hero-copy p",
+          "lines": [
+            414,
+            3326,
+            3889
+          ]
+        },
+        {
+          "key": "|.hero-actions",
+          "lines": [
+            419,
+            3897
+          ]
+        },
+        {
+          "key": "|.hero-caption",
+          "lines": [
+            456,
+            3329,
+            3909
+          ]
+        },
+        {
+          "key": "|.hero-visual",
+          "lines": [
+            470,
+            3913
+          ]
+        },
+        {
+          "key": "|.scene-heading",
+          "lines": [
+            497,
+            3359
+          ]
+        },
+        {
+          "key": "|.scene-bottom",
+          "lines": [
+            523,
+            3362
+          ]
+        },
+        {
+          "key": "|.hero-visual-caption",
+          "lines": [
+            597,
+            3918
+          ]
+        },
+        {
+          "key": "|.hero-visual-caption > span",
+          "lines": [
+            606,
+            3405
+          ]
+        },
+        {
+          "key": "|.hero-visual-caption b",
+          "lines": [
+            614,
+            3402
+          ]
+        },
+        {
+          "key": "|.home-control-wrap",
+          "lines": [
+            619,
+            4125
+          ]
+        },
+        {
+          "key": "|.control-button",
+          "lines": [
+            637,
+            3353
+          ]
+        },
+        {
+          "key": "|.legend",
+          "lines": [
+            671,
+            3356
+          ]
+        },
+        {
+          "key": "|.discovery-card",
+          "lines": [
+            730,
+            4128
+          ]
+        },
+        {
+          "key": "|.discovery-icon",
+          "lines": [
+            744,
+            4137
+          ]
+        },
+        {
+          "key": "|.card-index",
+          "lines": [
+            764,
+            3335
+          ]
+        },
+        {
+          "key": "|.discovery-card h3",
+          "lines": [
+            772,
+            4134
+          ]
+        },
+        {
+          "key": "|.discovery-card p",
+          "lines": [
+            778,
+            3338
+          ]
+        },
+        {
+          "key": "|.card-action",
+          "lines": [
+            785,
+            3341
+          ]
+        },
+        {
+          "key": "|.home-live",
+          "lines": [
+            857,
+            4142
+          ]
+        },
+        {
+          "key": "|.page-footer",
+          "lines": [
+            866,
+            3420
+          ]
+        },
+        {
+          "key": "|.page-footer > span:last-child",
+          "lines": [
+            881,
+            3423
+          ]
+        },
+        {
+          "key": "|.page-heading > .eyebrow",
+          "lines": [
+            888,
+            3399
+          ]
+        },
+        {
+          "key": "|.page-heading p",
+          "lines": [
+            906,
+            3396
+          ]
+        },
+        {
+          "key": "|.event-phase",
+          "lines": [
+            973,
+            3369
+          ]
+        },
+        {
+          "key": "|.explanation p",
+          "lines": [
+            988,
+            3366
+          ]
+        },
+        {
+          "key": "|.event-counter",
+          "lines": [
+            994,
+            3372
+          ]
+        },
+        {
+          "key": "|.experiment-note",
+          "lines": [
+            1121,
+            3380
+          ]
+        },
+        {
+          "key": "|.metric-strip small",
+          "lines": [
+            1171,
+            3383
+          ]
+        },
+        {
+          "key": "|.log-line",
+          "lines": [
+            1266,
+            3387
+          ]
+        },
+        {
+          "key": "|.log-line time",
+          "lines": [
+            1284,
+            3390
+          ]
+        },
+        {
+          "key": "|.log-type",
+          "lines": [
+            1288,
+            3393
+          ]
+        },
+        {
+          "key": "|.osi-model button",
+          "lines": [
+            1488,
+            3544
+          ]
+        },
+        {
+          "key": "@media (max-width: 1200px)|.hero-copy > .eyebrow",
+          "lines": [
+            2380,
+            3427
+          ]
+        },
+        {
+          "key": "@media (max-width: 1200px)|.hero-caption",
+          "lines": [
+            2394,
+            3433
+          ]
+        },
+        {
+          "key": "@media (max-width: 1200px)|.hero-visual-caption",
+          "lines": [
+            2397,
+            3436
+          ]
+        },
+        {
+          "key": "@media (max-width: 1200px)|.metric-strip small",
+          "lines": [
+            2428,
+            3442
+          ]
+        },
+        {
+          "key": "@media (max-width: 1200px)|.card-index",
+          "lines": [
+            2441,
+            3439
+          ]
+        },
+        {
+          "key": "@media (max-width: 1000px)|.hero-copy h1",
+          "lines": [
+            2516,
+            4150
+          ]
+        },
+        {
+          "key": "@media (max-width: 1000px)|.hero-copy",
+          "lines": [
+            2522,
+            2541,
+            4156
+          ]
+        },
+        {
+          "key": "@media (max-width: 1000px)|.home-hero",
+          "lines": [
+            2532,
+            4146
+          ]
+        },
+        {
+          "key": "@media (max-width: 1000px)|.hero-visual",
+          "lines": [
+            2538,
+            4153
+          ]
+        },
+        {
+          "key": "@media (max-width: 1000px)|.osi-layout",
+          "lines": [
+            2617,
+            3621
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.home-hero",
+          "lines": [
+            2705,
+            4174
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.hero-copy",
+          "lines": [
+            2711,
+            4178
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.hero-copy > .eyebrow",
+          "lines": [
+            2715,
+            3473
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.hero-copy h1",
+          "lines": [
+            2719,
+            3532,
+            4181
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.hero-copy p",
+          "lines": [
+            2724,
+            3467,
+            4185
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.hero-actions",
+          "lines": [
+            2731,
+            4189
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.hero-actions .primary",
+          "lines": [
+            2737,
+            4192
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.hero-actions .text-button",
+          "lines": [
+            2741,
+            3529
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.hero-caption",
+          "lines": [
+            2744,
+            3470
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.hero-visual",
+          "lines": [
+            2748,
+            4196
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.legend",
+          "lines": [
+            2797,
+            3476
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.card-index",
+          "lines": [
+            2824,
+            3520
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.discovery-card h3",
+          "lines": [
+            2830,
+            4241
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.discovery-card p",
+          "lines": [
+            2834,
+            3517
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.scene-heading",
+          "lines": [
+            2892,
+            3482
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.scene-bottom",
+          "lines": [
+            2898,
+            3485
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.explanation p",
+          "lines": [
+            2914,
+            3494
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.panel-kicker",
+          "lines": [
+            2917,
+            3488
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.experiment-note",
+          "lines": [
+            2931,
+            3502
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.event-phase",
+          "lines": [
+            2938,
+            3491
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.metric-strip small",
+          "lines": [
+            2947,
+            3505
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.log-line",
+          "lines": [
+            3154,
+            3508
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.log-type",
+          "lines": [
+            3160,
+            3514
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.page-footer",
+          "lines": [
+            3195,
+            3523
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.page-footer > span:last-child",
+          "lines": [
+            3199,
+            3526
+          ]
+        },
+        {
+          "key": "|.hero-copy h1 br",
+          "lines": [
+            3881,
+            4245
+          ]
+        },
+        {
+          "key": "|.cinematic-stage",
+          "lines": [
+            3921,
+            4245
+          ]
+        },
+        {
+          "key": "|.cinematic-device",
+          "lines": [
+            3940,
+            4245
+          ]
+        },
+        {
+          "key": "|.cinematic-caption",
+          "lines": [
+            4040,
+            4245
+          ]
+        }
+      ],
+      "selectors": [
+        ":root",
+        "*",
+        "body",
+        "button",
+        "input",
+        "select",
+        "a",
+        "button:focus-visible",
+        "a:focus-visible",
+        "input:focus-visible",
+        "select:focus-visible",
+        "button:disabled",
+        "button:hover:not(:disabled)",
+        "input::placeholder",
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "p",
+        ".mono",
+        "code",
+        "pre",
+        "time",
+        ".cyan",
+        ".green",
+        ".blue",
+        ".violet",
+        ".red",
+        ".muted",
+        ".micro",
+        ".eyebrow",
+        ".status-dot",
+        ".red-bg",
+        ".app",
+        ".sidebar",
+        ".brand",
+        ".brand small",
+        ".brand-symbol",
+        ".workspace-label",
+        ".workspace-label > span:last-child",
+        ".sidebar nav",
+        ".nav-item",
+        ".nav-item > svg",
+        ".nav-item > span:nth-child(2)",
+        ".nav-item small",
+        ".nav-item:hover",
+        ".nav-item.active",
+        ".nav-item.active:before",
+        ".nav-item.active > svg",
+        ".nav-item.active small",
+        ".sidebar-extra",
+        ".nav-group-label",
+        ".new-tag",
+        ".sidebar-footer",
+        ".sidebar-orbit",
+        ".sidebar-footer b",
+        ".sidebar-footer div span",
+        ".local-badge",
+        ".app-shell",
+        ".topbar",
+        ".breadcrumbs",
+        ".breadcrumbs > b",
+        ".topbar-actions",
+        ".level-switch",
+        ".level-switch button",
+        ".level-switch button.active",
+        ".top-divider",
+        ".icon-button",
+        ".icon-button:hover",
+        ".mobile-menu",
+        ".mobile-status",
+        "main",
+        ".home-hero",
+        ".hero-art",
+        ".hero-copy",
+        ".hero-copy > .eyebrow",
+        ".hero-copy h1",
+        ".hero-copy h1 span",
+        ".hero-copy p",
+        ".hero-actions",
+        ".primary",
+        ".primary:hover:not(:disabled)",
+        ".primary.compact",
+        ".text-button",
+        ".hero-caption",
+        ".tiny-network",
+        ".hero-visual",
+        ".network-scene",
+        ".network-scene canvas",
+        ".network-scene.hero-scene",
+        ".scene-heading",
+        ".scene-heading span:first-child",
+        ".hero-scene .scene-heading",
+        ".hero-scene .scene-heading > span:last-child",
+        ".scene-bottom",
+        ".hero-scene .scene-bottom",
+        ".scene-tools",
+        ".scene-tools button",
+        ".scene-tools button.active",
+        ".hero-scene .scene-tools",
+        ".device-label",
+        ".device-label small",
+        ".device-label.selected",
+        ".packet-label",
+        ".hero-visual-caption",
+        ".hero-visual-caption > span",
+        ".hero-visual-caption b",
+        ".home-control-wrap",
+        ".controls",
+        ".playback",
+        ".control-button",
+        ".control-button:hover",
+        ".time-controls",
+        ".time-controls small",
+        ".speed",
+        ".speed select",
+        ".legend",
+        ".home-control-wrap .legend",
+        ".legend > span",
+        ".legend i",
+        ".discovery-section",
+        ".section-title",
+        ".section-title .eyebrow",
+        ".section-title h2",
+        ".section-title > .micro",
+        ".discovery-grid",
+        ".discovery-card",
+        ".discovery-card:hover",
+        ".discovery-icon",
+        ".cyan-bg",
+        ".violet-bg",
+        ".amber-bg",
+        ".card-index",
+        ".discovery-card h3",
+        ".discovery-card p",
+        ".card-action",
+        ".card-action svg",
+        ".home-bottom",
+        ".guide > .eyebrow",
+        ".team .eyebrow",
+        ".guide > div",
+        ".guide > div > span",
+        ".guide b",
+        ".team",
+        ".team button",
+        ".team button span",
+        ".team form",
+        ".team input",
+        ".home-live",
+        ".home-live .logs",
+        ".page-footer",
+        ".page-footer > span",
+        ".page-footer > span:last-child",
+        ".page-heading",
+        ".page-heading > .eyebrow",
+        ".page-heading > div",
+        ".page-heading h1",
+        ".page-heading p",
+        ".simulation-label",
+        ".simulation-layout",
+        ".simulation-main",
+        ".scene-container",
+        ".simulation-aside",
+        ".panel",
+        ".panel-kicker",
+        ".panel-kicker > .status-dot",
+        ".panel-header",
+        ".panel-header h3",
+        ".explanation",
+        ".event-phase",
+        ".explanation h3",
+        ".explanation p",
+        ".event-counter",
+        ".event-counter .mono",
+        ".experiments",
+        ".experiments .panel-kicker",
+        ".slider-label",
+        ".slider-label > span",
+        ".slider-label b",
+        ".slider-label input",
+        ".toggle-label",
+        ".toggle-label input",
+        ".toggle-track",
+        ".toggle-track:before",
+        ".toggle-label input:checked + .toggle-track",
+        ".toggle-label input:checked + .toggle-track:before",
+        ".toggle-label input:focus-visible + .toggle-track",
+        ".outline",
+        ".danger-outline",
+        ".outline:hover",
+        ".danger-outline:hover",
+        ".full",
+        ".experiment-note",
+        ".experiment-note > span",
+        ".field",
+        ".field input",
+        ".field select",
+        ".metric-strip",
+        ".metric-strip > div",
+        ".metric-strip > div:last-child",
+        ".metric-strip svg",
+        ".metric-strip small",
+        ".metric-strip strong",
+        ".lesson",
+        ".lesson > h3",
+        ".lesson > p",
+        ".chip",
+        ".logs",
+        ".logs > .panel-header",
+        ".panel-kicker > b",
+        ".search",
+        ".search input",
+        ".search.compact",
+        ".search.compact input",
+        ".log-scroll",
+        ".empty-log",
+        ".empty-log span",
+        ".log-line",
+        ".log-line:last-child",
+        ".log-line:hover",
+        ".log-line time",
+        ".log-type",
+        ".log-type.error",
+        ".log-line > svg",
+        ".inspector",
+        ".inspector .panel-kicker",
+        ".inspector h2",
+        ".packet-badge",
+        ".inspector dl",
+        ".inspector dl > div",
+        ".inspector dt",
+        ".inspector dd",
+        ".inspector h4",
+        ".inspector .outline",
+        ".payload",
+        ".history",
+        ".link-switch",
+        ".link-switch b",
+        ".data-table",
+        ".data-table th",
+        ".data-table td",
+        ".data-table tr:last-child td",
+        ".compare-grid",
+        ".compare-grid .lesson",
+        ".protocol-card",
+        ".protocol-title",
+        ".protocol-title small",
+        ".handshake",
+        ".handshake > span",
+        ".handshake > span.done",
+        ".compare-metrics",
+        ".compare-metrics span",
+        ".compare-metrics b",
+        ".protocol-card p",
+        ".osi-layout",
+        ".model-head",
+        ".osi-model button",
+        ".osi-model button > b",
+        ".osi-model button > span",
+        ".osi-model small",
+        ".osi-model .tcp-layer",
+        ".osi-model button.current",
+        ".osi-model button.chosen > span",
+        ".layer-detail",
+        ".layer-detail h2",
+        ".layer-detail p",
+        ".layer-detail > .micro",
+        ".encapsulation",
+        ".encapsulation > *",
+        ".encapsulation b",
+        ".web-browser",
+        ".browser-toolbar",
+        ".window-dots",
+        ".window-dots i",
+        ".window-dots i:first-child",
+        ".window-dots i:nth-child(2)",
+        ".window-dots i:last-child",
+        ".browser-toolbar form",
+        ".browser-toolbar form > span",
+        ".browser-toolbar input",
+        ".browser-toolbar button",
+        ".page-progress",
+        ".page-progress > span",
+        ".page-progress b",
+        ".page-progress > span.done",
+        ".page-progress p",
+        ".browser-note",
+        ".loaded-page",
+        ".loaded-page h2",
+        ".loaded-page p",
+        ".success-icon",
+        ".loaded-grid",
+        ".link-grid",
+        ".link-grid button",
+        ".link-grid button > span",
+        ".link-grid button.broken",
+        ".segmented",
+        ".segmented button",
+        ".segmented button.active",
+        ".media-cards",
+        ".media-card",
+        ".media-card.chosen",
+        ".media-icon",
+        ".media-card h3",
+        ".media-card > .eyebrow",
+        ".media-card p",
+        ".diagnostic-layout",
+        ".diagnostic-layout .lesson",
+        ".diagnostic-layout .lesson h3",
+        ".diagnostic-layout .lesson p",
+        ".diagnostic-layout .text-button",
+        ".terminal",
+        ".terminal > .panel-kicker",
+        ".terminal-tag",
+        ".terminal pre",
+        ".terminal form",
+        ".terminal input",
+        ".terminal-examples",
+        ".terminal-examples button",
+        ".success-message",
+        ".rules-scroll",
+        ".rules",
+        ".rules input",
+        ".rules select",
+        ".rules td",
+        ".rules th",
+        ".rules td:nth-child(3)",
+        ".security-comparison",
+        ".security-comparison > div",
+        ".security-comparison > div:first-child",
+        ".security-comparison .eyebrow",
+        ".security-comparison code",
+        ".security-comparison p",
+        ".mission-tests",
+        ".chart",
+        ".throughput",
+        ".throughput small",
+        ".performance-stats",
+        ".performance-stats span",
+        ".performance-stats b",
+        ".cloud-table",
+        ".knowledge-layout",
+        ".knowledge-layout .lesson",
+        ".quiz .panel-kicker > span",
+        ".quiz-progress",
+        ".quiz-progress span",
+        ".quiz h2",
+        ".quiz-options",
+        ".quiz-options button",
+        ".quiz-options button > span",
+        ".quiz-options button > svg",
+        ".quiz-options button.correct",
+        ".quiz-options button.incorrect",
+        ".quiz-feedback",
+        ".quiz-feedback > b",
+        ".quiz-feedback p",
+        ".quiz-score",
+        ".quiz-trophy",
+        ".quiz > p",
+        ".glossary > .search",
+        ".glossary-categories",
+        ".glossary-categories select",
+        ".glossary-list",
+        ".glossary details",
+        ".glossary summary",
+        ".glossary summary > b",
+        ".glossary summary > span",
+        ".glossary summary > svg",
+        ".glossary details > p",
+        ".glossary-example",
+        ".glossary-example > span",
+        ".settings",
+        ".settings h3",
+        ".settings .field",
+        ".settings .micro",
+        ".presentation-bar",
+        ".presentation-bar > span",
+        ".presentation-bar > p",
+        ".presentation-bar > div",
+        ".presentation-bar button",
+        ".presentation .sidebar",
+        ".presentation .app-shell",
+        ".presentation .explanation h3",
+        ".presentation .explanation p",
+        ".presentation .simulation-layout",
+        ".presentation .network-scene",
+        ".achievement",
+        ".button-row",
+        ".upload",
+        ".upload input",
+        ".lab-controls",
+        ".lab-controls select",
+        ".lab-map",
+        ".lab-map svg",
+        ".lab-map > span",
+        ".lab-device-config",
+        ".lab-device-config .field",
+        ".error-message",
+        ".fallback",
+        ".fallback g[role=\"button\"]",
+        ".scene-loading",
+        ".skip-link",
+        ".skip-link:focus",
+        ".nav-backdrop",
+        "from",
+        "to",
+        "[data-reduced=\"true\"] *",
+        "[data-reduced=\"true\"] *:before",
+        ".hero-scene.network-scene",
+        ".hero-actions .primary",
+        ".hero-actions .text-button",
+        ".simulation-aside .explanation",
+        ".home-hero .hero-scene",
+        ".hero-copy button",
+        ".presentation-bar p",
+        ".presentation .simulation-aside",
+        ".controls .primary",
+        ".page-footer > span:nth-child(2)",
+        ".sidebar.open",
+        ".sidebar .nav-item",
+        ".sidebar .brand",
+        ".sidebar .brand small",
+        ".breadcrumbs > span",
+        ".breadcrumbs > svg",
+        ".level-switch button svg",
+        ".desktop-break",
+        ".control-button span",
+        ".time-controls > .mono",
+        ".home-live .explanation h3",
+        ".home-live .explanation p",
+        ".page-heading .simulation-label",
+        ".protocol-card .outline",
+        ".loaded-page .eyebrow",
+        ".compare-grid:has(.data-table)",
+        ".media-card .eyebrow",
+        ".media-card > *:not(.media-icon)",
+        ".performance .panel-header",
+        ".performance h3",
+        ".performance .eyebrow",
+        ".quiz .panel-kicker",
+        ".logs .panel-kicker",
+        ".logs .panel-kicker > svg",
+        ".lab .panel-header",
+        ".scene-heading > span:last-child",
+        ".home-hero .scene-loading",
+        ".osi-columns",
+        ".tcp-model",
+        ".tcp-model > span",
+        ".tcp-model small",
+        ".tcp-model .current",
+        ".bit-stream",
+        ".compare-lane",
+        ".packet-tray",
+        ".packet-tray > span",
+        ".packet-tray button",
+        ".route-input",
+        ".sidebar-footer > div",
+        ".mission-modal-backdrop",
+        ".mission-modal",
+        ".mission-modal h2",
+        ".mission-modal > p",
+        ".mission-picker-grid",
+        ".mission-picker-grid > button",
+        ".mission-picker-grid > button:hover",
+        ".mission-picker-grid .eyebrow",
+        ".mission-picker-grid h3",
+        ".mission-picker-grid p",
+        ".mission-picker-grid > button > span:last-child",
+        ".mission-total",
+        ".mission-bar",
+        ".mission-bar > svg",
+        ".mission-bar > div",
+        ".mission-bar h3",
+        ".mission-bar p",
+        ".mission-bar .eyebrow",
+        ".mission-bar.complete",
+        ".mission-bar .mission-hint",
+        ".skip-opening",
+        ".chart-picker",
+        ".chart-picker select",
+        ".mission-bar > .outline",
+        ".mission-bar > .icon-button",
+        ".hero-copy h1 br",
+        ".cinematic-stage",
+        ".cinematic-wires",
+        ".cinematic-wires g",
+        ".cinematic-device",
+        ".device-render",
+        ".cinematic-device:hover .device-render",
+        ".device-orbit",
+        ".cinematic-device-name",
+        ".cinematic-device-name small",
+        ".device-peer",
+        ".device-dns",
+        ".cinematic-status",
+        ".cinematic-status span",
+        ".cinematic-status button",
+        ".cinematic-caption",
+        ".cinematic-caption > span",
+        ".cinematic-caption i",
+        ".cinematic-caption p",
+        ".cinematic-caption b",
+        ".cinematic-caption small",
+        ".orbital",
+        ".orbital-two",
+        ".cinematic-stars",
+        ".spatial-stage",
+        ".spatial-stage .network-scene",
+        ".spatial-pause",
+        ".spatial-caption",
+        ".spatial-caption span",
+        ".spatial-caption p",
+        ".spatial-caption small",
+        ".spatial-stage .scene-bottom"
+      ]
+    },
+    "src/design.css": {
+      "rules": 646,
+      "duplicateSameContext": [
+        {
+          "key": "|.spatial-stage",
+          "lines": [
+            235,
+            864
+          ]
+        },
+        {
+          "key": "|.spatial-stage .scene-heading",
+          "lines": [
+            250,
+            839
+          ]
+        },
+        {
+          "key": "|.spatial-pause",
+          "lines": [
+            257,
+            842
+          ]
+        },
+        {
+          "key": "|.spatial-stage .scene-tools",
+          "lines": [
+            296,
+            845
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.hero-actions .text-button",
+          "lines": [
+            662,
+            3055
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.hero-visual",
+          "lines": [
+            682,
+            894
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.spatial-stage",
+          "lines": [
+            685,
+            887
+          ]
+        },
+        {
+          "key": "|.experience-osi .experience-content",
+          "lines": [
+            989,
+            1359,
+            2053
+          ]
+        },
+        {
+          "key": "|.experience-osi .simulation-layout",
+          "lines": [
+            1363,
+            2056
+          ]
+        },
+        {
+          "key": "|.experience-osi .experience-events",
+          "lines": [
+            1367,
+            2059
+          ]
+        },
+        {
+          "key": "|.quick-search-dialog .quick-search-results button",
+          "lines": [
+            2340,
+            2346
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.immersive-header",
+          "lines": [
+            3058,
+            3244
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.immersive-header b",
+          "lines": [
+            3061,
+            3251
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.immersive-header small",
+          "lines": [
+            3065,
+            3255
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.immersive-header > div",
+          "lines": [
+            3069,
+            3248
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.immersive-close",
+          "lines": [
+            3075,
+            3266
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.immersive-help",
+          "lines": [
+            3082,
+            3262
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.immersive-mission",
+          "lines": [
+            3086,
+            3274
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.immersive-mission h2",
+          "lines": [
+            3093,
+            3286
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.immersive-mission > p",
+          "lines": [
+            3097,
+            3290
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.immersive-mission > div",
+          "lines": [
+            3100,
+            3293
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.immersive-mission > div > span",
+          "lines": [
+            3105,
+            3298
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.immersive-inspector",
+          "lines": [
+            3116,
+            3310
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.immersive-inspector h2",
+          "lines": [
+            3126,
+            3323
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.immersive-inspector dl",
+          "lines": [
+            3132,
+            3330
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.immersive-inspector dl > div",
+          "lines": [
+            3138,
+            3333
+          ]
+        },
+        {
+          "key": "@media (max-width: 760px)|.immersive-inspector dd",
+          "lines": [
+            3143,
+            3339
+          ]
+        }
+      ],
+      "selectors": [
+        ":root",
+        "body",
+        ".sidebar",
+        ".brand",
+        ".brand-symbol",
+        ".workspace-label",
+        ".nav-item",
+        ".nav-item:hover",
+        ".nav-item.active",
+        ".nav-item.active:before",
+        ".nav-group-label",
+        ".sidebar-footer",
+        ".local-badge",
+        ".topbar",
+        ".breadcrumbs",
+        ".breadcrumbs b",
+        ".level-switch",
+        ".level-switch button",
+        ".level-switch button.active",
+        ".icon-button",
+        ".icon-button:hover",
+        "main",
+        ".home-hero",
+        ".hero-art",
+        ".hero-copy",
+        ".hero-copy > .eyebrow",
+        ".hero-copy h1",
+        ".hero-copy h1 br",
+        ".hero-copy h1 span",
+        ".hero-copy p",
+        ".hero-copy p br",
+        ".hero-actions",
+        ".primary",
+        ".primary:hover:not(:disabled)",
+        ".text-button",
+        ".hero-caption",
+        ".tiny-network",
+        ".experience-facts",
+        ".experience-facts > div",
+        ".experience-facts > div:first-child",
+        ".experience-facts > div:last-child",
+        ".experience-facts b",
+        ".experience-facts span",
+        ".hero-visual",
+        ".spatial-stage",
+        ".spatial-stage .network-scene",
+        ".spatial-stage .scene-heading",
+        ".spatial-pause",
+        ".spatial-caption",
+        ".spatial-caption span",
+        ".spatial-caption p",
+        ".spatial-caption small",
+        ".spatial-stage .scene-bottom",
+        ".spatial-stage .scene-tools",
+        ".scene-tools button",
+        ".hero-visual-caption",
+        ".home-control-wrap",
+        ".controls",
+        ".control-button",
+        ".control-button:hover",
+        ".controls .primary",
+        ".time-controls",
+        ".packet-tray",
+        ".home-control-wrap .legend",
+        ".discovery-section",
+        ".section-title",
+        ".eyebrow",
+        ".section-title h2",
+        ".section-title .micro",
+        ".discovery-grid",
+        ".discovery-card",
+        ".discovery-card:after",
+        ".discovery-card:hover",
+        ".discovery-icon",
+        ".discovery-card h3",
+        ".discovery-card p",
+        ".card-index",
+        ".card-action",
+        ".home-bottom",
+        ".guide > div span",
+        ".team button",
+        ".home-live",
+        ".page-footer",
+        ".page-heading",
+        ".page-heading h1",
+        ".page-heading p",
+        ".simulation-label",
+        ".network-scene",
+        ".panel",
+        ".panel-header",
+        ".panel-header h3",
+        ".panel p",
+        ".panel-kicker",
+        ".lesson",
+        ".lesson > h3",
+        ".lesson > p",
+        ".logs input",
+        ".logs time",
+        ".logs button:hover",
+        ".settings",
+        ".outline",
+        ".outline:hover",
+        "input",
+        "select",
+        "button:focus-visible",
+        "a:focus-visible",
+        "input:focus-visible",
+        "select:focus-visible",
+        ".app-shell",
+        ".hero-actions .primary",
+        ".hero-actions .text-button",
+        ".playback",
+        "*",
+        "*::before",
+        "*::after",
+        ".scene-telemetry",
+        ".scene-telemetry span",
+        ".scene-telemetry span:first-child",
+        ".scene-telemetry b",
+        ".spatial-stage .network-scene.hero-scene",
+        ".hero-actions .primary:hover",
+        ".experience",
+        ".experience-osi",
+        ".experience-tcp",
+        ".experience-web",
+        ".experience-diagnostics",
+        ".experience-security",
+        ".experience-performance",
+        ".experience-media",
+        ".experience-trends",
+        ".experience:not(.experience-home) .page-heading",
+        ".experience:not(.experience-home) .page-heading:after",
+        ".experience .page-heading > .eyebrow",
+        ".experience-content",
+        ".experience-content > .lesson",
+        ".experience-layout",
+        ".experience-layout > .simulation-layout",
+        ".experience-events",
+        ".experience-events > .logs",
+        ".experience-content .panel-header",
+        ".experience-osi .experience-content",
+        ".experience-osi .osi-layout",
+        ".experience-osi .osi-model button",
+        ".experience-osi .osi-model button:hover",
+        ".experience-osi .osi-model button.chosen",
+        ".experience-osi .layer-detail",
+        ".experience-osi .layer-detail h3",
+        ".experience-osi .osi-model",
+        ".experience-tcp .experience-content",
+        ".experience-tcp .compare-grid",
+        ".experience-tcp .protocol-card",
+        ".experience-tcp .protocol-card:nth-child(2)",
+        ".experience-tcp .protocol-title",
+        ".experience-tcp .compare-lane",
+        ".experience-tcp .handshake",
+        ".experience-web .experience-content",
+        ".experience-web .web-browser",
+        ".experience-web .browser-toolbar",
+        ".experience-web .loaded-page",
+        ".experience-web .page-progress",
+        ".experience-web .page-progress > span",
+        ".experience-web .browser-note",
+        ".experience-diagnostics .experience-content",
+        ".experience-diagnostics .terminal",
+        ".experience-diagnostics .terminal pre",
+        ".experience-diagnostics .terminal .panel-kicker",
+        ".experience-diagnostics .terminal form",
+        ".experience-diagnostics .diagnostic-layout",
+        ".experience-diagnostics .diagnostic-layout > .lesson",
+        ".experience-security .experience-content",
+        ".experience-security .experience-content > .lesson",
+        ".experience-security .rules thead",
+        ".experience-security .rules td",
+        ".experience-security .security-comparison",
+        ".experience-security .security-comparison > div",
+        ".experience-security .security-comparison > div:last-child",
+        ".experience-performance .experience-content",
+        ".experience-performance .performance",
+        ".experience-performance .chart",
+        ".experience-performance .throughput",
+        ".experience-performance .performance-stats",
+        ".experience-performance .performance-stats > div",
+        ".experience-performance .performance-stats strong",
+        ".experience-media .experience-content",
+        ".experience-media .media-cards",
+        ".experience-media .media-card",
+        ".experience-media .media-card:nth-child(2)",
+        ".experience-media .media-card:nth-child(3)",
+        ".experience-media .media-icon",
+        ".experience-media .media-card.chosen",
+        ".experience-media .media-card h3",
+        ".experience-topology .network-scene",
+        ".experience-lab .network-scene",
+        ".experience-topology .link-grid",
+        ".experience-topology .link-grid button",
+        ".experience-topology .link-grid button.broken",
+        ".experience-routing .experience-content",
+        ".experience-routing .data-table th",
+        ".experience-routing .compare-grid",
+        ".experience-trends .experience-content",
+        ".experience-trends .cloud-table",
+        ".experience-trends .cloud-table td",
+        ".experience-glossary .knowledge-layout",
+        ".experience-glossary .quiz",
+        ".experience-glossary .quiz-options button",
+        ".experience-glossary .glossary",
+        "from",
+        "to",
+        ".experience-osi .experience-layout",
+        ".experience-osi .simulation-layout",
+        ".experience-osi .experience-events",
+        ".osi-workbench",
+        ".osi-workbench-heading",
+        ".osi-workbench-heading h2",
+        ".osi-workbench-heading p",
+        ".osi-live-phase",
+        ".osi-dual-stage",
+        ".osi-tower",
+        ".osi-tower > header",
+        ".tower-device",
+        ".osi-tower > header small",
+        ".osi-tower > header h3",
+        ".osi-tower > header > svg",
+        ".osi-stack-3d",
+        ".osi-slab",
+        ".destination .osi-slab",
+        ".osi-slab:hover",
+        ".destination .osi-slab:hover",
+        ".osi-slab > b",
+        ".osi-slab > span",
+        ".osi-slab small",
+        ".osi-slab em",
+        ".osi-slab.is-selected",
+        ".osi-slab.is-active",
+        ".slab-packet",
+        ".osi-tower > footer",
+        ".osi-tower > footer > span",
+        ".osi-bridge",
+        ".osi-bridge > span",
+        ".osi-bridge > b",
+        ".osi-bridge > small",
+        ".bridge-wire",
+        ".bridge-wire:before",
+        ".bridge-wire:after",
+        ".bridge-wire i",
+        ".transmitting .bridge-wire i",
+        ".osi-inspection",
+        ".osi-inspector",
+        ".osi-pdu",
+        ".osi-inspector-top",
+        ".osi-inspector-top > .eyebrow",
+        ".osi-inspector-top button",
+        ".osi-detail-title",
+        ".osi-detail-title > b",
+        ".osi-detail-title small",
+        ".osi-detail-title h3",
+        ".osi-inspector > p",
+        ".osi-protocol-tag",
+        ".osi-detail-foot",
+        ".osi-pdu h3",
+        ".pdu-assembly",
+        ".pdu-assembly > span",
+        ".pdu-assembly > b",
+        ".pdu-ethernet",
+        ".pdu-ip",
+        ".pdu-tcp",
+        ".osi-pdu-state",
+        ".osi-pdu-state > strong",
+        ".osi-pdu-state > span:last-child",
+        ".osi-pdu > p",
+        ".osi-bits",
+        ".tcpip-mapping",
+        ".tcpip-mapping > span",
+        ".tcpip-mapping > b",
+        ".tcpip-mapping small",
+        "50%",
+        ".tower-device svg",
+        ".osi-bridge > svg",
+        ".experience-osi .osi-main-controls",
+        ".osi-main-controls .controls",
+        ".osi-main-controls > p",
+        ".path-explorer",
+        ".path-layout",
+        ".path-choices",
+        ".path-choices > button",
+        ".path-choices > button[aria-selected=\"true\"]",
+        ".path-choices > button:hover",
+        ".path-number",
+        ".path-choices small",
+        ".path-choices b",
+        ".path-choices > button > svg",
+        ".path-preview",
+        ".path-map",
+        ".path-map:before",
+        ".path-map > button",
+        ".path-orbit",
+        ".path-orbit > span",
+        ".path-map > button:hover .path-orbit > span",
+        ".path-map b",
+        ".path-map small",
+        ".path-preview-footer",
+        ".path-preview-footer p",
+        ".path-preview-footer .primary",
+        ".path-mission",
+        ".path-mission > b",
+        ".path-mission b",
+        ".path-mission > svg:first-child",
+        ".path-mission > svg:last-child",
+        ".quick-search-trigger",
+        ".quick-search-trigger kbd",
+        ".quick-search-dialog",
+        ".quick-search-dialog::backdrop",
+        ".quick-search-dialog > input",
+        ".quick-search-dialog > input:focus",
+        ".quick-search-dialog input",
+        ".quick-search-dialog .quick-search-input",
+        ".quick-search-dialog footer",
+        ".quick-search-dialog .quick-search-results",
+        ".quick-search-dialog .quick-search-list",
+        ".quick-search-dialog .quick-search-options",
+        ".quick-search-dialog .quick-search-results button",
+        ".quick-search-dialog .quick-search-results > p",
+        ".quick-search-dialog .quick-search-results button:hover",
+        ".quick-search-results button > span",
+        ".quick-search-results button > div",
+        ".quick-search-results b",
+        ".quick-search-results small",
+        ".quick-search-results button > svg",
+        ".prediction-card",
+        ".prediction-question h3",
+        ".prediction-question > p",
+        ".prediction-answers",
+        ".prediction-answers > button",
+        ".prediction-answers > button > span",
+        ".prediction-answers > button:hover:not(:disabled)",
+        ".prediction-answers > button:disabled",
+        ".prediction-answers > button.correct",
+        ".prediction-answers > button.incorrect",
+        ".prediction-feedback",
+        ".prediction-feedback > div",
+        ".prediction-feedback b",
+        ".prediction-feedback p",
+        ".prediction-feedback button",
+        ".immersive-entry",
+        ".immersive-entry:hover",
+        ".immersive-entry > svg:first-child",
+        ".immersive-loading",
+        ".immersive-lab",
+        ".immersive-lab::backdrop",
+        ".immersive-world",
+        ".immersive-world .network-scene",
+        ".immersive-world .scene-heading",
+        ".immersive-world .scene-tools",
+        ".immersive-world .scene-bottom",
+        ".immersive-vignette",
+        ".immersive-header",
+        ".immersive-header > div",
+        ".immersive-header > div > svg",
+        ".immersive-header b",
+        ".immersive-header b em",
+        ".immersive-header small",
+        ".immersive-close",
+        ".immersive-help",
+        ".immersive-close kbd",
+        ".immersive-mission",
+        ".immersive-mission h2",
+        ".immersive-mission > p",
+        ".immersive-mission > div",
+        ".immersive-mission > div > span",
+        ".immersive-mission b",
+        ".immersive-mission .done",
+        ".immersive-inspector",
+        ".immersive-inspector > div",
+        ".immersive-inspector h2",
+        ".immersive-inspector p",
+        ".immersive-inspector dl",
+        ".immersive-inspector dl > div",
+        ".immersive-inspector dt",
+        ".immersive-inspector dd",
+        ".immersive-tip",
+        ".immersive-instructions",
+        ".immersive-instructions > button",
+        ".immersive-instructions > span",
+        ".immersive-instructions kbd",
+        ".immersive-dock",
+        ".immersive-device-list",
+        ".immersive-device-list > button",
+        ".immersive-device-list > button[aria-pressed=\"true\"]",
+        ".immersive-device-list > button > span",
+        ".immersive-device-list > button .visited",
+        ".immersive-playback",
+        ".immersive-playback > .primary",
+        ".immersive-playback > .outline",
+        ".immersive-stream",
+        ".immersive-stream > span",
+        ".immersive-stream p",
+        ".immersive-playback > strong",
+        ".immersive-playback > strong small",
+        ".quick-search-trigger > span",
+        ".topbar-actions",
+        ".topbar .level-switch",
+        ".topbar .level-switch button",
+        ".topbar .top-divider",
+        ".path-orbit svg",
+        ".immersive-close span",
+        ".immersive-mission > div > span > b",
+        ".immersive-mission .eyebrow",
+        ".immersive-inspector ~ .immersive-instructions",
+        ".immersive-instructions > span:first-of-type",
+        ".quick-search-results button",
+        ".prediction-answers > button:hover",
+        ".quick-search-dialog > div.quick-search-input",
+        ".quick-search-input > svg",
+        ".quick-search-input > input",
+        ".quick-search-input > button",
+        ".quick-search-input > button:hover",
+        ".immersive-header .status-dot",
+        ".immersive-close > span",
+        ".immersive-close > kbd",
+        ".immersive-mission > .eyebrow",
+        ".immersive-mission > div > span > svg",
+        ".immersive-inspector > p",
+        ".immersive-inspector .eyebrow"
+      ]
+    }
+  },
+  "sharedSelectors": [
+    ":root",
+    "*",
+    "body",
+    "input",
+    "select",
+    "button:focus-visible",
+    "a:focus-visible",
+    "input:focus-visible",
+    "select:focus-visible",
+    ".eyebrow",
+    ".sidebar",
+    ".brand",
+    ".brand-symbol",
+    ".workspace-label",
+    ".nav-item",
+    ".nav-item:hover",
+    ".nav-item.active",
+    ".nav-item.active:before",
+    ".nav-group-label",
+    ".sidebar-footer",
+    ".local-badge",
+    ".app-shell",
+    ".topbar",
+    ".breadcrumbs",
+    ".topbar-actions",
+    ".level-switch",
+    ".level-switch button",
+    ".level-switch button.active",
+    ".icon-button",
+    ".icon-button:hover",
+    "main",
+    ".home-hero",
+    ".hero-art",
+    ".hero-copy",
+    ".hero-copy > .eyebrow",
+    ".hero-copy h1",
+    ".hero-copy h1 span",
+    ".hero-copy p",
+    ".hero-actions",
+    ".primary",
+    ".primary:hover:not(:disabled)",
+    ".text-button",
+    ".hero-caption",
+    ".tiny-network",
+    ".hero-visual",
+    ".network-scene",
+    ".scene-tools button",
+    ".hero-visual-caption",
+    ".home-control-wrap",
+    ".controls",
+    ".playback",
+    ".control-button",
+    ".control-button:hover",
+    ".time-controls",
+    ".home-control-wrap .legend",
+    ".discovery-section",
+    ".section-title",
+    ".section-title h2",
+    ".discovery-grid",
+    ".discovery-card",
+    ".discovery-card:hover",
+    ".discovery-icon",
+    ".card-index",
+    ".discovery-card h3",
+    ".discovery-card p",
+    ".card-action",
+    ".home-bottom",
+    ".team button",
+    ".home-live",
+    ".page-footer",
+    ".page-heading",
+    ".page-heading h1",
+    ".page-heading p",
+    ".simulation-label",
+    ".panel",
+    ".panel-kicker",
+    ".panel-header",
+    ".panel-header h3",
+    ".outline",
+    ".outline:hover",
+    ".lesson",
+    ".lesson > h3",
+    ".lesson > p",
+    ".settings",
+    "from",
+    "to",
+    ".hero-actions .primary",
+    ".hero-actions .text-button",
+    ".controls .primary",
+    ".packet-tray",
+    ".hero-copy h1 br",
+    ".spatial-stage",
+    ".spatial-stage .network-scene",
+    ".spatial-pause",
+    ".spatial-caption",
+    ".spatial-caption span",
+    ".spatial-caption p",
+    ".spatial-caption small",
+    ".spatial-stage .scene-bottom"
+  ]
+}

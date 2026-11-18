@@ -1,3 +1,5 @@
+import { WorldMode } from "../world/mode";
+import "../world/world.css";
 import { PathExplorer, QuickSearch } from "../components/StudioInteractions";
 import CinematicNetwork from "../scenes/CinematicNetwork";
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
@@ -83,6 +85,7 @@ const TrendsLesson = lazy(() =>
 const WebLesson = lazy(() =>
   import("../features/Lessons").then((m) => ({ default: m.WebLesson })),
 );
+const WorldLab = lazy(() => import("../world/Lab"));
 const ImmersiveLab = lazy(() => import("../scenes/ImmersiveLab"));
 const NetworkScene = lazy(() => import("../scenes/NetworkScene"));
 const icons = [
@@ -304,6 +307,10 @@ function Lesson() {
 export default function App() {
   const { state, technical, setTechnical, quality, setQuality, select } =
     useSimulation();
+  const [world, setWorld] = useState(
+    () => readSaved("netverse-view", "world") !== "simple",
+  );
+  const [terminal, setTerminal] = useState(false);
   const [immersive, setImmersive] = useState(false);
   const [menu, setMenu] = useState(false),
     [settings, setSettings] = useState(false),
@@ -346,12 +353,14 @@ export default function App() {
     setHint(0);
     setMissionPicker(false);
     setMenu(false);
+    setTerminal(false);
     window.scrollTo({ top: 0, behavior: "instant" });
   };
   const navigate = (id: Scenario) => {
     act((e) => e.reset(id));
     select(null);
     setMenu(false);
+    setTerminal(false);
     window.scrollTo({ top: 0, behavior: "instant" });
   };
   const startTour = () => {
@@ -372,9 +381,11 @@ export default function App() {
     });
     select(null);
     setMenu(false);
+    setTerminal(false);
     window.scrollTo({ top: 0, behavior: "instant" });
   };
   useEffect(() => {
+    if (world) return;
     let frame = 0,
       previous = performance.now(),
       accumulator = 0;
@@ -393,7 +404,7 @@ export default function App() {
     };
     frame = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(frame);
-  }, []);
+  }, [world]);
   useEffect(() => {
     document.documentElement.dataset.reduced = String(reduced);
   }, [reduced]);
@@ -429,371 +440,403 @@ export default function App() {
     volume,
   ]);
   return (
-    <div className={`app ${presentation ? "presentation" : ""}`}>
-      {immersive && (
-        <Suspense
-          fallback={
-            <div className="immersive-loading">Abrindo laboratório…</div>
-          }
-        >
-          <ImmersiveLab onClose={() => setImmersive(false)} />
-        </Suspense>
-      )}
-      <a className="skip-link" href="#main-content">
-        Pular para o conteúdo
-      </a>
-      {menu && (
-        <button
-          className="nav-backdrop"
-          aria-label="Fechar navegação"
-          onClick={() => setMenu(false)}
-        />
-      )}
-      <aside className={`sidebar ${menu ? "open" : ""}`}>
-        <button
-          className="brand"
-          onClick={() => navigate("home")}
-          aria-label="NETVERSE início"
-        >
-          <span className="brand-symbol">
-            <Network size={27} />
-          </span>
-          <span>
-            NETVERSE<small>O UNIVERSO VIVO DAS REDES</small>
-          </span>
-        </button>
-        <div className="workspace-label">
-          <span className="status-dot" /> LABORATÓRIO INTERATIVO{" "}
-          <span>v1.0</span>
-        </div>
-        <nav aria-label="Áreas do simulador">
-          {sections.map((s, i) => {
-            const Icon = icons[i];
-            return (
-              <button
-                key={s.id}
-                className={
-                  state.scenario === s.id ? "nav-item active" : "nav-item"
-                }
-                onClick={() => navigate(s.id)}
-                aria-current={state.scenario === s.id ? "page" : undefined}
-              >
-                <Icon size={17} />
-                <span>{s.short}</span>
-                <small>{String(i).padStart(2, "0")}</small>
-              </button>
-            );
-          })}
-        </nav>
-        <div className="sidebar-extra">
-          <span className="nav-group-label">VÁ ALÉM</span>
-          <button
-            className="nav-item"
-            onClick={() => {
-              setMissionPicker(true);
-              setMenu(false);
-            }}
+    <WorldMode.Provider value={world}>
+      <div
+        className={`app ${presentation ? "presentation" : ""} ${world ? "world-mode" : ""} ${terminal ? "world-terminal-open" : ""}`}
+      >
+        {world && (
+          <Suspense
+            fallback={<div className="world-boot">Carregando o mundo…</div>}
           >
-            <Flag size={17} />
-            <span>Desafios de rede</span>
-            <span className="new-tag">6</span>
-          </button>
-          <button
-            className={`nav-item ${state.scenario === "lab" ? "active" : ""}`}
-            onClick={() => navigate("lab")}
+            <WorldLab active={!terminal} onTerminal={() => setTerminal(true)} />
+          </Suspense>
+        )}
+        {immersive && (
+          <Suspense
+            fallback={
+              <div className="immersive-loading">Abrindo laboratório…</div>
+            }
           >
-            <FlaskConical size={17} />
-            <span>Laboratório livre</span>
-            <span className="new-tag">LAB</span>
-          </button>
-          <button className="nav-item" onClick={startTour}>
-            <Monitor size={17} />
-            <span>Modo apresentação</span>
-            <ChevronRight size={13} />
-          </button>
-        </div>
-        <div className="sidebar-footer">
-          <div className="sidebar-orbit">✳</div>
-          <div>
-            <b>Aprenda explorando.</b>
-            <span>Uma conexão de cada vez.</span>
-          </div>
-          <span className="local-badge">
-            <i className="status-dot" /> EXECUÇÃO LOCAL · OFFLINE
-          </span>
-        </div>
-      </aside>
-      <div className="app-shell">
-        <header className="topbar">
-          <div className="breadcrumbs">
-            <button
-              className="icon-button mobile-menu"
-              aria-label="Abrir navegação"
-              onClick={() => setMenu(true)}
-            >
-              <Menu size={20} />
-            </button>
-            <span>Universo NETVERSE</span>
-            <ChevronRight size={13} />
-            <b>{active?.short ?? "Laboratório livre"}</b>
-          </div>
-          <div className="topbar-actions">
-            <QuickSearch navigate={navigate} />
-            <div className="level-switch">
-              <button
-                className={!technical ? "active" : ""}
-                onClick={() => setTechnical(false)}
-              >
-                <GraduationCap size={14} />
-                Iniciante
-              </button>
-              <button
-                className={technical ? "active" : ""}
-                onClick={() => setTechnical(true)}
-              >
-                Técnico
-              </button>
-            </div>
-            <span className="top-divider" />
-            <button
-              className="icon-button"
-              aria-label={sound ? "Desativar áudio" : "Ativar áudio"}
-              onClick={() => {
-                if (!audio.current) audio.current = new AudioContext();
-                void audio.current.resume();
-                setSound(!sound);
-              }}
-            >
-              {sound ? <Volume2 size={17} /> : <VolumeX size={17} />}
-            </button>
-            <button
-              className="icon-button"
-              aria-label="Preferências"
-              onClick={() => setSettings(!settings)}
-            >
-              <Settings2 size={17} />
-            </button>
-          </div>
-        </header>
-        {settings && (
-          <section className="settings panel">
-            <div className="panel-header">
-              <h3>Seu jeito de explorar</h3>
-              <button
-                className="icon-button"
-                aria-label="Fechar preferências"
-                onClick={() => setSettings(false)}
-              >
-                <X size={16} />
-              </button>
-            </div>
-            <label className="field">
-              Qualidade visual
-              <select
-                value={quality}
-                onChange={(ev) => setQuality(ev.target.value)}
-              >
-                {["Automático", "Baixo", "Médio", "Alto"].map((v) => (
-                  <option key={v}>{v}</option>
-                ))}
-              </select>
-            </label>
-            <label className="toggle-label">
-              <span>Reduzir movimento da interface</span>
-              <input
-                type="checkbox"
-                checked={reduced}
-                onChange={(ev) => setReduced(ev.target.checked)}
-              />
-              <span className="toggle-track" />
-            </label>
-            <label className="slider-label">
-              <span>
-                Volume do áudio <b>{Math.round(volume * 100)}%</b>
-              </span>
-              <input
-                aria-label="Volume"
-                type="range"
-                min="0"
-                max="1"
-                step=".05"
-                value={volume}
-                onChange={(ev) => setVolume(Number(ev.target.value))}
-              />
-            </label>
-            <p className="micro">
-              Sem WebGL? O mapa 2D mantém a simulação e a inspeção disponíveis.
-              O tempo virtual avança a 180 ms/s em 1× para tornar os eventos
-              visíveis.
-            </p>
-          </section>
+            <ImmersiveLab onClose={() => setImmersive(false)} />
+          </Suspense>
         )}
-        {presentation && (
-          <div className="presentation-bar">
-            <span>
-              <Monitor size={16} /> DEMONSTRAÇÃO · {tourIndex + 1}/{tour.length}
-            </span>
-            <p>{tourNotes[tourIndex]}</p>
-            <div>
-              <button
-                aria-label="Cenário anterior"
-                disabled={tourIndex === 0}
-                onClick={() => {
-                  goTour(tourIndex - 1);
-                }}
-              >
-                <ChevronLeft size={18} />
-              </button>
-              <button
-                onClick={() => {
-                  const next = (tourIndex + 1) % tour.length;
-                  goTour(next);
-                }}
-              >
-                Próximo cenário <ChevronRight size={17} />
-              </button>
-              <button
-                aria-label="Sair da apresentação"
-                onClick={() => setPresentation(false)}
-              >
-                <X size={16} />
-              </button>
-            </div>
-          </div>
-        )}
-        <main
-          id="main-content"
-          className={`experience experience-${state.scenario}`}
-        >
-          {mission && (
-            <MissionBar
-              mission={mission}
-              complete={missionComplete}
-              hint={hint}
-              onHint={() => setHint((h) => Math.min(3, h + 1))}
-              onClose={() => setMission(null)}
-            />
-          )}
-          {state.scenario === "home" ? (
-            <Home
-              navigate={navigate}
-              startTour={startTour}
-              onImmerse={() => setImmersive(true)}
-              onMissions={() => setMissionPicker(true)}
-            />
-          ) : (
-            <>
-              <div className="page-heading">
-                <span className="eyebrow">
-                  {active?.tag ?? "LAB / SEU ESPAÇO DE DESCOBERTAS"}
-                </span>
-                <div>
-                  <h1>{active?.label ?? "Laboratório livre"}</h1>
-                  <span className="simulation-label">
-                    <i className="status-dot" />
-                    {state.running ? "SIMULAÇÃO EM ANDAMENTO" : "REDE PRONTA"}
-                  </span>
-                </div>
-                <p>
-                  {active?.description ??
-                    "Crie equipamentos, desenhe conexões e transforme uma hipótese em um experimento."}
-                </p>
-              </div>
-              {state.scenario === "glossary" ? (
-                <Suspense
-                  fallback={
-                    <div className="scene-loading">Abrindo o conhecimento…</div>
-                  }
-                >
-                  <GlossaryLesson />
-                </Suspense>
-              ) : (
-                <div className="experience-layout">
-                  {state.scenario === "osi" && (
-                    <div className="osi-main-controls">
-                      <Controls />
-                      <p>
-                        Inicie para acompanhar o percurso. Clique em uma camada
-                        para explorar sua função.
-                      </p>
-                    </div>
-                  )}
-                  <div className="simulation-layout">
-                    <div className="simulation-main">
-                      <div className="scene-container">
-                        <Suspense
-                          fallback={
-                            <div className="scene-loading">
-                              Preparando visualização…
-                            </div>
-                          }
-                        >
-                          <NetworkScene />
-                        </Suspense>
-                        <Legend />
-                        {state.scenario !== "osi" && <Controls />}
-                        <PacketTray />
-                      </div>
-                      <Metrics />
-                    </div>
-                    <div className="simulation-aside">
-                      <Explanation />
-                      <Experiments />
-                    </div>
-                  </div>
-                  <div className="experience-content">
-                    <Suspense
-                      fallback={
-                        <div className="scene-loading">
-                          Preparando a experiência…
-                        </div>
-                      }
-                    >
-                      <Lesson />
-                    </Suspense>
-                  </div>
-                  <div className="experience-events">
-                    <Logs />
-                  </div>
-                </div>
-              )}
-            </>
-          )}
-          <footer className="page-footer">
-            <span>
-              <Network size={13} /> NETVERSE <span className="muted">/</span>{" "}
-              Redes Vivas
-            </span>
-            <span>Feito para entender. Construído para explorar.</span>
-            <span>SIMULAÇÃO EDUCACIONAL</span>
-          </footer>
-        </main>
-        <Inspector />
-        {missionPicker && (
-          <MissionPicker
-            onChoose={chooseMission}
-            onClose={() => setMissionPicker(false)}
-            completed={completed}
+        <a className="skip-link" href="#main-content">
+          Pular para o conteúdo
+        </a>
+        {menu && (
+          <button
+            className="nav-backdrop"
+            aria-label="Fechar navegação"
+            onClick={() => setMenu(false)}
           />
         )}
-        {achievement && (
-          <div className="achievement">
-            <Check size={20} />
-            <span>{achievement}</span>
+        <aside className={`sidebar ${menu ? "open" : ""}`}>
+          <button
+            className="brand"
+            onClick={() => navigate("home")}
+            aria-label="NETVERSE início"
+          >
+            <span className="brand-symbol">
+              <Network size={27} />
+            </span>
+            <span>
+              NETVERSE<small>O UNIVERSO VIVO DAS REDES</small>
+            </span>
+          </button>
+          <div className="workspace-label">
+            <span className="status-dot" /> LABORATÓRIO INTERATIVO{" "}
+            <span>v1.0</span>
+          </div>
+          <nav aria-label="Áreas do simulador">
+            {sections.map((s, i) => {
+              const Icon = icons[i];
+              return (
+                <button
+                  key={s.id}
+                  className={
+                    state.scenario === s.id ? "nav-item active" : "nav-item"
+                  }
+                  onClick={() => navigate(s.id)}
+                  aria-current={state.scenario === s.id ? "page" : undefined}
+                >
+                  <Icon size={17} />
+                  <span>{s.short}</span>
+                  <small>{String(i).padStart(2, "0")}</small>
+                </button>
+              );
+            })}
+          </nav>
+          <div className="sidebar-extra">
+            <span className="nav-group-label">VÁ ALÉM</span>
             <button
-              className="icon-button"
-              aria-label="Fechar conquista"
-              onClick={() => setAchievement("")}
+              className="nav-item"
+              onClick={() => {
+                setMissionPicker(true);
+                setMenu(false);
+              }}
             >
-              <X size={14} />
+              <Flag size={17} />
+              <span>Desafios de rede</span>
+              <span className="new-tag">6</span>
+            </button>
+            <button
+              className={`nav-item ${state.scenario === "lab" ? "active" : ""}`}
+              onClick={() => navigate("lab")}
+            >
+              <FlaskConical size={17} />
+              <span>Laboratório livre</span>
+              <span className="new-tag">LAB</span>
+            </button>
+            <button className="nav-item" onClick={startTour}>
+              <Monitor size={17} />
+              <span>Modo apresentação</span>
+              <ChevronRight size={13} />
             </button>
           </div>
-        )}
+          <div className="sidebar-footer">
+            <div className="sidebar-orbit">✳</div>
+            <div>
+              <b>Aprenda explorando.</b>
+              <span>Uma conexão de cada vez.</span>
+            </div>
+            <span className="local-badge">
+              <i className="status-dot" /> EXECUÇÃO LOCAL · OFFLINE
+            </span>
+          </div>
+        </aside>
+        <div className="app-shell">
+          <header className="topbar">
+            <div className="breadcrumbs">
+              <button
+                className="icon-button mobile-menu"
+                aria-label="Abrir navegação"
+                onClick={() => setMenu(true)}
+              >
+                <Menu size={20} />
+              </button>
+              <span>Universo NETVERSE</span>
+              <ChevronRight size={13} />
+              <b>{active?.short ?? "Laboratório livre"}</b>
+            </div>
+            <div className="topbar-actions">
+              <button
+                className="world-mode-toggle"
+                onClick={() => {
+                  setWorld(!world);
+                  save("netverse-view", world ? "simple" : "world");
+                  setTerminal(false);
+                }}
+              >
+                {world ? "Visão simplificada" : "Entrar no mundo 3D"}
+              </button>
+              {world && (
+                <button
+                  className="world-mode-toggle"
+                  onClick={() => setTerminal(!terminal)}
+                >
+                  {terminal ? "Voltar ao mundo" : "Terminal da zona"}
+                </button>
+              )}
+              <QuickSearch navigate={navigate} />
+              <div className="level-switch">
+                <button
+                  className={!technical ? "active" : ""}
+                  onClick={() => setTechnical(false)}
+                >
+                  <GraduationCap size={14} />
+                  Iniciante
+                </button>
+                <button
+                  className={technical ? "active" : ""}
+                  onClick={() => setTechnical(true)}
+                >
+                  Técnico
+                </button>
+              </div>
+              <span className="top-divider" />
+              <button
+                className="icon-button"
+                aria-label={sound ? "Desativar áudio" : "Ativar áudio"}
+                onClick={() => {
+                  if (!audio.current) audio.current = new AudioContext();
+                  void audio.current.resume();
+                  setSound(!sound);
+                }}
+              >
+                {sound ? <Volume2 size={17} /> : <VolumeX size={17} />}
+              </button>
+              <button
+                className="icon-button"
+                aria-label="Preferências"
+                onClick={() => setSettings(!settings)}
+              >
+                <Settings2 size={17} />
+              </button>
+            </div>
+          </header>
+          {settings && (
+            <section className="settings panel">
+              <div className="panel-header">
+                <h3>Seu jeito de explorar</h3>
+                <button
+                  className="icon-button"
+                  aria-label="Fechar preferências"
+                  onClick={() => setSettings(false)}
+                >
+                  <X size={16} />
+                </button>
+              </div>
+              <label className="field">
+                Qualidade visual
+                <select
+                  value={quality}
+                  onChange={(ev) => setQuality(ev.target.value)}
+                >
+                  {["Automático", "Baixo", "Médio", "Alto"].map((v) => (
+                    <option key={v}>{v}</option>
+                  ))}
+                </select>
+              </label>
+              <label className="toggle-label">
+                <span>Reduzir movimento da interface</span>
+                <input
+                  type="checkbox"
+                  checked={reduced}
+                  onChange={(ev) => setReduced(ev.target.checked)}
+                />
+                <span className="toggle-track" />
+              </label>
+              <label className="slider-label">
+                <span>
+                  Volume do áudio <b>{Math.round(volume * 100)}%</b>
+                </span>
+                <input
+                  aria-label="Volume"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step=".05"
+                  value={volume}
+                  onChange={(ev) => setVolume(Number(ev.target.value))}
+                />
+              </label>
+              <p className="micro">
+                Sem WebGL? O mapa 2D mantém a simulação e a inspeção
+                disponíveis. O tempo virtual avança a 180 ms/s em 1× para tornar
+                os eventos visíveis.
+              </p>
+            </section>
+          )}
+          {presentation && (
+            <div className="presentation-bar">
+              <span>
+                <Monitor size={16} /> DEMONSTRAÇÃO · {tourIndex + 1}/
+                {tour.length}
+              </span>
+              <p>{tourNotes[tourIndex]}</p>
+              <div>
+                <button
+                  aria-label="Cenário anterior"
+                  disabled={tourIndex === 0}
+                  onClick={() => {
+                    goTour(tourIndex - 1);
+                  }}
+                >
+                  <ChevronLeft size={18} />
+                </button>
+                <button
+                  onClick={() => {
+                    const next = (tourIndex + 1) % tour.length;
+                    goTour(next);
+                  }}
+                >
+                  Próximo cenário <ChevronRight size={17} />
+                </button>
+                <button
+                  aria-label="Sair da apresentação"
+                  onClick={() => setPresentation(false)}
+                >
+                  <X size={16} />
+                </button>
+              </div>
+            </div>
+          )}
+          <main
+            id="main-content"
+            className={`experience experience-${state.scenario}`}
+          >
+            {mission && (
+              <MissionBar
+                mission={mission}
+                complete={missionComplete}
+                hint={hint}
+                onHint={() => setHint((h) => Math.min(3, h + 1))}
+                onClose={() => setMission(null)}
+              />
+            )}
+            {state.scenario === "home" ? (
+              <Home
+                navigate={navigate}
+                startTour={startTour}
+                onImmerse={() => setImmersive(true)}
+                onMissions={() => setMissionPicker(true)}
+              />
+            ) : (
+              <>
+                <div className="page-heading">
+                  <span className="eyebrow">
+                    {active?.tag ?? "LAB / SEU ESPAÇO DE DESCOBERTAS"}
+                  </span>
+                  <div>
+                    <h1>{active?.label ?? "Laboratório livre"}</h1>
+                    <span className="simulation-label">
+                      <i className="status-dot" />
+                      {state.running ? "SIMULAÇÃO EM ANDAMENTO" : "REDE PRONTA"}
+                    </span>
+                  </div>
+                  <p>
+                    {active?.description ??
+                      "Crie equipamentos, desenhe conexões e transforme uma hipótese em um experimento."}
+                  </p>
+                </div>
+                {state.scenario === "glossary" ? (
+                  <Suspense
+                    fallback={
+                      <div className="scene-loading">
+                        Abrindo o conhecimento…
+                      </div>
+                    }
+                  >
+                    <GlossaryLesson />
+                  </Suspense>
+                ) : (
+                  <div className="experience-layout">
+                    {state.scenario === "osi" && (
+                      <div className="osi-main-controls">
+                        <Controls />
+                        <p>
+                          Inicie para acompanhar o percurso. Clique em uma
+                          camada para explorar sua função.
+                        </p>
+                      </div>
+                    )}
+                    <div className="simulation-layout">
+                      <div className="simulation-main">
+                        <div className="scene-container">
+                          <Suspense
+                            fallback={
+                              <div className="scene-loading">
+                                Preparando visualização…
+                              </div>
+                            }
+                          >
+                            <NetworkScene />
+                          </Suspense>
+                          <Legend />
+                          {state.scenario !== "osi" && <Controls />}
+                          <PacketTray />
+                        </div>
+                        <Metrics />
+                      </div>
+                      <div className="simulation-aside">
+                        <Explanation />
+                        <Experiments />
+                      </div>
+                    </div>
+                    <div className="experience-content">
+                      <Suspense
+                        fallback={
+                          <div className="scene-loading">
+                            Preparando a experiência…
+                          </div>
+                        }
+                      >
+                        <Lesson />
+                      </Suspense>
+                    </div>
+                    <div className="experience-events">
+                      <Logs />
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
+            <footer className="page-footer">
+              <span>
+                <Network size={13} /> NETVERSE <span className="muted">/</span>{" "}
+                Redes Vivas
+              </span>
+              <span>Feito para entender. Construído para explorar.</span>
+              <span>SIMULAÇÃO EDUCACIONAL</span>
+            </footer>
+          </main>
+          <Inspector />
+          {missionPicker && (
+            <MissionPicker
+              onChoose={chooseMission}
+              onClose={() => setMissionPicker(false)}
+              completed={completed}
+            />
+          )}
+          {achievement && (
+            <div className="achievement">
+              <Check size={20} />
+              <span>{achievement}</span>
+              <button
+                className="icon-button"
+                aria-label="Fechar conquista"
+                onClick={() => setAchievement("")}
+              >
+                <X size={14} />
+              </button>
+            </div>
+          )}
+        </div>
+        <div className="mobile-status">
+          <i className="status-dot" /> NETVERSE · REDE VIRTUAL{" "}
+          <Search size={12} />
+        </div>
       </div>
-      <div className="mobile-status">
-        <i className="status-dot" /> NETVERSE · REDE VIRTUAL{" "}
-        <Search size={12} />
-      </div>
-    </div>
+    </WorldMode.Provider>
   );
 }

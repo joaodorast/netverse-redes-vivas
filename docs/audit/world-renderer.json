@@ -1,0 +1,53 @@
+{
+  "environment": "Chrome headless local, hardware não certificado, amostra curta por zona; não é benchmark mobile nem estabilidade de 30 minutos",
+  "results": [
+    {
+      "zone": "Início00",
+      "renderer": "60 FPS · 16.7 ms\n93 draw calls · 25432 triângulos\n88 geometrias · 8 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "zone": "Camadas OSI01",
+      "renderer": "60 FPS · 16.6 ms\n49 draw calls · 18184 triângulos\n36 geometrias · 17 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "zone": "TCP × UDP02",
+      "renderer": "60 FPS · 16.7 ms\n20 draw calls · 4644 triângulos\n19 geometrias · 5 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "zone": "Viagem da web03",
+      "renderer": "60 FPS · 16.7 ms\n13 draw calls · 3920 triângulos\n11 geometrias · 6 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "zone": "Switch e roteador04",
+      "renderer": "60 FPS · 16.7 ms\n9 draw calls · 1328 triângulos\n8 geometrias · 5 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "zone": "Topologias05",
+      "renderer": "60 FPS · 16.6 ms\n72 draw calls · 26676 triângulos\n67 geometrias · 9 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "zone": "Meios físicos06",
+      "renderer": "60 FPS · 16.6 ms\n27 draw calls · 6154 triângulos\n25 geometrias · 6 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "zone": "Diagnóstico07",
+      "renderer": "60 FPS · 16.7 ms\n10 draw calls · 1330 triângulos\n8 geometrias · 6 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "zone": "Segurança08",
+      "renderer": "60 FPS · 16.6 ms\n10 draw calls · 1330 triângulos\n8 geometrias · 6 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "zone": "Desempenho09",
+      "renderer": "60 FPS · 16.7 ms\n7 draw calls · 34 triângulos\n7 geometrias · 4 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "zone": "Tendências10",
+      "renderer": "60 FPS · 16.6 ms\n12 draw calls · 3914 triângulos\n10 geometrias · 6 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "zone": "Glossário e quiz11",
+      "renderer": "60 FPS · 16.7 ms\n11 draw calls · 3912 triângulos\n9 geometrias · 6 texturas\nMemória GPU: indisponível pela API"
+    }
+  ]
+}
