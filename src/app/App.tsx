@@ -1,3 +1,4 @@
+import { PathExplorer, QuickSearch } from "../components/StudioInteractions";
 import CinematicNetwork from "../scenes/CinematicNetwork";
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import {
@@ -82,6 +83,7 @@ const TrendsLesson = lazy(() =>
 const WebLesson = lazy(() =>
   import("../features/Lessons").then((m) => ({ default: m.WebLesson })),
 );
+const ImmersiveLab = lazy(() => import("../scenes/ImmersiveLab"));
 const NetworkScene = lazy(() => import("../scenes/NetworkScene"));
 const icons = [
   Compass,
@@ -137,10 +139,12 @@ function Home({
   navigate,
   startTour,
   onMissions,
+  onImmerse,
 }: {
   navigate: (id: Scenario) => void;
   startTour: () => void;
   onMissions: () => void;
+  onImmerse: () => void;
 }) {
   const [members, setMembers] = useState(readSaved("netverse-members", "")),
     [editing, setEditing] = useState(false);
@@ -166,6 +170,9 @@ function Home({
             <button className="primary" onClick={() => navigate("web")}>
               Explorar o universo
               <ArrowRight size={17} />
+            </button>
+            <button className="immersive-entry" onClick={onImmerse}>
+              <Boxes size={17} /> Entrar no laboratório <ArrowRight size={15} />
             </button>
             <button className="text-button" onClick={startTour}>
               <Play size={14} /> Iniciar demonstração
@@ -212,55 +219,7 @@ function Home({
         <PacketTray />
         <Legend />
       </div>
-      <section className="discovery-section">
-        <div className="section-title">
-          <div>
-            <span className="eyebrow">ESCOLHA O SEU PRÓXIMO PASSO</span>
-            <h2>Todo caminho ensina algo novo.</h2>
-          </div>
-          <span className="micro">
-            12 áreas para explorar <ArrowRight size={15} />
-          </span>
-        </div>
-        <div className="discovery-grid">
-          <button className="discovery-card" onClick={() => navigate("osi")}>
-            <div className="discovery-icon cyan-bg">
-              <Layers3 size={23} />
-            </div>
-            <span className="card-index">01 / ENTENDA</span>
-            <h3>Por dentro da mensagem</h3>
-            <p>Desmonte os protocolos e descubra o que faz cada camada.</p>
-            <span className="card-action">
-              Aprender conceitos <ArrowRight size={16} />
-            </span>
-          </button>
-          <button
-            className="discovery-card"
-            onClick={() => navigate("topology")}
-          >
-            <div className="discovery-icon violet-bg">
-              <Network size={23} />
-            </div>
-            <span className="card-index">02 / EXPERIMENTE</span>
-            <h3>Conexões que ganham vida</h3>
-            <p>Explore topologias. Mude caminhos. Veja a rede se adaptar.</p>
-            <span className="card-action">
-              Explorar topologias <ArrowRight size={16} />
-            </span>
-          </button>
-          <button className="discovery-card" onClick={onMissions}>
-            <div className="discovery-icon amber-bg">
-              <Terminal size={23} />
-            </div>
-            <span className="card-index">03 / DESCUBRA</span>
-            <h3>Uma falha. Sua investigação.</h3>
-            <p>Encontre pistas, teste hipóteses e restaure a comunicação.</p>
-            <span className="card-action">
-              Resolver desafios <ArrowRight size={16} />
-            </span>
-          </button>
-        </div>
-      </section>
+      <PathExplorer navigate={navigate} onMissions={onMissions} />
       <div className="home-bottom">
         <section className="guide">
           <span className="eyebrow">SEU GUIA DE EXPLORAÇÃO</span>
@@ -345,6 +304,7 @@ function Lesson() {
 export default function App() {
   const { state, technical, setTechnical, quality, setQuality, select } =
     useSimulation();
+  const [immersive, setImmersive] = useState(false);
   const [menu, setMenu] = useState(false),
     [settings, setSettings] = useState(false),
     [presentation, setPresentation] = useState(false),
@@ -470,6 +430,15 @@ export default function App() {
   ]);
   return (
     <div className={`app ${presentation ? "presentation" : ""}`}>
+      {immersive && (
+        <Suspense
+          fallback={
+            <div className="immersive-loading">Abrindo laboratório…</div>
+          }
+        >
+          <ImmersiveLab onClose={() => setImmersive(false)} />
+        </Suspense>
+      )}
       <a className="skip-link" href="#main-content">
         Pular para o conteúdo
       </a>
@@ -569,6 +538,7 @@ export default function App() {
             <b>{active?.short ?? "Laboratório livre"}</b>
           </div>
           <div className="topbar-actions">
+            <QuickSearch navigate={navigate} />
             <div className="level-switch">
               <button
                 className={!technical ? "active" : ""}
@@ -708,6 +678,7 @@ export default function App() {
             <Home
               navigate={navigate}
               startTour={startTour}
+              onImmerse={() => setImmersive(true)}
               onMissions={() => setMissionPicker(true)}
             />
           ) : (
