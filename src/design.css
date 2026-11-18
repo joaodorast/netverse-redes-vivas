@@ -2059,3 +2059,1287 @@ select:focus-visible {
 .experience-osi .experience-events {
   grid-row: 4;
 }
+/* Participatory studio: journeys, discovery and immediate feedback. */
+.path-explorer {
+  margin: 22px 0 32px;
+}
+.path-layout {
+  display: grid;
+  grid-template-columns: 0.8fr 1.5fr;
+  gap: 18px;
+}
+.path-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.path-choices > button {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  text-align: left;
+  padding: 24px 20px;
+  background: #111e2f;
+  border: 1px solid #2c4057;
+  border-radius: 15px;
+  min-height: 112px;
+  transition:
+    transform 0.2s,
+    border-color 0.2s,
+    background 0.2s;
+}
+.path-choices > button[aria-selected="true"] {
+  background: linear-gradient(100deg, #243448, #18253a);
+  border-color: #7fa9bf;
+  box-shadow:
+    inset 3px 0 #9debd9,
+    0 8px 25px #0002;
+}
+.path-choices > button:hover {
+  transform: translateX(3px);
+  border-color: #6b92ab;
+}
+.path-number {
+  font:
+    22px Consolas,
+    monospace;
+  color: #708ca7;
+}
+.path-choices small {
+  font:
+    8px Consolas,
+    monospace;
+  letter-spacing: 1px;
+  color: #94b9c7;
+  display: block;
+  margin-bottom: 9px;
+}
+.path-choices b {
+  font-size: 16px;
+  font-weight: 550;
+  letter-spacing: -0.3px;
+}
+.path-choices > button > svg {
+  margin-left: auto;
+  color: #85b8c8;
+}
+.path-preview {
+  border: 1px solid #40516a;
+  border-radius: 18px;
+  background:
+    radial-gradient(
+      ellipse at 50% 15%,
+      color-mix(in srgb, var(--path-color) 15%, transparent),
+      transparent 70%
+    ),
+    #101c2d;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+.path-map {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  padding: 40px 20px;
+  flex: 1;
+  gap: 8px;
+}
+.path-map:before {
+  content: "";
+  position: absolute;
+  top: 47%;
+  left: 16%;
+  right: 16%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--path-color),
+    transparent
+  );
+  box-shadow: 0 0 22px var(--path-color);
+}
+.path-map > button {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 13px;
+  flex: 1;
+  min-width: 0;
+}
+.path-orbit {
+  display: grid;
+  place-items: center;
+  width: 100px;
+  height: 100px;
+  border: 1px solid color-mix(in srgb, var(--path-color) 30%, transparent);
+  border-radius: 50%;
+  background: #111e30;
+  box-shadow:
+    0 0 30px color-mix(in srgb, var(--path-color) 9%, transparent),
+    inset 0 0 25px color-mix(in srgb, var(--path-color) 7%, transparent);
+  transform: rotateX(15deg);
+}
+.path-orbit > span {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--path-color) 30%, #101c30),
+    #182538
+  );
+  border: 1px solid color-mix(in srgb, var(--path-color) 55%, transparent);
+  border-radius: 18px;
+  color: var(--path-color);
+  box-shadow:
+    0 7px 0 #070f1d,
+    0 8px 0 color-mix(in srgb, var(--path-color) 35%, transparent);
+  transition: transform 0.25s;
+}
+.path-map > button:hover .path-orbit > span {
+  transform: translateY(-7px);
+}
+.path-map b {
+  font-size: 12px;
+  font-weight: 550;
+  color: #e8f3ff;
+}
+.path-map small {
+  font:
+    8px Consolas,
+    monospace;
+  letter-spacing: 1px;
+  color: #91a9c0;
+}
+.path-preview-footer {
+  padding: 22px 25px;
+  border-top: 1px solid #33445b;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #0a152480;
+}
+.path-preview-footer p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #a9bfd2;
+  flex: 1;
+}
+.path-preview-footer .primary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  min-height: 42px;
+  white-space: nowrap;
+}
+.path-mission {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  margin-top: 15px;
+  padding: 18px 21px;
+  border: 1px solid #3b465c;
+  border-radius: 12px;
+  background: linear-gradient(100deg, #20263c, #111d2d);
+  font-size: 12px;
+  color: #a8b9cf;
+}
+.path-mission > b,
+.path-mission b {
+  font-weight: 500;
+  color: #deddf6;
+}
+.path-mission > svg:first-child {
+  color: #c8adf3;
+}
+.path-mission > svg:last-child {
+  margin-left: auto;
+  color: #c8adf3;
+}
+.quick-search-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #9fb6cc;
+  padding: 9px 12px;
+  border: 1px solid #30445b;
+  border-radius: 9px;
+  font-size: 10px;
+}
+.quick-search-trigger kbd {
+  font:
+    8px Consolas,
+    monospace;
+  padding: 3px 5px;
+  border: 1px solid #42566d;
+  border-radius: 4px;
+  color: #b7c8d9;
+}
+.quick-search-dialog {
+  padding: 0;
+  width: min(600px, calc(100vw - 32px));
+  max-height: 75vh;
+  background: #111e30;
+  border: 1px solid #49637c;
+  border-radius: 17px;
+  color: #e1edf7;
+  box-shadow: 0 30px 120px #000b;
+  overflow: hidden;
+}
+.quick-search-dialog::backdrop {
+  background: #030814ba;
+  backdrop-filter: blur(7px);
+}
+.quick-search-dialog > input {
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 1px solid #344a64;
+  padding: 22px 25px;
+  font-size: 17px;
+  background: #15243a;
+  outline-offset: -4px;
+}
+.quick-search-dialog > input:focus {
+  outline: 2px solid #83dfd0;
+}
+.quick-search-dialog input {
+  display: block;
+}
+.quick-search-dialog .quick-search-input {
+  width: 100%;
+  padding: 22px 25px;
+  border: 0;
+  border-bottom: 1px solid #344a64;
+  border-radius: 0;
+  font-size: 17px;
+}
+.quick-search-dialog footer {
+  padding: 14px 20px;
+  border-top: 1px solid #344a64;
+  font-size: 9px;
+  color: #92a9c0;
+  display: flex;
+  justify-content: space-between;
+}
+.quick-search-dialog .quick-search-results,
+.quick-search-dialog .quick-search-list,
+.quick-search-dialog .quick-search-options {
+  max-height: 50vh;
+  overflow: auto;
+}
+.quick-search-dialog .quick-search-results button {
+  width: 100%;
+}
+.quick-search-dialog .quick-search-results > p {
+  padding: 25px;
+}
+.quick-search-dialog .quick-search-results button {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+  padding: 16px 21px;
+  border-bottom: 1px solid #283b50;
+}
+.quick-search-dialog .quick-search-results button:hover {
+  background: #243a51;
+}
+.quick-search-results button > span {
+  font:
+    11px Consolas,
+    monospace;
+  color: #6eaeb7;
+}
+.quick-search-results button > div {
+  flex: 1;
+  min-width: 0;
+}
+.quick-search-results b {
+  display: block;
+  font-size: 13px;
+  font-weight: 550;
+}
+.quick-search-results small {
+  display: block;
+  color: #92abc3;
+  font-size: 10px;
+  line-height: 1.6;
+  margin-top: 5px;
+}
+.quick-search-results button > svg {
+  color: #8acfc8;
+}
+.prediction-card {
+  padding: 24px 30px;
+  border-top: 1px solid #64578055;
+  background: linear-gradient(110deg, #2b2742, #18263b);
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 20px;
+  align-items: center;
+}
+.prediction-question h3 {
+  font-size: 17px;
+  font-weight: 550;
+  line-height: 1.65;
+  letter-spacing: -0.25px;
+  margin: 10px 0 6px;
+}
+.prediction-question > p {
+  font-size: 10px;
+  color: #a3abc4;
+}
+.prediction-answers {
+  display: flex;
+  gap: 9px;
+}
+.prediction-answers > button {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  flex: 1;
+  min-height: 92px;
+  padding: 13px 8px;
+  border: 1px solid #615571;
+  border-radius: 12px;
+  background: #111c30;
+  font-size: 11px;
+  color: #dcd9ef;
+}
+.prediction-answers > button > span {
+  font:
+    10px Consolas,
+    monospace;
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #635a7e;
+  border-radius: 7px;
+  color: #c0acdf;
+}
+.prediction-answers > button:hover:not(:disabled) {
+  transform: translateY(-4px);
+  border-color: #d2b6ff;
+  background: #352d4d;
+}
+.prediction-answers > button:disabled {
+  opacity: 0.7;
+}
+.prediction-answers > button.correct {
+  opacity: 1;
+  border-color: #78d3ae;
+  background: #173d36;
+  color: #b6f9d6;
+}
+.prediction-answers > button.incorrect {
+  opacity: 1;
+  border-color: #b492a3;
+  background: #3d2c3b;
+}
+.prediction-feedback {
+  grid-column: 1/-1;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px 20px;
+  background: #0c1727;
+  border: 1px solid #3f586d;
+  border-radius: 12px;
+}
+.prediction-feedback > div {
+  flex: 1;
+}
+.prediction-feedback b {
+  font-size: 12px;
+  color: #a9edd5;
+  font-weight: 550;
+}
+.prediction-feedback p {
+  font-size: 11px;
+  margin-top: 7px;
+  line-height: 1.8;
+  color: #b2c2d5;
+}
+.prediction-feedback button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  white-space: nowrap;
+  padding: 10px 13px;
+  min-height: 38px;
+}
+.immersive-entry {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #c0a0f188;
+  background: linear-gradient(115deg, #393055, #222a47);
+  color: #e0d3ff;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 12px;
+  min-height: 47px;
+  box-shadow: 0 5px 25px #a18cff15;
+}
+.immersive-entry:hover {
+  transform: translateY(-3px);
+  border-color: #dbc4ff;
+  box-shadow: 0 8px 35px #a18cff30;
+}
+.immersive-entry > svg:first-child {
+  color: #b7a8fa;
+}
+.hero-actions .text-button {
+  flex-basis: 100%;
+  justify-content: flex-start;
+  padding-left: 2px;
+}
+.immersive-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #07101cef;
+  display: grid;
+  place-items: center;
+  color: #c5dce9;
+}
+.immersive-lab {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  background: #070d18;
+  color: #edf4fd;
+}
+.immersive-lab::backdrop {
+  background: #070d18;
+}
+.immersive-world {
+  position: absolute;
+  inset: 0;
+}
+.immersive-world .network-scene {
+  height: 100%;
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.immersive-world .scene-heading,
+.immersive-world .scene-tools,
+.immersive-world .scene-bottom {
+  display: none;
+}
+.immersive-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(#05101cbb, transparent 22%, transparent 60%, #05101cbb),
+    linear-gradient(
+      90deg,
+      #05101c77,
+      transparent 35%,
+      transparent 80%,
+      #05101c66
+    );
+}
+.immersive-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  pointer-events: none;
+}
+.immersive-header > div {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  pointer-events: auto;
+}
+.immersive-header > div > svg {
+  color: #8ff4db;
+}
+.immersive-header b {
+  display: block;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+.immersive-header b em {
+  font-style: normal;
+  color: #85e7d1;
+  font-weight: 400;
+}
+.immersive-header small {
+  display: block;
+  font:
+    8px Consolas,
+    monospace;
+  letter-spacing: 2px;
+  color: #8ea9c0;
+  margin-top: 7px;
+}
+.immersive-close,
+.immersive-help {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 15px;
+  border: 1px solid #4c6275;
+  border-radius: 10px;
+  background: #102234b3;
+  backdrop-filter: blur(10px);
+  font-size: 11px;
+  color: #bed2e3;
+}
+.immersive-close kbd {
+  font:
+    8px Consolas,
+    monospace;
+  padding: 4px;
+  border: 1px solid #526779;
+  border-radius: 4px;
+}
+.immersive-mission {
+  position: absolute;
+  top: 110px;
+  left: 30px;
+  max-width: 340px;
+  padding: 22px;
+  border: 1px solid #4a65785c;
+  border-radius: 16px;
+  background: #102032a6;
+  backdrop-filter: blur(14px);
+}
+.immersive-mission h2 {
+  font-size: 24px;
+  letter-spacing: -0.8px;
+  margin: 12px 0;
+}
+.immersive-mission > p {
+  font-size: 11px;
+  line-height: 1.8;
+  color: #b5c8da;
+}
+.immersive-mission > div {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.immersive-mission > div > span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  color: #9cb2c8;
+  padding: 10px 0;
+  border-top: 1px solid #40536877;
+}
+.immersive-mission b {
+  margin-left: auto;
+  font:
+    11px Consolas,
+    monospace;
+}
+.immersive-mission .done {
+  color: #99e7c9;
+}
+.immersive-inspector {
+  position: absolute;
+  right: 30px;
+  top: 110px;
+  width: 300px;
+  padding: 23px;
+  border: 1px solid #69c6bc66;
+  border-radius: 17px;
+  background: #102537de;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 20px 60px #0004;
+  animation: workbench-in 0.25s ease;
+}
+.immersive-inspector > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 15px 0;
+}
+.immersive-inspector h2 {
+  font-size: 22px;
+  letter-spacing: -0.7px;
+}
+.immersive-inspector p {
+  font-size: 12px;
+  line-height: 1.9;
+  color: #b8cedd;
+}
+.immersive-inspector dl {
+  margin: 20px 0 0;
+}
+.immersive-inspector dl > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 0;
+  border-top: 1px solid #35546b;
+}
+.immersive-inspector dt {
+  font:
+    8px Consolas,
+    monospace;
+  letter-spacing: 1px;
+  color: #91b2c6;
+}
+.immersive-inspector dd {
+  font:
+    11px Consolas,
+    monospace;
+  color: #d4eaf5;
+  margin: 0;
+}
+.immersive-tip {
+  display: block;
+  font-size: 9px;
+  line-height: 1.8;
+  color: #8fbbca;
+  border-top: 1px solid #35546b;
+  padding-top: 14px;
+}
+.immersive-instructions {
+  position: absolute;
+  bottom: 195px;
+  left: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 28px 18px 16px;
+  border: 1px solid #3f586d77;
+  border-radius: 12px;
+  background: #102032c7;
+  backdrop-filter: blur(12px);
+}
+.immersive-instructions > button {
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  color: #8daac1;
+}
+.immersive-instructions > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  color: #9db8cd;
+}
+.immersive-instructions kbd {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid #536c82;
+  border-radius: 4px;
+  background: #24394b;
+  color: #cee6f2;
+  font:
+    10px Consolas,
+    monospace;
+}
+.immersive-dock {
+  position: absolute;
+  bottom: 25px;
+  left: 30px;
+  right: 30px;
+  max-width: 1150px;
+  margin: auto;
+  border: 1px solid #526a7e88;
+  border-radius: 18px;
+  background: #0c1e30db;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 20px 70px #0005;
+  overflow: hidden;
+}
+.immersive-device-list {
+  display: flex;
+  gap: 8px;
+  padding: 13px 17px;
+  border-bottom: 1px solid #3a526880;
+  overflow: auto;
+}
+.immersive-device-list > button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 11px;
+  font-size: 9px;
+  white-space: nowrap;
+  border: 1px solid #3d5369;
+  border-radius: 8px;
+  background: #183045;
+  color: #bed1e1;
+}
+.immersive-device-list > button[aria-pressed="true"] {
+  background: #1c4649;
+  border-color: #71d8c7;
+  color: #aff9e5;
+}
+.immersive-device-list > button > span {
+  color: #8ca9c1;
+}
+.immersive-device-list > button .visited {
+  color: #9be8c9;
+}
+.immersive-playback {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 18px;
+}
+.immersive-playback > .primary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  min-height: 40px;
+}
+.immersive-playback > .outline {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+}
+.immersive-stream {
+  flex: 1;
+  min-width: 0;
+  padding-left: 13px;
+}
+.immersive-stream > span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font:
+    8px Consolas,
+    monospace;
+  letter-spacing: 1px;
+  color: #91cfc6;
+}
+.immersive-stream p {
+  font-size: 11px;
+  color: #aec4d6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 6px;
+}
+.immersive-playback > strong {
+  font:
+    26px Consolas,
+    monospace;
+  color: #9ae9d4;
+  text-align: right;
+  margin-left: auto;
+}
+.immersive-playback > strong small {
+  display: block;
+  font:
+    7px Consolas,
+    monospace;
+  letter-spacing: 1px;
+  color: #7fa7b9;
+  margin-top: 5px;
+}
+@media (max-width: 1150px) {
+  .quick-search-trigger > span,
+  .quick-search-trigger kbd {
+    display: none;
+  }
+  .quick-search-trigger {
+    padding: 9px;
+  }
+  .path-layout {
+    grid-template-columns: 1fr;
+  }
+  .path-choices {
+    flex-direction: row;
+    gap: 10px;
+  }
+  .path-choices > button {
+    flex: 1;
+    min-width: 0;
+    min-height: 100px;
+    padding: 17px 13px;
+    gap: 10px;
+  }
+  .path-choices > button > svg {
+    display: none;
+  }
+  .path-choices b {
+    font-size: 12px;
+  }
+  .path-choices small {
+    font-size: 6px;
+    letter-spacing: 0.5px;
+  }
+  .path-number {
+    font-size: 18px;
+  }
+  .path-map {
+    padding: 35px 20px;
+  }
+  .prediction-card {
+    grid-template-columns: 1fr;
+  }
+  .prediction-feedback {
+    flex-wrap: wrap;
+  }
+  .prediction-feedback > div {
+    flex-basis: 100%;
+  }
+  .immersive-mission {
+    max-width: 275px;
+    padding: 18px;
+  }
+  .immersive-mission h2 {
+    font-size: 20px;
+  }
+  .immersive-inspector {
+    width: 270px;
+  }
+  .immersive-instructions {
+    bottom: 185px;
+  }
+}
+@media (max-width: 760px) {
+  .quick-search-trigger {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    justify-content: center;
+  }
+  .topbar-actions {
+    gap: 7px;
+  }
+  .topbar .level-switch {
+    padding: 2px;
+  }
+  .topbar .level-switch button {
+    padding: 6px 7px;
+    font-size: 8px;
+  }
+  .topbar .top-divider {
+    display: none;
+  }
+  .path-choices {
+    flex-direction: column;
+    gap: 9px;
+  }
+  .path-choices > button {
+    min-height: 75px;
+    padding: 15px 18px;
+  }
+  .path-choices > button > svg {
+    display: block;
+  }
+  .path-choices b {
+    font-size: 15px;
+  }
+  .path-choices small {
+    font-size: 7px;
+  }
+  .path-number {
+    font-size: 22px;
+  }
+  .path-layout {
+    gap: 13px;
+  }
+  .path-orbit {
+    width: 74px;
+    height: 74px;
+  }
+  .path-orbit > span {
+    width: 47px;
+    height: 47px;
+    border-radius: 13px;
+  }
+  .path-orbit svg {
+    width: 21px;
+  }
+  .path-map {
+    padding: 30px 10px;
+  }
+  .path-map b {
+    font-size: 9px;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .path-map small {
+    font-size: 6px;
+    letter-spacing: 0.5px;
+  }
+  .path-preview-footer {
+    padding: 20px;
+    display: block;
+  }
+  .path-preview-footer p {
+    font-size: 12px;
+    margin-bottom: 17px;
+  }
+  .path-preview-footer .primary {
+    width: 100%;
+    justify-content: center;
+  }
+  .path-mission {
+    padding: 16px;
+    font-size: 11px;
+    line-height: 1.7;
+  }
+  .path-mission b {
+    display: block;
+  }
+  .prediction-card {
+    padding: 22px 17px;
+    gap: 17px;
+  }
+  .prediction-question h3 {
+    font-size: 15px;
+  }
+  .prediction-answers {
+    gap: 7px;
+  }
+  .prediction-answers > button {
+    font-size: 10px;
+    padding: 11px 6px;
+    min-height: 83px;
+  }
+  .prediction-feedback {
+    padding: 15px;
+    gap: 10px;
+  }
+  .prediction-feedback button {
+    font-size: 9px;
+    flex: 1;
+    justify-content: center;
+    padding: 9px 6px;
+  }
+  .immersive-entry {
+    font-size: 11px;
+    padding: 12px 15px;
+  }
+  .hero-actions .text-button {
+    font-size: 10px;
+  }
+  .immersive-header {
+    padding: 17px;
+  }
+  .immersive-header b {
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  .immersive-header small {
+    font-size: 6px;
+    letter-spacing: 1px;
+  }
+  .immersive-header > div {
+    gap: 9px;
+  }
+  .immersive-header > div > svg {
+    width: 18px;
+  }
+  .immersive-close {
+    padding: 9px;
+  }
+  .immersive-close span,
+  .immersive-close kbd {
+    display: none;
+  }
+  .immersive-help {
+    padding: 9px;
+    font-size: 9px;
+  }
+  .immersive-mission {
+    top: 80px;
+    left: 16px;
+    right: 16px;
+    max-width: none;
+    padding: 15px;
+  }
+  .immersive-mission h2 {
+    font-size: 19px;
+    margin: 8px 0;
+  }
+  .immersive-mission > p {
+    font-size: 10px;
+  }
+  .immersive-mission > div {
+    flex-direction: row;
+    gap: 12px;
+    margin-top: 10px;
+  }
+  .immersive-mission > div > span {
+    font-size: 8px;
+    gap: 5px;
+    flex: 1;
+  }
+  .immersive-mission > div > span > b {
+    font-size: 9px;
+  }
+  .immersive-mission .eyebrow {
+    font-size: 7px;
+  }
+  .immersive-inspector {
+    top: auto;
+    bottom: 165px;
+    left: 16px;
+    right: 16px;
+    width: auto;
+    padding: 18px;
+    max-height: 42vh;
+    overflow: auto;
+  }
+  .immersive-inspector h2 {
+    font-size: 20px;
+  }
+  .immersive-inspector p {
+    font-size: 11px;
+  }
+  .immersive-inspector dl {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .immersive-inspector dl > div {
+    display: block;
+    flex: 1;
+    padding: 10px 0;
+  }
+  .immersive-inspector dd {
+    font-size: 10px;
+    margin-top: 6px;
+  }
+  .immersive-tip {
+    display: none;
+  }
+  .immersive-instructions {
+    bottom: 170px;
+    left: 16px;
+    right: 16px;
+    padding: 15px;
+  }
+  .immersive-inspector ~ .immersive-instructions {
+    display: none;
+  }
+  .immersive-instructions > span:first-of-type {
+    display: none;
+  }
+  .immersive-dock {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    border-radius: 14px;
+  }
+  .immersive-device-list {
+    padding: 10px;
+    gap: 7px;
+  }
+  .immersive-device-list > button {
+    font-size: 8px;
+    padding: 8px;
+  }
+  .immersive-playback {
+    padding: 12px;
+    gap: 8px;
+  }
+  .immersive-playback > .primary {
+    font-size: 10px;
+    padding: 10px 12px;
+  }
+  .immersive-playback > strong {
+    font-size: 21px;
+  }
+  .immersive-stream {
+    display: none;
+  }
+  .quick-search-dialog footer {
+    font-size: 8px;
+    padding: 13px;
+  }
+  .quick-search-results small {
+    font-size: 9px;
+  }
+  .quick-search-results button {
+    padding: 13px 17px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .path-map > button:hover .path-orbit > span,
+  .path-choices > button:hover,
+  .prediction-answers > button:hover,
+  .immersive-entry:hover {
+    transform: none;
+  }
+  .immersive-inspector {
+    animation: none;
+  }
+}
+.quick-search-dialog > div.quick-search-input {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  background: #17273d;
+  padding: 16px 20px;
+}
+.quick-search-input > svg {
+  color: #94c9d5;
+  flex-shrink: 0;
+}
+.quick-search-input > input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline-offset: 1px;
+  background: transparent;
+  padding: 10px 3px;
+  font-size: 16px;
+}
+.quick-search-input > button {
+  display: grid;
+  place-items: center;
+  color: #a7bdcf;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+}
+.quick-search-input > button:hover {
+  background: #2d455d;
+}
+@media (max-width: 760px) {
+  .immersive-header {
+    padding: 17px 15px;
+    gap: 8px;
+  }
+  .immersive-header > div {
+    gap: 9px;
+  }
+  .immersive-header b {
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+  .immersive-header small {
+    font-size: 6px;
+    letter-spacing: 1px;
+  }
+  .immersive-header .status-dot {
+    display: none;
+  }
+  .immersive-help {
+    font-size: 9px;
+    padding: 9px;
+  }
+  .immersive-close {
+    padding: 9px;
+    gap: 0;
+  }
+  .immersive-close > span,
+  .immersive-close > kbd {
+    display: none;
+  }
+  .immersive-mission {
+    top: 78px;
+    left: 14px;
+    right: 14px;
+    max-width: none;
+    padding: 13px 15px;
+    border-radius: 12px;
+  }
+  .immersive-mission > .eyebrow {
+    font-size: 7px;
+    letter-spacing: 1px;
+  }
+  .immersive-mission h2 {
+    font-size: 17px;
+    margin: 8px 0 0;
+  }
+  .immersive-mission > p {
+    display: none;
+  }
+  .immersive-mission > div {
+    margin-top: 10px;
+    flex-direction: row;
+    gap: 13px;
+  }
+  .immersive-mission > div > span {
+    font-size: 8px;
+    flex: 1;
+    gap: 5px;
+    padding: 8px 0 0;
+  }
+  .immersive-mission b {
+    font-size: 9px;
+  }
+  .immersive-mission > div > span > svg {
+    width: 10px;
+  }
+  .immersive-inspector {
+    top: auto;
+    bottom: 164px;
+    left: 14px;
+    right: 14px;
+    width: auto;
+    padding: 16px 18px;
+    max-height: 235px;
+    overflow: auto;
+  }
+  .immersive-inspector > div {
+    margin: 9px 0;
+  }
+  .immersive-inspector h2 {
+    font-size: 19px;
+  }
+  .immersive-inspector > p {
+    font-size: 10px;
+    line-height: 1.7;
+  }
+  .immersive-inspector dl {
+    margin-top: 8px;
+  }
+  .immersive-inspector dl > div {
+    padding: 9px 0 0;
+  }
+  .immersive-inspector .eyebrow {
+    font-size: 7px;
+  }
+  .immersive-inspector dd {
+    font-size: 9px;
+  }
+  .immersive-inspector dt {
+    font-size: 7px;
+  }
+}
