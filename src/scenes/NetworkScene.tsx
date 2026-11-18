@@ -72,15 +72,32 @@ function Label({
 }
 const Device = memo(
   function Device({ d }: { d: NetworkDevice }) {
+    const model = useRef<Group>(null);
+    const [hovered, setHovered] = useState(false);
     const selected = useSimulation((s) => s.selected === d.id),
       select = useSimulation((s) => s.select);
     const receiving = useSimulation((s) =>
       s.state.packets.some((p) => p.status === "transit" && p.to === d.id),
     );
     const color = d.active ? deviceColors[d.type] : "#6b4655";
+    useFrame((_, delta) => {
+      if (!model.current) return;
+      const target = selected ? 1.07 : hovered ? 1.035 : 1;
+      const scale =
+        model.current.scale.x +
+        (target - model.current.scale.x) * Math.min(1, delta * 10);
+      if (Math.abs(scale - model.current.scale.x) > 0.0001)
+        model.current.scale.setScalar(scale);
+    });
     return (
       <group
+        ref={model}
         position={d.position}
+        onPointerOver={(e) => {
+          e.stopPropagation();
+          setHovered(true);
+        }}
+        onPointerOut={() => setHovered(false)}
         onClick={(e) => {
           e.stopPropagation();
           select(d.id);
@@ -452,18 +469,103 @@ function OpeningCamera({ active }: { active: boolean }) {
   });
   return null;
 }
+function LaboratoryRoom() {
+  return (
+    <group>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.15, 0]}>
+        <planeGeometry args={[24, 26]} />
+        <meshStandardMaterial
+          color="#101f2c"
+          metalness={0.6}
+          roughness={0.38}
+        />
+      </mesh>
+      <mesh position={[0, 3, -9]}>
+        <boxGeometry args={[22, 6, 0.2]} />
+        <meshStandardMaterial
+          color="#172735"
+          metalness={0.65}
+          roughness={0.4}
+        />
+      </mesh>
+      {[-8, -4, 0, 4, 8].map((x) => (
+        <group key={x} position={[x, 0, -8.85]}>
+          <mesh position={[0, 2.8, 0]}>
+            <boxGeometry args={[3.4, 4.8, 0.08]} />
+            <meshStandardMaterial
+              color="#0b1725"
+              metalness={0.75}
+              roughness={0.25}
+            />
+          </mesh>
+          <mesh position={[0, 5.25, 0.06]}>
+            <boxGeometry args={[3.2, 0.035, 0.02]} />
+            <meshBasicMaterial color="#65dfd5" />
+          </mesh>
+          {[1.4, 1.7, 2, 2.3].map((y) => (
+            <mesh key={y} position={[-0.7, y, 0.06]}>
+              <boxGeometry args={[1.2, 0.018, 0.02]} />
+              <meshBasicMaterial color="#3c8499" />
+            </mesh>
+          ))}
+        </group>
+      ))}
+      {[-7, 0, 7].map((z) => (
+        <group key={z}>
+          {[-9, 9].map((x) => (
+            <group key={x} position={[x, 2.7, z]}>
+              <mesh>
+                <boxGeometry args={[0.16, 5.6, 0.2]} />
+                <meshStandardMaterial
+                  color="#2d4052"
+                  metalness={0.8}
+                  roughness={0.3}
+                />
+              </mesh>
+              <mesh position={[x < 0 ? 0.09 : -0.09, 0, 0.12]}>
+                <boxGeometry args={[0.025, 5.1, 0.03]} />
+                <meshBasicMaterial color="#5da9ba" />
+              </mesh>
+            </group>
+          ))}
+          <mesh position={[0, 5.5, z]}>
+            <boxGeometry args={[18, 0.12, 0.2]} />
+            <meshStandardMaterial
+              color="#243c4f"
+              metalness={0.8}
+              roughness={0.3}
+            />
+          </mesh>
+          <mesh position={[0, 5.42, z]}>
+            <boxGeometry args={[13, 0.025, 0.1]} />
+            <meshBasicMaterial color="#b3e8f0" />
+          </mesh>
+        </group>
+      ))}
+      <Label
+        title="N E T V E R S E  /  N E T W O R K  L A B"
+        subtitle="EXPLORE · CONNECT · DISCOVER"
+        color="#91e5df"
+        position={[0, 4.2, -8.5]}
+      />
+    </group>
+  );
+}
 function World({
   opening,
   onOrbit,
+  immersive = false,
 }: {
   opening: boolean;
   onOrbit: () => void;
+  immersive?: boolean;
 }) {
   const state = useSimulation((s) => s.state);
   return (
     <>
       <color attach="background" args={["#080e19"]} />
       <fog attach="fog" args={["#080e19", 20, 45]} />
+      {immersive && <LaboratoryRoom />}
       <Stars
         radius={65}
         depth={30}
@@ -528,6 +630,7 @@ function World({
         ))}
       <OrbitControls
         autoRotate={
+          !immersive &&
           state.scenario === "home" &&
           !window.matchMedia("(prefers-reduced-motion: reduce)").matches
         }
@@ -544,6 +647,7 @@ function World({
         }}
       />
       <CameraFollow />
+      {immersive && <WalkCamera />}
       <AdaptiveQuality />
       <OpeningCamera active={opening} />
     </>
@@ -664,12 +768,77 @@ class SceneBoundary extends Component<
     return this.state.error ? this.props.fallback : this.props.children;
   }
 }
-export default function NetworkScene({ hero = false }: { hero?: boolean }) {
+function WalkCamera() {
+  const { camera, controls } = useThree();
+  const keys = useRef(new Set<string>());
+  const direction = useRef(new Vector3());
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (
+        !(e.target instanceof HTMLInputElement) &&
+        ["KeyW", "KeyA", "KeyS", "KeyD"].includes(e.code)
+      ) {
+        e.preventDefault();
+        keys.current.add(e.code);
+      }
+    };
+    const up = (e: KeyboardEvent) => keys.current.delete(e.code);
+    const clear = () => keys.current.clear();
+    window.addEventListener("keydown", down);
+    window.addEventListener("keyup", up);
+    window.addEventListener("blur", clear);
+    return () => {
+      window.removeEventListener("keydown", down);
+      window.removeEventListener("keyup", up);
+      window.removeEventListener("blur", clear);
+    };
+  }, []);
+  useFrame((_, delta) => {
+    if (!keys.current.size) return;
+    camera.getWorldDirection(direction.current);
+    direction.current.y = 0;
+    direction.current.normalize();
+    const forward =
+      Number(keys.current.has("KeyW")) - Number(keys.current.has("KeyS"));
+    const right =
+      Number(keys.current.has("KeyD")) - Number(keys.current.has("KeyA"));
+    const amount = Math.min(delta, 0.05) * 3;
+    const dx =
+      (direction.current.x * forward - direction.current.z * right) * amount;
+    const dz =
+      (direction.current.z * forward + direction.current.x * right) * amount;
+    if (
+      Math.abs(camera.position.x + dx) > 18 ||
+      Math.abs(camera.position.z + dz) > 18
+    )
+      return;
+    camera.position.x += dx;
+    camera.position.z += dz;
+    const orbit = controls as unknown as { target: Vector3 } | null;
+    if (orbit) {
+      orbit.target.x += dx;
+      orbit.target.z += dz;
+    }
+  });
+  return null;
+}
+export default function NetworkScene({
+  hero = false,
+  immersive = false,
+}: {
+  hero?: boolean;
+  immersive?: boolean;
+}) {
   const container = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(true);
   useEffect(() => {
     let intersecting = true;
-    const update = () => setVisible(intersecting && !document.hidden);
+    const update = () =>
+      setVisible(
+        intersecting &&
+          !document.hidden &&
+          (immersive || document.documentElement.dataset.immersive !== "true"),
+      );
     const observer = new IntersectionObserver(
       ([entry]) => {
         intersecting = entry.isIntersecting;
@@ -679,11 +848,13 @@ export default function NetworkScene({ hero = false }: { hero?: boolean }) {
     );
     if (container.current) observer.observe(container.current);
     document.addEventListener("visibilitychange", update);
+    document.addEventListener("netverse-immersion", update);
     return () => {
       observer.disconnect();
       document.removeEventListener("visibilitychange", update);
+      document.removeEventListener("netverse-immersion", update);
     };
-  }, []);
+  }, [immersive]);
   const [flat, setFlat] = useState(false),
     [cameraKey, setCameraKey] = useState(0);
   const [opening, setOpening] = useState(
@@ -720,7 +891,10 @@ export default function NetworkScene({ hero = false }: { hero?: boolean }) {
             <Canvas
               frameloop={visible ? "always" : "never"}
               key={cameraKey}
-              camera={{ position: [8, 8, 12], fov: hero ? 60 : 42 }}
+              camera={{
+                position: immersive ? [0, 3.2, 11] : [8, 8, 12],
+                fov: immersive ? 62 : hero ? 60 : 42,
+              }}
               dpr={
                 quality === "Baixo" ? 1 : quality === "Alto" ? [1, 2] : [1, 1.5]
               }
@@ -730,7 +904,11 @@ export default function NetworkScene({ hero = false }: { hero?: boolean }) {
               }}
               fallback={<Fallback />}
             >
-              <World opening={opening} onOrbit={() => setOpening(false)} />
+              <World
+                immersive={immersive}
+                opening={opening}
+                onOrbit={() => setOpening(false)}
+              />
             </Canvas>
           </Suspense>
         )}
