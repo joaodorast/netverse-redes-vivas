@@ -37,3 +37,7 @@ flowchart LR
 Logs retêm até 800 eventos, amostras de gráfico até 300 pontos e a lista principal de pacotes tem limite de retenção de 400 no envio. Cópias de flooding transitórias podem elevar esse limite durante uma rajada. Laboratório aceita até 30 dispositivos, 100 enlaces e arquivos de 100 KB pela interface. Retransmissões são limitadas a três. O motor aborta uma drenagem de testes acima de 20.000 tarefas.
 
 Nomes do grupo ficam somente em localStorage. Laboratório usa exportação explícita para arquivo local. Não há autenticação, telemetria, armazenamento remoto ou backend de aplicação.
+
+## Fundação do mundo persistente
+
+`src/world/Lab` compõe o HUD; `LabCanvas` mantém o único Canvas no modo mundo e realiza culling por vizinhança. `Navigation` usa vetores/Euler reutilizados; `PacketField` usa InstancedMesh a partir dos timestamps do motor; `Hologram` compartilha o uniforme de relógio publicado por Clock. O renderer legado, quando dentro de WorldMode, mostra SVG e não cria Canvas adicional. O relógio do App desliga no modo mundo; Clock assume via useFrame. Sem WebGL, WorldFallback usa o RAF equivalente. Os terminais continuam usando as funcionalidades existentes; são escondidos no mundo e abertos pelo HUD. Limites e status estão em WORLD_PROGRESS.md.
