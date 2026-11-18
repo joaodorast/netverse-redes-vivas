@@ -22,3 +22,6 @@ Sistema visual unificado: abertura com composição editorial e cena 3D, indicad
 
 ## Experiências distintas e OSI dimensional
 OSI com origem/destino, sete camadas em perspectiva, inspeção independente e PDU sincronizada ao motor. TCP/UDP prioriza comparação; web, o navegador; diagnóstico, o terminal; segurança, regras; desempenho, gráficos; meios, escolhas físicas. Three.js carrega em um chunk separado; renderização suspensa fora da tela e em aba oculta; equipamentos estáticos usam memoização. Pacotes ganharam rastros e o ambiente 3D recebeu estrelas estáticas leves.
+
+## Laboratório imersivo e participação
+Ambiente arquitetônico 3D sob demanda, câmera próxima, deslocamento W/A/S/D, inspeção contextual e missão de exploração. Jornadas interativas, busca com Ctrl+K, perguntas OSI com feedback e salto para inspeção da camada. Overlays responsivos, saída por Esc, pausa da cena ao fundo e carregamento separado do modo imersivo (cerca de 6 KB sem compressão).
