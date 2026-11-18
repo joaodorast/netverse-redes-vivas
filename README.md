@@ -101,3 +101,8 @@ O Início combina apresentação, cena Three.js orbital e tráfego automático d
 
 ## Exploração das camadas
 Na tela OSI, use os controles no topo para acompanhar a mensagem entre origem e destino. Selecione uma camada para inspecioná-la; Seguir mensagem retoma o acompanhamento do motor. Os blocos de PDU são didáticos. As outras telas priorizam a ferramenta relevante para sua tarefa. O código 3D é carregado separadamente, com pausa de desenho fora da área visível.
+
+## Entre no laboratório
+No Início, use **Entrar no laboratório** para abrir a exploração imersiva. Arraste para orientar a câmera, role para aproximar e, no computador, use W/A/S/D para se deslocar. Selecione equipamentos diretamente na cena ou na faixa inferior para comparar IP, MAC e função. A missão acompanha três inspeções e uma entrega real do motor. Esc ou Sair do laboratório retorna à interface. A cena ao fundo suspende seu desenho enquanto o modo está aberto.
+
+As jornadas da página inicial permitem escolher um objetivo e explorar suas três áreas. A busca no topo aceita Ctrl+K e navegação por teclado. OSI inclui perguntas com feedback e acesso direto à camada pertinente.
