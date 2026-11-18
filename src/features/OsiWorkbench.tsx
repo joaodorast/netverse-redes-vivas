@@ -10,6 +10,29 @@ import {
 } from "lucide-react";
 import { layers } from "../data/content";
 import { useSimulation } from "../stores/useSimulation";
+const predictions = [
+  {
+    q: "A mensagem precisa atravessar redes diferentes. Quem cuida do endereçamento IP?",
+    options: ["Transporte", "Rede", "Aplicação"],
+    correct: 1,
+    layer: 3,
+    why: "A camada de Rede usa endereços IP para levar o pacote entre redes. O roteador decide o próximo salto.",
+  },
+  {
+    q: "Qual camada representa o quadro como sinais no cabo ou no ar?",
+    options: ["Física", "Sessão", "Enlace"],
+    correct: 0,
+    layer: 1,
+    why: "A camada Física transmite sinais elétricos, ópticos ou de rádio. O quadro pertence ao Enlace; no meio ele vira sinais.",
+  },
+  {
+    q: "Onde o TCP oferece confirmações e retransmissões?",
+    options: ["Apresentação", "Rede", "Transporte"],
+    correct: 2,
+    layer: 4,
+    why: "TCP atua no Transporte. Confirmações e retransmissões ajudam a entregar o fluxo de bytes em ordem.",
+  },
+];
 const colors = [
   "#74dddf",
   "#7db7ff",
@@ -21,6 +44,9 @@ const colors = [
 ];
 export function OsiWorkbench() {
   const { state, technical } = useSimulation();
+  const [predictionIndex, setPredictionIndex] = useState(0);
+  const [answer, setAnswer] = useState<number | null>(null);
+  const prediction = predictions[predictionIndex];
   const [chosen, setChosen] = useState<number | null>(null);
   const layer = layers.find((l) => l.n === (chosen ?? state.osiLayer))!;
   const travelling = state.packets.some((p) => p.status === "transit");
@@ -113,6 +139,71 @@ export function OsiWorkbench() {
         </div>
         {stack(true)}
       </div>
+      <section className="prediction-card" aria-label="Teste sua intuição">
+        <div className="prediction-question">
+          <span className="eyebrow">SUA VEZ / {predictionIndex + 1} DE 3</span>
+          <h3>{prediction.q}</h3>
+          <p>Faça uma escolha e descubra o motivo.</p>
+        </div>
+        <div className="prediction-answers">
+          {prediction.options.map((option, i) => (
+            <button
+              key={option}
+              disabled={answer !== null}
+              className={
+                answer !== null && i === prediction.correct
+                  ? "correct"
+                  : answer === i
+                    ? "incorrect"
+                    : ""
+              }
+              onClick={() => setAnswer(i)}
+            >
+              <span>{String.fromCharCode(65 + i)}</span>
+              {option}
+            </button>
+          ))}
+        </div>
+        {answer !== null && (
+          <div className="prediction-feedback" role="status">
+            <div>
+              <b>
+                {answer === prediction.correct
+                  ? "Isso! Agora veja o porquê."
+                  : "Boa hipótese. Vamos ajustar o raciocínio."}
+              </b>
+              <p>{prediction.why}</p>
+            </div>
+            <button
+              className="outline"
+              onClick={() => {
+                setChosen(prediction.layer);
+                document
+                  .querySelector(".osi-inspection")
+                  ?.scrollIntoView({
+                    behavior: window.matchMedia(
+                      "(prefers-reduced-motion: reduce)",
+                    ).matches
+                      ? "instant"
+                      : "smooth",
+                    block: "center",
+                  });
+              }}
+            >
+              Mostrar na pilha
+            </button>
+            <button
+              className="primary"
+              onClick={() => {
+                setPredictionIndex((predictionIndex + 1) % predictions.length);
+                setAnswer(null);
+              }}
+            >
+              Próxima pergunta <ArrowRight size={14} />
+            </button>
+          </div>
+        )}
+      </section>
       <div className="osi-inspection">
         <section className="osi-inspector">
           <div className="osi-inspector-top">
