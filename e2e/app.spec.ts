@@ -327,3 +327,75 @@ test("OSI tem origem e destino, inspeção independente e acompanhamento do moto
     fullPage: true,
   });
 });
+
+test("jornadas e busca ajudam a descobrir áreas por teclado", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.getByRole("tab", { name: /Construir conexões/ }).click();
+  await expect(page.getByRole("tabpanel")).toContainText("Topologias");
+  await page
+    .getByRole("tab", { name: /Construir conexões/ })
+    .press("ArrowRight");
+  await expect(
+    page.getByRole("tab", { name: /Resolver um mistério/ }),
+  ).toHaveAttribute("aria-selected", "true");
+  await page
+    .getByRole("button", { name: "Buscar experiência", exact: true })
+    .click();
+  await page
+    .getByRole("textbox", { name: "Pesquisar áreas" })
+    .fill("seguranca");
+  await page.getByRole("textbox", { name: "Pesquisar áreas" }).press("Enter");
+  await expect(
+    page.getByRole("heading", { name: "Segurança e firewall", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("dialog", { name: "Buscar experiência" }),
+  ).not.toBeVisible();
+});
+
+test("laboratório imersivo permite exploração, inspeção e saída segura", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto("/");
+  await page.getByRole("button", { name: /Entrar no laboratório/ }).click();
+  const lab = page.getByRole("dialog", { name: "Laboratório imersivo" });
+  await expect(lab).toBeVisible();
+  await expect(lab.locator("canvas")).toBeVisible();
+  for (let i = 0; i < 3; i++)
+    await lab.locator(".immersive-device-list button").nth(i).click();
+  await expect(lab.locator(".immersive-mission")).toContainText("3/3");
+  await expect(
+    lab.getByRole("complementary", { name: "Equipamento selecionado" }),
+  ).toBeVisible();
+  await page.screenshot({ path: "docs/screenshots/immersive-desktop.png" });
+  await page.setViewportSize({ width: 390, height: 844 });
+  expect(await lab.evaluate((e) => e.scrollWidth <= innerWidth)).toBe(true);
+  await page.screenshot({ path: "docs/screenshots/immersive-mobile.png" });
+  await page.keyboard.press("Escape");
+  await expect(lab).toHaveCount(0);
+  await expect(
+    page.getByRole("heading", { name: /O universo vivo/ }),
+  ).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
+test("previsão OSI dá feedback e conecta a resposta à camada", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page
+    .getByRole("navigation")
+    .getByRole("button", { name: /Camadas OSI/ })
+    .click();
+  const quiz = page.getByRole("region", { name: "Teste sua intuição" });
+  await quiz.getByRole("button", { name: "B Rede" }).click();
+  await expect(quiz.getByRole("status")).toContainText("Isso!");
+  await quiz.getByRole("button", { name: "Mostrar na pilha" }).click();
+  await expect(page.locator(".osi-detail-title h3")).toHaveText("Rede");
+  await quiz.getByRole("button", { name: /Próxima pergunta/ }).click();
+  await expect(quiz).toContainText("2 DE 3");
+});
