@@ -1,0 +1,125 @@
+{
+  "scope": "axe automatizado desktop nas 12 áreas e nos dois modos; não substitui auditoria manual com leitor de tela nem testa todas as combinações de controles",
+  "reports": [
+    {
+      "mode": "telas",
+      "zone": "Início00",
+      "violations": []
+    },
+    {
+      "mode": "telas",
+      "zone": "Camadas OSI01",
+      "violations": []
+    },
+    {
+      "mode": "telas",
+      "zone": "TCP × UDP02",
+      "violations": []
+    },
+    {
+      "mode": "telas",
+      "zone": "Viagem da web03",
+      "violations": []
+    },
+    {
+      "mode": "telas",
+      "zone": "Switch e roteador04",
+      "violations": []
+    },
+    {
+      "mode": "telas",
+      "zone": "Topologias05",
+      "violations": []
+    },
+    {
+      "mode": "telas",
+      "zone": "Meios físicos06",
+      "violations": []
+    },
+    {
+      "mode": "telas",
+      "zone": "Diagnóstico07",
+      "violations": []
+    },
+    {
+      "mode": "telas",
+      "zone": "Segurança08",
+      "violations": []
+    },
+    {
+      "mode": "telas",
+      "zone": "Desempenho09",
+      "violations": []
+    },
+    {
+      "mode": "telas",
+      "zone": "Tendências10",
+      "violations": []
+    },
+    {
+      "mode": "telas",
+      "zone": "Glossário e quiz11",
+      "violations": []
+    },
+    {
+      "mode": "mundo",
+      "zone": "Início00",
+      "violations": []
+    },
+    {
+      "mode": "mundo",
+      "zone": "Camadas OSI01",
+      "violations": []
+    },
+    {
+      "mode": "mundo",
+      "zone": "TCP × UDP02",
+      "violations": []
+    },
+    {
+      "mode": "mundo",
+      "zone": "Viagem da web03",
+      "violations": []
+    },
+    {
+      "mode": "mundo",
+      "zone": "Switch e roteador04",
+      "violations": []
+    },
+    {
+      "mode": "mundo",
+      "zone": "Topologias05",
+      "violations": []
+    },
+    {
+      "mode": "mundo",
+      "zone": "Meios físicos06",
+      "violations": []
+    },
+    {
+      "mode": "mundo",
+      "zone": "Diagnóstico07",
+      "violations": []
+    },
+    {
+      "mode": "mundo",
+      "zone": "Segurança08",
+      "violations": []
+    },
+    {
+      "mode": "mundo",
+      "zone": "Desempenho09",
+      "violations": []
+    },
+    {
+      "mode": "mundo",
+      "zone": "Tendências10",
+      "violations": []
+    },
+    {
+      "mode": "mundo",
+      "zone": "Glossário e quiz11",
+      "violations": []
+    }
+  ]
+}
