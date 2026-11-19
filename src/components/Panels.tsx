@@ -1,3 +1,4 @@
+import ExpandPanel from "./ExpandPanel";
 import { useState } from "react";
 import {
   Play,
@@ -101,10 +102,11 @@ export function Explanation() {
     SDN: "Um controlador fornece as instruções; os equipamentos encaminham conforme a política.",
   };
   return (
-    <section className="explanation panel">
+    <section className="explanation panel" data-expandable>
       <div className="panel-kicker">
         <Radio size={15} />
         <span>O QUE ESTÁ ACONTECENDO?</span>
+        <ExpandPanel />
         <i className="status-dot" />
       </div>
       <span className="event-phase">{state.phase}</span>
