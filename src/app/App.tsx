@@ -1,3 +1,7 @@
+import SimpleScene from "../scenes/SimpleScene";
+import SimulationAudio from "../components/SimulationAudio";
+import { useShallow } from "zustand/react/shallow";
+import ExpandPanel from "../components/ExpandPanel";
 import { WorldMode } from "../world/mode";
 import "../world/world.css";
 import { PathExplorer, QuickSearch } from "../components/StudioInteractions";
@@ -86,8 +90,7 @@ const WebLesson = lazy(() =>
   import("../features/Lessons").then((m) => ({ default: m.WebLesson })),
 );
 const WorldLab = lazy(() => import("../world/Lab"));
-const ImmersiveLab = lazy(() => import("../scenes/ImmersiveLab"));
-const NetworkScene = lazy(() => import("../scenes/NetworkScene"));
+const NetworkScene = SimpleScene;
 const icons = [
   Compass,
   Layers3,
@@ -305,13 +308,30 @@ function Lesson() {
   }
 }
 export default function App() {
-  const { state, technical, setTechnical, quality, setQuality, select } =
-    useSimulation();
+  const {
+    scenario,
+    running,
+    technical,
+    setTechnical,
+    quality,
+    setQuality,
+    select,
+  } = useSimulation(
+    useShallow((s) => ({
+      scenario: s.state.scenario,
+      running: s.state.running,
+      technical: s.technical,
+      setTechnical: s.setTechnical,
+      quality: s.quality,
+      setQuality: s.setQuality,
+      select: s.select,
+    })),
+  );
+
   const [world, setWorld] = useState(
-    () => readSaved("netverse-view", "world") !== "simple",
+    () => readSaved("netverse-view-v2", "simple") !== "simple",
   );
   const [terminal, setTerminal] = useState(false);
-  const [immersive, setImmersive] = useState(false);
   const [menu, setMenu] = useState(false),
     [settings, setSettings] = useState(false),
     [presentation, setPresentation] = useState(false),
@@ -322,15 +342,32 @@ export default function App() {
       () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
     ),
     [achievement, setAchievement] = useState("");
-  const audio = useRef<AudioContext | null>(null),
-    lastEvent = useRef(0);
-  const active = sections.find((s) => s.id === state.scenario);
+  const audio = useRef<AudioContext | null>(null);
+  const active = sections.find((s) => s.id === scenario);
   const [missionPicker, setMissionPicker] = useState(false),
     [mission, setMission] = useState<Mission | null>(null),
     [hint, setHint] = useState(0),
     [completed, setCompleted] = useState<string[]>([]);
-  const missionComplete = Boolean(
-    mission && state.scenario === mission.scenario && mission.complete(state),
+  useEffect(() => {
+    const open = () => setMissionPicker(true);
+    const enter = () => {
+      setWorld(true);
+      setTerminal(false);
+      save("netverse-view-v2", "world");
+    };
+    document.addEventListener("enter-world", enter);
+    document.addEventListener("world-missions", open);
+    return () => {
+      document.removeEventListener("world-missions", open);
+      document.removeEventListener("enter-world", enter);
+    };
+  }, []);
+  const missionComplete = useSimulation((s) =>
+    Boolean(
+      mission &&
+      s.state.scenario === mission.scenario &&
+      mission.complete(s.state),
+    ),
   );
   useEffect(() => {
     if (mission && missionComplete)
@@ -392,12 +429,14 @@ export default function App() {
     const animate = (now: number) => {
       const delta = Math.min(100, now - previous);
       previous = now;
+      const wasRunning = engine.state.running;
+      if (wasRunning && !document.hidden) engine.tick(delta * 0.18);
       accumulator += delta;
-      if (accumulator >= 45) {
-        if (engine.state.running) {
-          engine.tick(accumulator * 0.18);
-          useSimulation.getState().refresh();
-        }
+      if (
+        (wasRunning && accumulator >= 100) ||
+        (wasRunning && !engine.state.running)
+      ) {
+        useSimulation.getState().refresh();
         accumulator = 0;
       }
       frame = requestAnimationFrame(animate);
@@ -408,39 +447,15 @@ export default function App() {
   useEffect(() => {
     document.documentElement.dataset.reduced = String(reduced);
   }, [reduced]);
-  useEffect(() => {
-    const event = state.events.at(-1);
-    if (!event || event.id === lastEvent.current) return;
-    lastEvent.current = event.id;
-    if (
-      sound &&
-      audio.current &&
-      ["ENTREGA", "PERDA", "BLOQUEADO"].includes(event.type)
-    ) {
-      const context = audio.current,
-        osc = context.createOscillator(),
-        gain = context.createGain();
-      osc.connect(gain);
-      gain.connect(context.destination);
-      osc.frequency.value = event.type === "ENTREGA" ? 680 : 220;
-      gain.gain.setValueAtTime(volume * 0.2, context.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, context.currentTime + 0.09);
-      osc.start();
-      osc.stop(context.currentTime + 0.1);
-    }
-    if (state.pageReady && state.metrics.retransmitted > 0)
-      setAchievement(
-        "Conexão resiliente: a página chegou mesmo após uma perda.",
-      );
-  }, [
-    state.events,
-    state.pageReady,
-    state.metrics.retransmitted,
-    sound,
-    volume,
-  ]);
   return (
     <WorldMode.Provider value={world}>
+      <SimulationAudio
+        sound={sound}
+        volume={volume}
+        world={world}
+        audio={audio}
+        onAchievement={setAchievement}
+      />
       <div
         className={`app ${presentation ? "presentation" : ""} ${world ? "world-mode" : ""} ${terminal ? "world-terminal-open" : ""}`}
       >
@@ -448,19 +463,22 @@ export default function App() {
           <Suspense
             fallback={<div className="world-boot">Carregando o mundo…</div>}
           >
-            <WorldLab active={!terminal} onTerminal={() => setTerminal(true)} />
+            <WorldLab
+              active={!terminal}
+              onNavigate={navigate}
+              onExitWorld={() => {
+                setWorld(false);
+                setTerminal(false);
+                save("netverse-view-v2", "simple");
+              }}
+              onTerminal={() => setTerminal(true)}
+            />
           </Suspense>
         )}
-        {immersive && (
-          <Suspense
-            fallback={
-              <div className="immersive-loading">Abrindo laboratório…</div>
-            }
-          >
-            <ImmersiveLab onClose={() => setImmersive(false)} />
-          </Suspense>
-        )}
-        <a className="skip-link" href="#main-content">
+        <a
+          className="skip-link"
+          href={world ? "#world-content" : "#main-content"}
+        >
           Pular para o conteúdo
         </a>
         {menu && (
@@ -493,11 +511,9 @@ export default function App() {
               return (
                 <button
                   key={s.id}
-                  className={
-                    state.scenario === s.id ? "nav-item active" : "nav-item"
-                  }
+                  className={scenario === s.id ? "nav-item active" : "nav-item"}
                   onClick={() => navigate(s.id)}
-                  aria-current={state.scenario === s.id ? "page" : undefined}
+                  aria-current={scenario === s.id ? "page" : undefined}
                 >
                   <Icon size={17} />
                   <span>{s.short}</span>
@@ -520,7 +536,7 @@ export default function App() {
               <span className="new-tag">6</span>
             </button>
             <button
-              className={`nav-item ${state.scenario === "lab" ? "active" : ""}`}
+              className={`nav-item ${scenario === "lab" ? "active" : ""}`}
               onClick={() => navigate("lab")}
             >
               <FlaskConical size={17} />
@@ -563,18 +579,18 @@ export default function App() {
                 className="world-mode-toggle"
                 onClick={() => {
                   setWorld(!world);
-                  save("netverse-view", world ? "simple" : "world");
+                  save("netverse-view-v2", world ? "simple" : "world");
                   setTerminal(false);
                 }}
               >
-                {world ? "Visão simplificada" : "Entrar no mundo 3D"}
+                {world ? "Ver telas" : "Mundo 3D"}
               </button>
               {world && (
                 <button
                   className="world-mode-toggle"
                   onClick={() => setTerminal(!terminal)}
                 >
-                  {terminal ? "Voltar ao mundo" : "Terminal da zona"}
+                  {terminal ? "Voltar ao mundo" : "Controles e conteúdo"}
                 </button>
               )}
               <QuickSearch navigate={navigate} />
@@ -701,116 +717,130 @@ export default function App() {
               </div>
             </div>
           )}
-          <main
-            id="main-content"
-            className={`experience experience-${state.scenario}`}
-          >
-            {mission && (
-              <MissionBar
-                mission={mission}
-                complete={missionComplete}
-                hint={hint}
-                onHint={() => setHint((h) => Math.min(3, h + 1))}
-                onClose={() => setMission(null)}
-              />
-            )}
-            {state.scenario === "home" ? (
-              <Home
-                navigate={navigate}
-                startTour={startTour}
-                onImmerse={() => setImmersive(true)}
-                onMissions={() => setMissionPicker(true)}
-              />
-            ) : (
-              <>
-                <div className="page-heading">
-                  <span className="eyebrow">
-                    {active?.tag ?? "LAB / SEU ESPAÇO DE DESCOBERTAS"}
-                  </span>
-                  <div>
-                    <h1>{active?.label ?? "Laboratório livre"}</h1>
-                    <span className="simulation-label">
-                      <i className="status-dot" />
-                      {state.running ? "SIMULAÇÃO EM ANDAMENTO" : "REDE PRONTA"}
+          {(!world || terminal) && (
+            <main
+              id="main-content"
+              className={`experience experience-${scenario}`}
+            >
+              {mission && (
+                <MissionBar
+                  mission={mission}
+                  complete={missionComplete}
+                  hint={hint}
+                  onHint={() => setHint((h) => Math.min(3, h + 1))}
+                  onClose={() => setMission(null)}
+                />
+              )}
+              {scenario === "home" ? (
+                <Home
+                  navigate={navigate}
+                  startTour={startTour}
+                  onImmerse={() => {
+                    setWorld(true);
+                    setTerminal(false);
+                    save("netverse-view-v2", "world");
+                  }}
+                  onMissions={() => setMissionPicker(true)}
+                />
+              ) : (
+                <>
+                  <div className="page-heading">
+                    <span className="eyebrow">
+                      {active?.tag ?? "LAB / SEU ESPAÇO DE DESCOBERTAS"}
                     </span>
+                    <div>
+                      <h1>{active?.label ?? "Laboratório livre"}</h1>
+                      <span className="simulation-label">
+                        <i className="status-dot" />
+                        {running ? "SIMULAÇÃO EM ANDAMENTO" : "REDE PRONTA"}
+                      </span>
+                    </div>
+                    <p>
+                      {active?.description ??
+                        "Crie equipamentos, desenhe conexões e transforme uma hipótese em um experimento."}
+                    </p>
                   </div>
-                  <p>
-                    {active?.description ??
-                      "Crie equipamentos, desenhe conexões e transforme uma hipótese em um experimento."}
-                  </p>
-                </div>
-                {state.scenario === "glossary" ? (
-                  <Suspense
-                    fallback={
-                      <div className="scene-loading">
-                        Abrindo o conhecimento…
-                      </div>
-                    }
-                  >
-                    <GlossaryLesson />
-                  </Suspense>
-                ) : (
-                  <div className="experience-layout">
-                    {state.scenario === "osi" && (
-                      <div className="osi-main-controls">
-                        <Controls />
-                        <p>
-                          Inicie para acompanhar o percurso. Clique em uma
-                          camada para explorar sua função.
-                        </p>
-                      </div>
-                    )}
-                    <div className="simulation-layout">
-                      <div className="simulation-main">
-                        <div className="scene-container">
-                          <Suspense
-                            fallback={
-                              <div className="scene-loading">
-                                Preparando visualização…
-                              </div>
-                            }
-                          >
-                            <NetworkScene />
-                          </Suspense>
-                          <Legend />
-                          {state.scenario !== "osi" && <Controls />}
-                          <PacketTray />
+                  {scenario === "glossary" ? (
+                    <Suspense
+                      fallback={
+                        <div className="scene-loading">
+                          Abrindo o conhecimento…
                         </div>
-                        <Metrics />
+                      }
+                    >
+                      <div className="knowledge-expand" data-expandable>
+                        <div className="area-expand">
+                          <ExpandPanel label="glossário e quiz" />
+                        </div>
+                        <GlossaryLesson />
                       </div>
-                      <div className="simulation-aside">
-                        <Explanation />
-                        <Experiments />
-                      </div>
-                    </div>
-                    <div className="experience-content">
-                      <Suspense
-                        fallback={
-                          <div className="scene-loading">
-                            Preparando a experiência…
+                    </Suspense>
+                  ) : (
+                    <div className="experience-layout">
+                      {scenario === "osi" && (
+                        <div className="osi-main-controls">
+                          <Controls />
+                          <p>
+                            Inicie para acompanhar o percurso. Clique em uma
+                            camada para explorar sua função.
+                          </p>
+                        </div>
+                      )}
+                      <div className="simulation-layout">
+                        <div className="simulation-main">
+                          <div className="scene-container">
+                            <Suspense
+                              fallback={
+                                <div className="scene-loading">
+                                  Preparando visualização…
+                                </div>
+                              }
+                            >
+                              <NetworkScene />
+                            </Suspense>
+                            <Legend />
+                            {scenario !== "osi" && <Controls />}
+                            <PacketTray />
                           </div>
-                        }
-                      >
-                        <Lesson />
-                      </Suspense>
+                          <Metrics />
+                        </div>
+                        <div className="simulation-aside">
+                          <Explanation />
+                          <Experiments />
+                        </div>
+                      </div>
+                      <div className="experience-content" data-expandable>
+                        <div className="area-expand">
+                          <ExpandPanel label="conteúdo da área" />
+                        </div>
+                        <Suspense
+                          fallback={
+                            <div className="scene-loading">
+                              Preparando a experiência…
+                            </div>
+                          }
+                        >
+                          <Lesson />
+                        </Suspense>
+                      </div>
+                      <div className="experience-events">
+                        <Logs />
+                      </div>
                     </div>
-                    <div className="experience-events">
-                      <Logs />
-                    </div>
-                  </div>
-                )}
-              </>
-            )}
-            <footer className="page-footer">
-              <span>
-                <Network size={13} /> NETVERSE <span className="muted">/</span>{" "}
-                Redes Vivas
-              </span>
-              <span>Feito para entender. Construído para explorar.</span>
-              <span>SIMULAÇÃO EDUCACIONAL</span>
-            </footer>
-          </main>
-          <Inspector />
+                  )}
+                </>
+              )}
+              <footer className="page-footer">
+                <span>
+                  <Network size={13} /> NETVERSE{" "}
+                  <span className="muted">/</span> Redes Vivas
+                </span>
+                <span>Feito para entender. Construído para explorar.</span>
+                <span>SIMULAÇÃO EDUCACIONAL</span>
+              </footer>
+            </main>
+          )}
+          {(!world || terminal) && <Inspector />}
           {missionPicker && (
             <MissionPicker
               onChoose={chooseMission}
