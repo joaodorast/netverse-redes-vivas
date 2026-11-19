@@ -1,0 +1,57 @@
+{
+  "method": "WCAG relative luminance, tokens opacos; não certifica composições transparentes sobre imagem/3D",
+  "tokens": {
+    "background": "#05070d",
+    "surface": "#101d2d",
+    "text": "#ecf4ff",
+    "muted": "#adc0d6",
+    "cyan": "#84e5d0",
+    "indigo": "#aaa5ff",
+    "warm": "#ffc48a",
+    "primaryText": "#092d34"
+  },
+  "pairs": [
+    {
+      "foreground": "text",
+      "background": "background",
+      "ratio": 18.18,
+      "aaNormalText": true
+    },
+    {
+      "foreground": "text",
+      "background": "surface",
+      "ratio": 15.34,
+      "aaNormalText": true
+    },
+    {
+      "foreground": "muted",
+      "background": "surface",
+      "ratio": 9.13,
+      "aaNormalText": true
+    },
+    {
+      "foreground": "cyan",
+      "background": "surface",
+      "ratio": 11.41,
+      "aaNormalText": true
+    },
+    {
+      "foreground": "indigo",
+      "background": "surface",
+      "ratio": 7.72,
+      "aaNormalText": true
+    },
+    {
+      "foreground": "warm",
+      "background": "surface",
+      "ratio": 10.94,
+      "aaNormalText": true
+    },
+    {
+      "foreground": "primaryText",
+      "background": "cyan",
+      "ratio": 9.81,
+      "aaNormalText": true
+    }
+  ]
+}
