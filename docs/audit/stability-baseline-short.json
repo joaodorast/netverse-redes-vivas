@@ -1,0 +1,79 @@
+{
+  "complete": false,
+  "environment": "Chrome headless local; sem benchmark de GPU física; pode haver QA concorrente nas amostras iniciais",
+  "samples": [
+    {
+      "elapsedSeconds": 56,
+      "zone": 0,
+      "heapUsedMB": 27.340656280517578,
+      "domNodes": 749,
+      "documents": 1,
+      "renderer": "50 FPS · 20.0 ms\n101 draw calls · 25692 triângulos\n90 geometrias · 8 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 112,
+      "zone": 1,
+      "heapUsedMB": 12.01089859008789,
+      "domNodes": 703,
+      "documents": 1,
+      "renderer": "50 FPS · 20.0 ms\n58 draw calls · 18544 triângulos\n48 geometrias · 17 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 168,
+      "zone": 2,
+      "heapUsedMB": 10.833629608154297,
+      "domNodes": 704,
+      "documents": 1,
+      "renderer": "56 FPS · 17.9 ms\n48 draw calls · 5614 triângulos\n47 geometrias · 8 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 225,
+      "zone": 3,
+      "heapUsedMB": 11.666313171386719,
+      "domNodes": 706,
+      "documents": 1,
+      "renderer": "60 FPS · 16.7 ms\n21 draw calls · 4268 triângulos\n22 geometrias · 6 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 281,
+      "zone": 4,
+      "heapUsedMB": 11.333045959472656,
+      "domNodes": 754,
+      "documents": 1,
+      "renderer": "54 FPS · 18.6 ms\n17 draw calls · 1676 triângulos\n19 geometrias · 5 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 338,
+      "zone": 5,
+      "heapUsedMB": 12.340023040771484,
+      "domNodes": 723,
+      "documents": 1,
+      "renderer": "60 FPS · 16.7 ms\n81 draw calls · 27606 triângulos\n79 geometrias · 9 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 394,
+      "zone": 6,
+      "heapUsedMB": 11.489974975585938,
+      "domNodes": 687,
+      "documents": 1,
+      "renderer": "48 FPS · 21.0 ms\n35 draw calls · 6502 triângulos\n36 geometrias · 6 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 450,
+      "zone": 7,
+      "heapUsedMB": 10.98977279663086,
+      "domNodes": 710,
+      "documents": 1,
+      "renderer": "60 FPS · 16.7 ms\n20 draw calls · 1682 triângulos\n19 geometrias · 8 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 506,
+      "zone": 8,
+      "heapUsedMB": 11.558235168457031,
+      "domNodes": 752,
+      "documents": 1,
+      "renderer": "60 FPS · 16.7 ms\n18 draw calls · 1678 triângulos\n19 geometrias · 6 texturas\nMemória GPU: indisponível pela API"
+    }
+  ],
+  "errors": []
+}
