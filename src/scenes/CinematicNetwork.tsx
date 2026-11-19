@@ -1,5 +1,5 @@
-import { lazy, Suspense, useEffect, useState } from "react";
-const NetworkScene = lazy(() => import("./NetworkScene"));
+import { Suspense, useEffect, useState } from "react";
+import NetworkScene from "./SimpleScene";
 import { act, engine, useSimulation } from "../stores/useSimulation";
 export default function CinematicNetwork() {
   const [automatic, setAutomatic] = useState(true);
@@ -54,8 +54,8 @@ export default function CinematicNetwork() {
             : "Acompanhe DNS, TCP e HTTP atravessando a rede."}
         </p>
         <small>
-          Arraste para explorar a profundidade · aproxime para ver os
-          equipamentos
+          Selecione um equipamento para inspecionar · entre no mundo 3D para
+          explorar o laboratório
         </small>
       </div>
     </div>
