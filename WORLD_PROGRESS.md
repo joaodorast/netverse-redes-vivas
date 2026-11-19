@@ -1,36 +1,37 @@
-# Desenvolvimento do mundo — primeira etapa
+# Laboratório: reconstrução e evidências
 
-## Entregue
-- Canvas persistente entre as 12 zonas; geometria apenas da zona ativa e estruturas vizinhas.
-- Câmera com transição, WASD/setas, pointer lock opcional e controles de toque.
-- Material holográfico GLSL ligado ao relógio real de OSI; tráfego instanciado, sem relógio decorativo independente.
-- Teclados e grades dos equipamentos instanciados; Início caiu de 161 para 93 draw calls e Topologias de 186 para 72 na amostra local.
-- Terminais DOM preservam aulas, missões, tabelas, comandos, quiz e laboratório; opção de visão simplificada preservada.
-- Relógio via useFrame no modo mundo, RAF somente na visão simplificada/fallback. Motor intacto por comparação de SHA-256.
-- Painel P com FPS/frame time/draw calls/triângulos/contagens de recursos; memória GPU explicitamente indisponível.
-- Build/lint/36 testes do motor; 15 jornadas de navegador e teste adicional de relógio sem WebGL aprovados.
+Atualização de 18/11/2026. O fluxo de exploração é único: entrada leve → Mundo 3D → controles da cena ou conteúdo → Ver telas. As duas versões preservam o mesmo motor, cenários e estado. Não há um segundo laboratório imersivo escondido.
 
-## Matriz de acompanhamento (não é aceite final)
+## Critérios comuns às 12 áreas
 
-Escala: P = protótipo implementado; V = verificação automatizada parcial; A = aberto. Não se atribui nota máxima sem evidência. Todos os conceitos abaixo precisam de direção de arte final, revisão com usuário iniciante e benchmark físico.
+- Navegação com nomes completos, câmera reposicionada pela área, mapa recolhível e inspeção acessível.
+- Cena desobstruída por padrão; bancada e explicação abertas pelo usuário.
+- Tela cheia do mundo e expansão independente das explicações/aulas.
+- Texto DOM nítido no mundo, materiais PBR locais e iluminação sem HDRI externo.
+- Um Canvas persistente, módulos lazy, instâncias e qualidade adaptativa. A versão leve não inicializa WebGL. O mundo em repouso renderiza sob demanda; o shell não acompanha cada tick.
+- Eventos, perdas, tabelas, gráficos e pacotes derivados do motor; arquitetura estática não é tráfego fictício.
 
-| Zona | Design | Animação causal | Performance | Acessibilidade | Responsividade | Testes/evidência |
-|---|---|---|---|---|---|---|
-| home | P: saguão/grafo | P: tráfego real | V: 93 calls | V: terminal/fallback | V parcial | world-zone-0.png |
-| osi | P: duas torres | P: camada/GLSL/relógio | V: 49 calls | V: terminal completo | V parcial | world-zone-1.png + OSI E2E |
-| tcp | P: dois túneis | P: unidades por protocolo | V: 20 calls | V: comparação DOM | V parcial | world-zone-2.png |
-| web | P: estações | P: pageReady | V: 13 calls | V: navegador DOM | V parcial | world-zone-3.png + fluxo com perda |
-| routing | P: mesa/tabelas | P: entradas reais | V: 9 calls | V: rotas/MAC DOM | V parcial | world-zone-4.png |
-| topology | P: grafo | P: enlaces/pacotes | V: 72 calls | V: editor DOM | V parcial | world-zone-5.png + importação/exportação |
-| media | P: bancadas | P: estado do motor | V: 27 calls | V: controles DOM | V parcial | world-zone-6.png |
-| diagnostics | P: console | P: terminal real | V: contadores JSON | V: comandos por teclado | V parcial | world-zone-7.png |
-| security | P: fronteira | P: regras/bloqueios reais | V: contadores JSON | V: regras DOM | V parcial | world-zone-8.png |
-| performance | P: barras espaciais | P: samples reais | V: contadores JSON | V: gráfico DOM | V parcial | world-zone-9.png |
-| trends | P: instalações | P: configuração real | V: contadores JSON | V: escolhas DOM | V parcial | world-zone-10.png |
-| glossary | P: terminais | A: coreografia educativa | V: contadores JSON | V: quiz/busca DOM | V parcial | world-zone-11.png + 24 questões |
+## Matriz das áreas
 
-## Ainda não concluído
+A matriz registra implementação e evidências verificáveis, não uma nota estética universal. As capturas `world-zone-N.png`, o relatório do renderer e os testes em `e2e/app.spec.ts` permitem revisar cada área.
 
-Esta etapa não atende integralmente ao pedido de reconstrução final. Faltam: cenas autorais completas de todas as zonas (as atuais são protótipos), terminais espacialmente integrados, minimapa, portais/boot com portas, áudio espacial, drag/puxar cabos no mundo, force-directed em worker, LOD completo, pós-processamento adaptativo, migração e remoção do CSS antigo, fontes locais licenciadas, verificação WCAG AA de todas as composições, Lighthouse/Spector/CPU6x, teste de 30 minutos e celular físico. As zonas não são declaradas perfeitas nem aprovadas.
+| Área            | Design e interação próprios                        | Animação/dados                             | Otimização                                       | Acessibilidade e responsividade         | Evidência específica                   |
+| --------------- | -------------------------------------------------- | ------------------------------------------ | ------------------------------------------------ | --------------------------------------- | -------------------------------------- |
+| Início          | Saguão circular, equipamentos, missão              | DNS/TCP/HTTP automático                    | Pacotes e peças instanciados; SVG inicial        | Equipamentos por teclado; HUD recolhido | zone-0, entrada e saída, modo leve     |
+| OSI             | Duas torres, camadas selecionáveis, PDU            | Encapsulamento e shader pelo tempo virtual | Etiquetas DOM, sem pós-processamento             | Pilha DOM, previsões, expansão          | zone-1, origem/destino e quiz OSI      |
+| TCP/UDP         | Duas pistas, estado de handshake, perda provocada  | SYN/SYN-ACK/ACK e resultados reais         | Geometrias simples e chunk próprio               | Comparação DOM e controles rotulados    | zone-2, testes TCP/UDP do motor        |
+| Web             | Três estações DNS/TCP/HTTP, domínio e fragmentos   | Página montada com dados reais             | Bancada sob demanda                              | Navegador DOM e explicação expansível   | zone-3, recuperação de perda HTTP      |
+| Switch/roteador | Mesa de encaminhamento, rotas e MAC                | Contagens/tabelas do motor                 | Sem gráfico pesado em segundo plano              | Tabelas semânticas e maior prefixo      | zone-4, testes de MAC/rotas            |
+| Topologias      | Ilha circular, cabos curvos, arrastar e organizar  | Conexões alteram o caminho real            | Force-directed em worker, cache de curvas        | Editor DOM equivalente; JSON validado   | zone-5, worker e importação/exportação |
+| Meios físicos   | Três bancadas de sinal, seleção de meio            | Configuração de latência/perda real        | Materiais locais e sem partículas decorativas    | Sliders e escolhas DOM                  | zone-6, teste dos cenários             |
+| Diagnóstico     | Console espacial com comando                       | Saída de ping/ipconfig/tracert             | Retenção limitada do motor                       | Terminal por teclado                    | zone-7, comando no terminal espacial   |
+| Segurança       | Fronteira física e regras editáveis                | Bloqueios e política por porta             | Sem efeitos de rajada fictícios                  | Formulário e tabela de regras           | zone-8, firewall e fila DDoS           |
+| Desempenho      | Observatório com barras, escala e unidades         | Throughput e novas perdas por amostra      | Barras instanciadas, 30 amostras visuais         | Gráfico/tabela DOM equivalentes         | zone-9, fórmula do motor e métricas    |
+| Tendências      | Três instalações IoT/nuvem/SDN                     | Arquitetura e política do cenário          | Módulo próprio; escolhas sem recarregar renderer | Conteúdo e seletores DOM                | zone-10, cenários e serviço cloud      |
+| Glossário/quiz  | Biblioteca de terminais, busca e resposta imediata | Feedback vinculado à resposta real         | Busca local e conteúdo sob demanda               | 24 questões por teclado                 | zone-11, 24 respostas e pontuação      |
 
-O benchmark JSON é amostra curta Chrome headless local; não certifica FPS em hardware de apresentação. Build principal ~101,8 KB gzip; o Three.js carrega depois e deve ser contado no carregamento real do mundo. Prévia separada evita substituir a produção estável por uma etapa ainda incompleta.
+## Evidências e limites
+
+`docs/audit/world-renderer.json` contém amostras curtas por área. `contrast.json` calcula contraste dos tokens opacos. `axe-zones.json` registra o escopo do teste automático de acessibilidade. Os relatórios Lighthouse são medições locais, com histórico mantido para comparação. O arquivo de estabilidade só certifica 30 minutos se contiver `complete: true` e duração correspondente.
+
+Não se declara certificação WCAG completa, memória GPU medida, 60 FPS universal nem validação em celular físico. Chrome headless e CPU emulada não substituem o dispositivo de apresentação. Não foi adicionado pós-processamento caro para mascarar geometria; a prioridade é leitura e resposta. O CSS foi reduzido por regras comprovadamente sem uso e duplicações seguras; os três arquivos ainda compõem a cascata.
