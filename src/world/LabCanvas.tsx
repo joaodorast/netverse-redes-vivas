@@ -1,350 +1,89 @@
+import StudioLighting from "../scenes/StudioLighting";
+import Room from "./zones/Room";
+import Station from "./zones/Station";
+import Zone, { preloadZone } from "./zones";
 import WorldFallback from "./WorldFallback";
-import Hologram, { signalTime } from "./Hologram";
+import { signalTime } from "./Hologram";
 import PacketField from "./PacketField";
 import Navigation from "./Navigation";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState, memo } from "react";
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Grid, Line, OrbitControls, RoundedBox } from "@react-three/drei";
+import { Grid, OrbitControls } from "@react-three/drei";
 import { Vector3 } from "three";
 import { engine, useSimulation } from "../stores/useSimulation";
-import { sections, layers } from "../data/content";
-import { Device, Label, SceneBoundary } from "../scenes/NetworkScene";
-const accent = "#84e5d0";
-function Block({
-  position,
-  size,
-  color = accent,
-}: {
-  position: [number, number, number];
-  size: [number, number, number];
-  color?: string;
-}) {
-  return (
-    <RoundedBox args={size} radius={0.04} position={position}>
-      <meshStandardMaterial
-        color="#172b3b"
-        metalness={0.65}
-        roughness={0.4}
-        emissive={color}
-        emissiveIntensity={0.08}
-      />
-    </RoundedBox>
-  );
-}
-function Zone({ id }: { id: string }) {
-  const { state, select } = useSimulation();
-  if (id === "osi")
-    return (
-      <>
-        {[-3, 3].map((x, side) => (
-          <group key={x}>
-            {layers.map((l) => (
-              <group
-                key={l.n}
-                position={[x, l.n * 0.62, 0]}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  select(`layer-${l.n}`);
-                }}
-              >
-                <Block
-                  position={[0, 0, 0]}
-                  size={[3, 0.35, 1.7]}
-                  color={state.osiLayer === l.n ? accent : "#aaa5ff"}
-                />
-                <mesh position={[0, 0, 0.88]}>
-                  <planeGeometry args={[3, 0.35]} />
-                  <Hologram
-                    color={state.osiLayer === l.n ? accent : "#aaa5ff"}
-                    active={state.osiLayer === l.n}
-                  />
-                </mesh>
-                <Label
-                  title={`${l.n} · ${l.name}`}
-                  color={state.osiLayer === l.n ? accent : "#b8b6da"}
-                  position={[0, 0.12, 1]}
-                />
-                {state.osiLayer === l.n &&
-                  (state.osiDirection === "down") === (side === 0) && (
-                    <mesh position={[0, 0.4, 0]}>
-                      <octahedronGeometry args={[0.2]} />
-                      <meshBasicMaterial color="#ffc48a" />
-                    </mesh>
-                  )}
-              </group>
-            ))}
-          </group>
-        ))}
-      </>
-    );
-  if (id === "tcp")
-    return (
-      <>
-        {[-3, 3].map((x, i) => (
-          <group key={x}>
-            <Label
-              title={i ? "UDP / DATAGRAMAS" : "TCP / CONFIRMAÇÃO"}
-              color={i ? "#aaa5ff" : accent}
-              position={[x, 3, 0]}
-            />
-            {Array.from({ length: 6 }, (_, n) => (
-              <mesh key={n} position={[x, 1, -n * 1.2]}>
-                <torusGeometry args={[1.1, 0.025, 6, 32]} />
-                <meshStandardMaterial
-                  color={i ? "#aaa5ff" : accent}
-                  emissive={i ? "#aaa5ff" : accent}
-                  emissiveIntensity={0.5}
-                />
-              </mesh>
-            ))}
-            {state.packets
-              .filter((p) => p.protocol === (i ? "UDP" : "TCP"))
-              .slice(-12)
-              .map((p, n) => (
-                <mesh key={p.id} position={[x, 1, -n * 0.5]}>
-                  <octahedronGeometry args={[0.13]} />
-                  <meshBasicMaterial
-                    color={
-                      p.status === "lost" ? "#ffc48a" : i ? "#aaa5ff" : accent
-                    }
-                  />
-                </mesh>
-              ))}
-          </group>
-        ))}
-      </>
-    );
-  if (id === "media")
-    return (
-      <>
-        {["COBRE", "FIBRA", "RÁDIO"].map((t, i) => (
-          <group key={t} position={[(i - 1) * 4, 0, 0]}>
-            <Block position={[0, 0.3, 0]} size={[3, 0.5, 3]} />
-            <Label title={t} color={accent} position={[0, 2, 0]} />
-            {[0, 1, 2, 3, 4].map((n) => (
-              <mesh
-                key={n}
-                position={[0, 0.9 + n * 0.08, 0]}
-                rotation={[Math.PI / 2, 0, 0]}
-              >
-                {i === 2 ? (
-                  <torusGeometry args={[0.3 + n * 0.18, 0.015, 6, 32]} />
-                ) : (
-                  <cylinderGeometry args={[0.035, 0.035, 2.6, 8]} />
-                )}
-                <meshStandardMaterial
-                  color={i === 0 ? "#ffc48a" : i === 1 ? accent : "#aaa5ff"}
-                  emissive={i === 1 ? accent : "#000000"}
-                  emissiveIntensity={state.running ? 0.7 : 0}
-                />
-              </mesh>
-            ))}
-          </group>
-        ))}
-      </>
-    );
-  if (id === "performance")
-    return (
-      <>
-        {state.samples.slice(-30).map((s, i) => (
-          <Block
-            key={i}
-            position={[-6 + i * 0.4, Math.max(0.03, s.throughput) * 2, 0]}
-            size={[0.25, Math.max(0.06, s.throughput) * 4, 0.5]}
-          />
-        ))}
-        <Label
-          title="VAZÃO / AMOSTRAS DO MOTOR"
-          subtitle="Altura proporcional a Mbit/s"
-          color={accent}
-          position={[0, 4, -1]}
-        />
-      </>
-    );
-  if (id === "web")
-    return (
-      <>
-        {["DNS", "TCP", "HTTP"].map((s, i) => (
-          <group key={s} position={[(i - 1) * 4, 0, 0]}>
-            <Block position={[0, 1, 0]} size={[2.8, 1.8, 0.5]} />
-            <Label
-              title={s}
-              subtitle={
-                i === 2
-                  ? state.pageReady
-                    ? "PÁGINA ENTREGUE"
-                    : "AGUARDANDO DADOS"
-                  : s === "DNS"
-                    ? "RESOLUÇÃO DE NOME"
-                    : "TRANSPORTE"
-              }
-              color={accent}
-              position={[0, 2.5, 0]}
-            />
-          </group>
-        ))}
-        <Line
-          points={[
-            [-4, 0.2, 0],
-            [4, 0.2, 0],
-          ]}
-          color={accent}
-        />
-      </>
-    );
-  if (id === "routing")
-    return (
-      <>
-        <Block position={[0, 0.5, 0]} size={[10, 0.3, 5]} />
-        {state.devices
-          .filter((d) => d.type === "switch" || d.type === "router")
-          .map((d, i) => (
-            <Label
-              key={d.id}
-              title={d.type === "switch" ? "TABELA MAC" : "MAIOR PREFIXO"}
-              subtitle={
-                d.type === "switch"
-                  ? `${Object.keys(d.macTable).length} entradas aprendidas`
-                  : `${d.routes.length} rotas`
-              }
-              color={accent}
-              position={[(i - 0.5) * 5, 2, 0]}
-            />
-          ))}
-      </>
-    );
-  if (id === "security")
-    return (
-      <>
-        <Block position={[0, 1.8, 0]} size={[0.15, 3.6, 8]} color="#aaa5ff" />
-        <Label
-          title="FRONTEIRA DE ACESSO"
-          subtitle={`${state.metrics.blocked} bloqueios reais · ${state.rules.length} regras`}
-          color="#ffc48a"
-          position={[0, 4, 0]}
-        />
-        {state.rules.map((r, i) => (
-          <Label
-            key={r.id}
-            title={`${r.action.toUpperCase()} / ${r.protocol}:${r.port}`}
-            color={r.action === "deny" ? "#ffc48a" : accent}
-            position={[3, 3 - i * 0.7, 0]}
-          />
-        ))}
-      </>
-    );
-  if (id === "diagnostics")
-    return (
-      <>
-        <Block position={[0, 1.5, 0]} size={[8, 3, 0.4]} />
-        {state.terminal.slice(-4).map((t, i) => (
-          <Label
-            key={i}
-            title={t.slice(0, 70)}
-            color={accent}
-            position={[0, 2.5 - i * 0.55, 0.3]}
-          />
-        ))}
-        <Label
-          title="CONSOLE DE DIAGNÓSTICO"
-          color="#aaa5ff"
-          position={[0, 3.7, 0]}
-        />
-      </>
-    );
-  if (id === "trends")
-    return (
-      <>
-        {["IoT", "NUVEM", "SDN"].map((t, i) => (
-          <group key={t} position={[(i - 1) * 4, 0, 0]}>
-            <Block
-              position={[0, 1, 0]}
-              size={[2, 2, 2]}
-              color={
-                state.config.trend === t.toLowerCase() ? accent : "#aaa5ff"
-              }
-            />
-            <Label
-              title={t}
-              subtitle={
-                state.config.trend === t.toLowerCase()
-                  ? "EXPERIÊNCIA ATIVA"
-                  : "ABRA O TERMINAL PARA EXPLORAR"
-              }
-              color={accent}
-              position={[0, 2.8, 0]}
-            />
-          </group>
-        ))}
-      </>
-    );
-  if (id === "glossary")
-    return (
-      <>
-        {["CONCEITOS", "QUIZ", "MISSÕES"].map((t, i) => (
-          <group key={t} position={[(i - 1) * 4, 0, 0]}>
-            <Block position={[0, 1, 0]} size={[2.5, 2, 1]} />
-            <Label
-              title={t}
-              subtitle="TERMINAL INTERATIVO"
-              color={accent}
-              position={[0, 2.5, 0]}
-            />
-          </group>
-        ))}
-      </>
-    );
-  return (
-    <>
-      {state.links.map((l) => {
-        const a = state.devices.find((d) => d.id === l.from),
-          b = state.devices.find((d) => d.id === l.to);
-        return a && b ? (
-          <Line
-            key={l.id}
-            points={[
-              [a.position[0], 0.2, a.position[2]],
-              [b.position[0], 0.2, b.position[2]],
-            ]}
-            color={l.active ? accent : "#ffc48a"}
-          />
-        ) : null;
-      })}
-      {state.devices.map((d) => (
-        <Device key={d.id} d={d} />
-      ))}
-    </>
-  );
+import { sections } from "../data/content";
+import { SceneBoundary } from "../scenes/NetworkScene";
+
+function Ready() {
+  const sent = useRef(false);
+  useFrame(() => {
+    if (!sent.current) {
+      sent.current = true;
+      document.dispatchEvent(new Event("world-renderer-ready"));
+    }
+  });
+  return null;
 }
 function Clock() {
   const elapsed = useRef(0);
   useFrame((_, delta) => {
+    const dt = Math.min(delta, 0.1) * 1000;
+    const wasRunning = engine.state.running;
+    if (wasRunning) engine.tick(dt * 0.18);
     signalTime.value = engine.state.time / 1000;
-    elapsed.current += Math.min(delta, 0.1) * 1000;
-    if (elapsed.current >= 45) {
-      if (engine.state.running) {
-        engine.tick(elapsed.current * 0.18);
-        useSimulation.getState().refresh();
-      }
+    elapsed.current += dt;
+    if (
+      (wasRunning && elapsed.current >= 100) ||
+      (wasRunning && !engine.state.running)
+    ) {
+      useSimulation.getState().refresh();
       elapsed.current = 0;
     }
   });
   return null;
 }
+const cameraPresets: Record<string, [number, number, number]> = {
+  home: [1, 6, 12],
+  security: [8, 6, 11],
+  topology: [2, 9, 13],
+  routing: [4, 7, 12],
+  media: [5, 6, 12],
+  performance: [3, 7, 14],
+  diagnostics: [0.4, 4.5, 12],
+  tcp: [4, 7, 13],
+  trends: [4, 6, 12],
+};
+
 function Camera({ index }: { index: number }) {
-  const { camera, controls } = useThree();
+  const { camera, controls, size, invalidate } = useThree();
   const target = useRef(new Vector3());
   const eye = useRef(new Vector3());
   const active = useRef(-1);
+  const viewport = useRef("");
   const remaining = useRef(0);
+  useEffect(() => {
+    const stop = () => {
+      remaining.current = 0;
+    };
+    document.addEventListener("world-manual-camera", stop);
+    return () => document.removeEventListener("world-manual-camera", stop);
+  }, []);
   useFrame((_, delta) => {
     const x = index * 30;
-    if (active.current !== index) {
-      target.current.set(x, 1, 0);
-      eye.current.set(x + 1, 6, 12);
+    const view = `${Math.round(size.width / 100)}:${Math.round(size.height / 100)}`;
+    if (active.current !== index || viewport.current !== view) {
+      const id = sections[index]?.id ?? "home";
+      const [dx, dy, dz] = cameraPresets[id] ?? cameraPresets.home;
+      const fit =
+        size.width < 760
+          ? Math.max(1, Math.min(3, (1.2 * size.height) / size.width))
+          : 1;
+      target.current.set(x, id === "osi" ? 2 : 1, 0);
+      eye.current.set(x + dx * fit, dy * Math.max(1, fit * 0.7), dz * fit);
       active.current = index;
-      remaining.current = 1.5;
+      viewport.current = view;
+      remaining.current = 0.85;
     }
     const reduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
@@ -354,9 +93,10 @@ function Camera({ index }: { index: number }) {
       update: () => void;
     } | null;
     if (remaining.current > 0) {
+      invalidate();
       remaining.current -= delta;
-      camera.position.lerp(eye.current, reduced ? 1 : Math.min(1, delta * 3));
-      orbit?.target.lerp(target.current, reduced ? 1 : Math.min(1, delta * 3));
+      camera.position.lerp(eye.current, reduced ? 1 : Math.min(1, delta * 6));
+      orbit?.target.lerp(target.current, reduced ? 1 : Math.min(1, delta * 6));
       orbit?.update();
     }
   });
@@ -368,35 +108,66 @@ function Profiler({
   output: React.RefObject<HTMLPreElement | null>;
 }) {
   const { gl, setDpr } = useThree();
-  const stats = useRef({ time: 0, frames: 0 });
+  const stats = useRef({ time: 0, frames: 0, low: 0, high: 0, ratio: 1.25 });
   useFrame((_, delta) => {
+    if ((!engine.state.running && output.current?.hidden) || delta > 0.5) {
+      stats.current.time = 0;
+      stats.current.frames = 0;
+      return;
+    }
     stats.current.time += delta;
     stats.current.frames++;
     if (stats.current.time >= 1) {
       const fps = stats.current.frames / stats.current.time;
       if (output.current)
         output.current.textContent = `${fps.toFixed(0)} FPS · ${(1000 / fps).toFixed(1)} ms\n${gl.info.render.calls} draw calls · ${gl.info.render.triangles} triângulos\n${gl.info.memory.geometries} geometrias · ${gl.info.memory.textures} texturas\nMemória GPU: indisponível pela API`;
-      if (useSimulation.getState().quality === "Automático" && fps < 28)
-        setDpr(1);
-      stats.current = { time: 0, frames: 0 };
+      if (useSimulation.getState().quality === "Automático") {
+        stats.current.ratio = gl.getPixelRatio();
+        stats.current.low = fps < 38 ? stats.current.low + 1 : 0;
+        stats.current.high = fps > 57 ? stats.current.high + 1 : 0;
+        if (stats.current.low >= 3 && stats.current.ratio > 0.75) {
+          stats.current.ratio = Math.max(0.75, stats.current.ratio - 0.25);
+          setDpr(stats.current.ratio);
+          stats.current.low = 0;
+        } else if (stats.current.high >= 6 && stats.current.ratio < 1.5) {
+          stats.current.ratio = Math.min(1.5, stats.current.ratio + 0.125);
+          setDpr(stats.current.ratio);
+          stats.current.high = 0;
+        }
+      }
+      stats.current.time = 0;
+      stats.current.frames = 0;
     }
   });
   return null;
 }
-export default function LabCanvas({
+const LabCanvas = memo(function LabCanvas({
   debug,
   onDebug,
   active,
+  stationOpen,
 }: {
   debug: boolean;
   onDebug: () => void;
   active: boolean;
+  stationOpen: boolean;
 }) {
   const scenario = useSimulation((s) => s.state.scenario);
+  const quality = useSimulation((s) => s.quality);
+  const running = useSimulation((s) => s.state.running);
   const index = Math.max(
     0,
     sections.findIndex((s) => s.id === scenario),
   );
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      for (const offset of [-1, 1]) {
+        const next = sections[index + offset];
+        if (next) preloadZone(next.id);
+      }
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [index]);
   const [visible, setVisible] = useState(!document.hidden);
   const output = useRef<HTMLPreElement>(null);
   useEffect(() => {
@@ -418,41 +189,45 @@ export default function LabCanvas({
   }, [onDebug]);
   return (
     <>
+      <div
+        id="world-label-layer"
+        className="world-label-layer"
+        aria-hidden="true"
+      />
       <SceneBoundary fallback={<WorldFallback />}>
         <Canvas
           camera={{ position: [1, 6, 12], fov: 55 }}
-          dpr={[1, 1.5]}
-          frameloop={visible ? "always" : "never"}
+          dpr={
+            quality === "Baixo"
+              ? 0.75
+              : quality === "Alto"
+                ? 2
+                : quality === "Médio"
+                  ? 1
+                  : 1.25
+          }
+          frameloop={
+            visible ? (running || debug ? "always" : "demand") : "never"
+          }
           gl={{ antialias: false, powerPreference: "high-performance" }}
           fallback={<WorldFallback />}
         >
           <color attach="background" args={["#05070d"]} />
           <fog attach="fog" args={["#05070d", 18, 55]} />
           <ambientLight intensity={1.4} />
+          <StudioLighting />
           <directionalLight position={[index * 30, 8, 6]} intensity={3} />
           <Suspense fallback={null}>
             {sections.map(
               (s, i) =>
                 Math.abs(i - index) <= 1 && (
                   <group visible={active} key={s.id} position={[i * 30, 0, 0]}>
+                    <Room id={s.id} />
                     <Grid
                       args={[25, 25]}
                       cellColor="#193340"
                       sectionColor="#355a66"
                       fadeDistance={23}
-                    />
-                    <mesh position={[0, -0.25, 0]}>
-                      <boxGeometry args={[23, 0.3, 21]} />
-                      <meshStandardMaterial
-                        color="#111923"
-                        metalness={0.7}
-                        roughness={0.45}
-                      />
-                    </mesh>
-                    <Label
-                      title={s.short.toUpperCase()}
-                      color={accent}
-                      position={[0, 5, -7]}
                     />
                     {i === index && (
                       <group
@@ -461,6 +236,9 @@ export default function LabCanvas({
                         }
                       >
                         <Zone id={scenario} />
+                        {active && stationOpen && (
+                          <Station key={scenario} id={scenario} />
+                        )}
                         <PacketField zone={scenario} />
                       </group>
                     )}
@@ -469,15 +247,19 @@ export default function LabCanvas({
             )}
           </Suspense>
           <OrbitControls
+            onStart={() =>
+              document.dispatchEvent(new Event("world-manual-camera"))
+            }
             makeDefault
             minDistance={5}
-            maxDistance={22}
+            maxDistance={48}
             maxPolarAngle={Math.PI / 2.1}
           />
           <Camera index={index} />
           <Navigation enabled={active} index={index} />
           <Profiler output={output} />
           <Clock />
+          <Ready />
         </Canvas>
       </SceneBoundary>
       <pre className="world-profiler" ref={output} hidden={!debug}>
@@ -485,5 +267,5 @@ export default function LabCanvas({
       </pre>
     </>
   );
-}
-
+});
+export default LabCanvas;
