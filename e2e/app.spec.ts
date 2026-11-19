@@ -143,7 +143,7 @@ test("WebGL indisponível oferece mapa funcional", async ({ page }) => {
     .getByRole("button", { name: /Camadas OSI/ })
     .click();
   await expect(
-    page.getByRole("img", { name: "Mapa 2D interativo da rede" }),
+    page.getByRole("group", { name: "Mapa 2D interativo da rede" }),
   ).toBeVisible();
   await page
     .getByRole("button", { name: "Inspecionar SEU COMPUTADOR" })
@@ -254,9 +254,9 @@ test("recursos locais, mapa 2D e screenshot inicial", async ({ page }) => {
     .getByRole("navigation")
     .getByRole("button", { name: /Camadas OSI/ })
     .click();
-  await page.getByRole("button", { name: "Alternar mapa 2D" }).click();
+  // A visão simplificada agora já usa o mapa leve, sem carregar WebGL.
   await expect(
-    page.getByRole("img", { name: "Mapa 2D interativo da rede" }),
+    page.getByRole("group", { name: "Mapa 2D interativo da rede" }),
   ).toBeVisible();
   await page
     .getByRole("button", { name: "Inspecionar SEU COMPUTADOR" })
@@ -361,27 +361,31 @@ test("jornadas e busca ajudam a descobrir áreas por teclado", async ({
   ).not.toBeVisible();
 });
 
-test("laboratório imersivo permite exploração, inspeção e saída segura", async ({
+test("laboratório único permite exploração, inspeção e saída segura", async ({
   page,
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/");
   await page.getByRole("button", { name: /Entrar no laboratório/ }).click();
-  const lab = page.getByRole("dialog", { name: "Laboratório imersivo" });
-  await expect(lab).toBeVisible();
-  await expect(lab.locator("canvas")).toBeVisible();
+  const lab = page.getByRole("region", { name: "Mundo NETVERSE" });
+  await expect(lab.locator("canvas")).toHaveCount(1, { timeout: 20000 });
+  await lab.locator(".world-equipment summary").click();
   for (let i = 0; i < 3; i++)
-    await lab.locator(".immersive-device-list button").nth(i).click();
-  await expect(lab.locator(".immersive-mission")).toContainText("3/3");
+    await lab.locator(".world-equipment button").nth(i).click();
+  await expect(lab.locator(".world-equipment summary")).toContainText("3/3");
   await expect(
     lab.getByRole("complementary", { name: "Equipamento selecionado" }),
   ).toBeVisible();
   await page.screenshot({ path: "docs/screenshots/immersive-desktop.png" });
   await page.setViewportSize({ width: 390, height: 844 });
-  expect(await lab.evaluate((e) => e.scrollWidth <= innerWidth)).toBe(true);
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
   await page.screenshot({ path: "docs/screenshots/immersive-mobile.png" });
-  await page.keyboard.press("Escape");
+  await lab.getByRole("button", { name: "← Ver telas", exact: true }).click();
   await expect(lab).toHaveCount(0);
   await expect(
     page.getByRole("heading", { name: /O universo vivo/ }),
@@ -410,10 +414,10 @@ test("mundo mantém um Canvas entre as 12 zonas e preserva terminais", async ({
   page,
 }) => {
   await page.goto("/");
-  await page
-    .getByRole("button", { name: "Entrar no mundo 3D", exact: true })
-    .click();
-  await expect(page.locator(".world-lab canvas")).toHaveCount(1);
+  await page.getByRole("button", { name: "Mundo 3D", exact: true }).click();
+  await expect(page.locator(".world-lab canvas")).toHaveCount(1, {
+    timeout: 20000,
+  });
   const original = await page.locator(".world-lab canvas").elementHandle();
   const nav = page.getByRole("navigation", { name: "Áreas do simulador" });
   for (const name of [
@@ -430,11 +434,13 @@ test("mundo mantém um Canvas entre as 12 zonas e preserva terminais", async ({
     "Glossário e quiz",
   ]) {
     await nav.getByRole("button", { name: new RegExp(name) }).click();
-    await expect(page.locator(".world-lab canvas")).toHaveCount(1);
+    await expect(page.locator(".world-lab canvas")).toHaveCount(1, {
+      timeout: 20000,
+    });
     expect(await original?.evaluate((e) => e.isConnected)).toBe(true);
   }
   await page
-    .getByRole("button", { name: "Terminal da zona", exact: true })
+    .getByRole("button", { name: "Controles e conteúdo", exact: true })
     .click();
   await expect(page.locator(".knowledge-layout")).toBeVisible();
   await page
@@ -443,18 +449,303 @@ test("mundo mantém um Canvas entre as 12 zonas e preserva terminais", async ({
   await page.screenshot({ path: "docs/screenshots/world-glossary.png" });
 });
 
-test("instrumenta as 12 zonas com contadores reais do renderer",async({page})=>{
- await page.goto('/');await page.getByRole('button',{name:'Entrar no mundo 3D',exact:true}).click();await page.getByRole('button',{name:'P / Métricas 3D',exact:true}).click();
- const results=[];
- const nav=page.getByRole('navigation',{name:'Áreas do simulador'});
- const names=await nav.getByRole('button').allTextContents();
- for(let i=0;i<names.length;i++){
-  await nav.getByRole('button').nth(i).click();
-  await page.waitForTimeout(1800);
-  results.push({zone:names[i].trim(),renderer:await page.locator('.world-profiler').innerText()});
-  await page.screenshot({path:`docs/screenshots/world-zone-${i}.png`});
- }
- const {writeFile}=await import('node:fs/promises');await writeFile('docs/audit/world-renderer.json',JSON.stringify({environment:'Chrome headless local, hardware não certificado, amostra curta por zona; não é benchmark mobile nem estabilidade de 30 minutos',results},null,2));
+test("instrumenta as 12 zonas com contadores reais do renderer", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Mundo 3D", exact: true }).click();
+  await page
+    .getByRole("button", { name: "P / Métricas 3D", exact: true })
+    .click();
+  const results = [];
+  const nav = page.getByRole("navigation", { name: "Áreas do simulador" });
+  const names = await nav.getByRole("button").allTextContents();
+  for (let i = 0; i < names.length; i++) {
+    await nav.getByRole("button").nth(i).click();
+    await page.waitForTimeout(1800);
+    results.push({
+      zone: names[i].trim(),
+      renderer: await page.locator(".world-profiler").innerText(),
+    });
+    await page.screenshot({ path: `docs/screenshots/world-zone-${i}.png` });
+  }
+  const { writeFile } = await import("node:fs/promises");
+  await writeFile(
+    "docs/audit/world-renderer.json",
+    JSON.stringify(
+      {
+        environment:
+          "Chrome headless local, hardware não certificado, amostra curta por zona; não é benchmark mobile nem estabilidade de 30 minutos",
+        results,
+      },
+      null,
+      2,
+    ),
+  );
 });
 
-test("mundo sem WebGL mantém fallback e relógio funcional",async({page})=>{await page.addInitScript(()=>{const get=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(type:string,...args:unknown[]){if(type.includes('webgl'))return null;return Reflect.apply(get,this,[type,...args]);} as typeof get;});await page.goto('/');await page.getByRole('button',{name:'Entrar no mundo 3D',exact:true}).click();await expect(page.locator('.world-fallback')).toBeVisible();await page.getByRole('navigation').getByRole('button',{name:/Camadas OSI/}).click();await page.getByRole('button',{name:'Executar experiência',exact:true}).click();await expect(page.locator('.world-task')).not.toContainText('Sua rede está pronta');});
+test("mundo sem WebGL mantém fallback e relógio funcional", async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    const get = HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext = function (
+      type: string,
+      ...args: unknown[]
+    ) {
+      if (type.includes("webgl")) return null;
+      return Reflect.apply(get, this, [type, ...args]);
+    } as typeof get;
+  });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Mundo 3D", exact: true }).click();
+  await expect(page.locator(".world-fallback")).toBeVisible();
+  await page
+    .getByRole("navigation")
+    .getByRole("button", { name: /Camadas OSI/ })
+    .click();
+  await page
+    .getByRole("button", { name: "Executar experiência", exact: true })
+    .click();
+  await expect(page.locator(".world-task")).not.toContainText(
+    "Sua rede está pronta",
+  );
+});
+
+test("mundo fica livre de cartões e permite tela cheia com explicação expansível", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Mundo 3D", exact: true }).click();
+  await expect(page.locator(".world-lab canvas")).toHaveCount(1, {
+    timeout: 20000,
+  });
+  await expect(page.locator(".zone-station")).toHaveCount(0);
+  await expect(page.locator(".world-explanation-content")).not.toBeVisible();
+  await page
+    .getByRole("button", { name: "Tela cheia do mundo 3D", exact: true })
+    .click();
+  await expect
+    .poll(() =>
+      page.evaluate(() =>
+        document.fullscreenElement?.classList.contains("world-lab"),
+      ),
+    )
+    .toBe(true);
+  await page
+    .getByRole("button", {
+      name: "Expandir explicação em tela cheia",
+      exact: true,
+    })
+    .click();
+  await expect
+    .poll(() =>
+      page.evaluate(() =>
+        document.fullscreenElement?.classList.contains("compact-explanation"),
+      ),
+    )
+    .toBe(true);
+  await expect(page.locator(".world-explanation-content")).toBeVisible();
+  await page
+    .getByRole("button", {
+      name: "Sair da tela cheia da explicação",
+      exact: true,
+    })
+    .click();
+  if (
+    await page.evaluate(() =>
+      document.fullscreenElement?.classList.contains("world-lab"),
+    )
+  )
+    await page
+      .getByRole("button", { name: "Sair da tela cheia do mundo", exact: true })
+      .click();
+  await expect
+    .poll(() => page.evaluate(() => document.fullscreenElement === null))
+    .toBe(true);
+  await page
+    .getByRole("button", { name: "Controles da cena", exact: true })
+    .click();
+  await expect(page.locator(".zone-station")).toBeVisible();
+  await page
+    .getByRole("button", { name: "Ocultar controles", exact: true })
+    .click();
+  await expect(page.locator(".zone-station")).toHaveCount(0);
+  await page
+    .getByRole("button", { name: "Tela cheia do mundo 3D", exact: true })
+    .click();
+  // The same event is emitted by the 3D terminals and a double click in the scene.
+  await page.evaluate(() =>
+    document.dispatchEvent(new Event("world-terminal")),
+  );
+  await expect
+    .poll(() => page.evaluate(() => document.fullscreenElement === null))
+    .toBe(true);
+  await expect(page.locator("#main-content")).toBeVisible();
+});
+
+test("terminal espacial de diagnóstico executa comando e quiz dá feedback", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page
+    .getByRole("navigation")
+    .getByRole("button", { name: /Diagnóstico/ })
+    .click();
+  await page.getByRole("button", { name: "Mundo 3D", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Controles da cena", exact: true })
+    .click();
+  await page
+    .getByRole("textbox", { name: "Comando no console espacial" })
+    .fill("ipconfig");
+  await page
+    .getByRole("button", { name: "Executar diagnóstico", exact: true })
+    .click();
+  await expect(page.locator(".station-console")).toContainText("192.168.10.2");
+  await page
+    .getByRole("navigation")
+    .getByRole("button", { name: /Glossário e quiz/ })
+    .click();
+  await expect(page.locator(".zone-station")).toHaveCount(0);
+  await page
+    .getByRole("button", { name: "Controles da cena", exact: true })
+    .click();
+  await page
+    .locator(".zone-station")
+    .getByRole("button", { name: "Switch", exact: true })
+    .click();
+  await expect(page.locator(".station-feedback")).toContainText("Correto.");
+});
+
+test("explicação simplificada expande e restaura sem bloquear a navegação", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page
+    .getByRole("navigation")
+    .getByRole("button", { name: /Camadas OSI/ })
+    .click();
+  await page
+    .locator(".explanation")
+    .getByRole("button", {
+      name: "Expandir explicação em tela cheia",
+      exact: true,
+    })
+    .click();
+  await expect
+    .poll(() =>
+      page.evaluate(() =>
+        document.fullscreenElement?.classList.contains("explanation"),
+      ),
+    )
+    .toBe(true);
+  await page
+    .getByRole("button", {
+      name: "Sair da tela cheia da explicação",
+      exact: true,
+    })
+    .click();
+  await expect
+    .poll(() => page.evaluate(() => document.fullscreenElement === null))
+    .toBe(true);
+  await page
+    .getByRole("navigation")
+    .getByRole("button", { name: /TCP × UDP/ })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "TCP × UDP", exact: true }),
+  ).toBeVisible();
+});
+
+test("mundo respeita pausa do relógio e organização em worker", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page
+    .getByRole("navigation")
+    .getByRole("button", { name: /Camadas OSI/ })
+    .click();
+  await page.getByRole("button", { name: "Mundo 3D", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Executar experiência", exact: true })
+    .click();
+  await expect
+    .poll(() => page.locator(".world-time").innerText())
+    .not.toBe("0.00 s virtuais");
+  await page
+    .getByRole("button", { name: "Pausar simulação", exact: true })
+    .click();
+  await expect(
+    page.getByRole("button", { name: "Executar experiência", exact: true }),
+  ).toBeVisible();
+  const paused = await page.locator(".world-time").innerText();
+  await page.waitForTimeout(250);
+  await expect(page.locator(".world-time")).toHaveText(paused);
+  await page.waitForTimeout(1000);
+  const still = await page.locator(".world-lab canvas").screenshot();
+  await page.keyboard.down("KeyW");
+  await page.waitForTimeout(350);
+  await page.keyboard.up("KeyW");
+  await page.waitForTimeout(200);
+  const moved = await page.locator(".world-lab canvas").screenshot();
+  expect(still.equals(moved)).toBe(false);
+  await expect(page.locator(".world-time")).toHaveText(paused);
+
+  await page
+    .getByRole("navigation")
+    .getByRole("button", { name: /Topologias/ })
+    .click();
+  await page
+    .getByRole("button", { name: "Controles da cena", exact: true })
+    .click();
+  await page
+    .getByRole("button", {
+      name: "Organizar grafo automaticamente",
+      exact: true,
+    })
+    .click();
+  await expect(page.locator(".zone-station [role=status]")).toContainText(
+    "conexões foram preservadas",
+  );
+});
+
+test("HUD mobile legível sem menu fantasma e botões de tela cheia", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Mundo 3D", exact: true }).click();
+  await expect(page.locator(".world-lab canvas")).toHaveCount(1, {
+    timeout: 20000,
+  });
+  await expect(
+    page.getByRole("navigation", { name: "Áreas do simulador" }),
+  ).not.toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Tela cheia do mundo 3D", exact: true }),
+  ).toBeVisible();
+  await expect(page.locator(".world-explanation-content")).not.toBeVisible();
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+  await page.screenshot({ path: "docs/screenshots/world-clean-mobile.png" });
+});
+
+test("entrada leve adia WebGL até a escolha do mundo", async ({ page }) => {
+  const assets: string[] = [];
+  page.on("request", (r) => assets.push(r.url()));
+  await page.goto("/");
+  await expect(
+    page.getByRole("group", { name: "Mapa 2D interativo da rede" }),
+  ).toBeVisible();
+  await expect(page.locator("canvas")).toHaveCount(0);
+  expect(assets.some((url) => /LabCanvas-.*\.js/.test(url))).toBe(false);
+  await page.getByRole("button", { name: "Mundo 3D", exact: true }).click();
+  await expect(page.locator(".world-lab canvas")).toHaveCount(1, {
+    timeout: 20000,
+  });
+  expect(assets.some((url) => /LabCanvas-.*\.js/.test(url))).toBe(true);
+});
