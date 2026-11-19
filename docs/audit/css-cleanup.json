@@ -1,0 +1,49 @@
+{
+  "method": "PostCSS: apenas famílias confirmadas sem uso textual no código e declarações repetidas no mesmo contexto/seletor/propriedade, respeitando important. Sem purge global heurístico.",
+  "removedClassFamilies": [
+    "cinematic-device",
+    "device-render",
+    "cinematic-device-name",
+    "cinematic-wires",
+    "cinematic-stars",
+    "orbital",
+    "orbital-one",
+    "orbital-two",
+    "discovery-section",
+    "discovery-grid",
+    "discovery-card",
+    "discovery-icon",
+    "card-index",
+    "card-action",
+    "osi-model",
+    "tcp-model",
+    "osi-columns",
+    "model-head",
+    "layer-detail",
+    "encapsulation",
+    "bit-stream"
+  ],
+  "files": [
+    {
+      "file": "src/styles.css",
+      "beforeBytes": 77359,
+      "afterBytes": 66445,
+      "removedRules": 104,
+      "removedDeclarations": 87
+    },
+    {
+      "file": "src/design.css",
+      "beforeBytes": 63455,
+      "afterBytes": 59861,
+      "removedRules": 37,
+      "removedDeclarations": 41
+    },
+    {
+      "file": "src/world/world.css",
+      "beforeBytes": 18562,
+      "afterBytes": 18379,
+      "removedRules": 1,
+      "removedDeclarations": 9
+    }
+  ]
+}
