@@ -1,3 +1,4 @@
+import { listenerPose } from "./runtime";
 import { useEffect, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Euler, Vector3 } from "three";
@@ -8,7 +9,7 @@ export default function Navigation({
   enabled: boolean;
   index: number;
 }) {
-  const { camera, controls, gl } = useThree();
+  const { camera, controls, gl, invalidate } = useThree();
   const keys = useRef(new Set<string>());
   const euler = useRef(new Euler(0, 0, 0, "YXZ"));
   const direction = useRef(new Vector3());
@@ -17,6 +18,10 @@ export default function Navigation({
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (
+        (e.target instanceof HTMLElement &&
+          Boolean(
+            e.target.closest(".zone-station,select,[contenteditable=true]"),
+          )) ||
         e.target instanceof HTMLInputElement ||
         e.target instanceof HTMLTextAreaElement
       )
@@ -34,18 +39,24 @@ export default function Navigation({
         ].includes(e.code)
       ) {
         e.preventDefault();
+        document.dispatchEvent(new Event("world-manual-camera"));
         keys.current.add(e.code);
+        invalidate();
       }
     };
     const up = (e: KeyboardEvent) => keys.current.delete(e.code);
     const clear = () => keys.current.clear();
     const touch = (e: Event) => {
       const d = (e as CustomEvent<{ key: string; pressed: boolean }>).detail;
-      if (d.pressed) keys.current.add(d.key);
-      else keys.current.delete(d.key);
+      if (d.pressed) {
+        document.dispatchEvent(new Event("world-manual-camera"));
+        keys.current.add(d.key);
+        invalidate();
+      } else keys.current.delete(d.key);
     };
     const mouse = (e: MouseEvent) => {
       if (document.pointerLockElement !== gl.domElement || !enabled) return;
+      invalidate();
       euler.current.setFromQuaternion(camera.quaternion);
       euler.current.y -= e.movementX * 0.002;
       euler.current.x = Math.max(
@@ -79,6 +90,13 @@ export default function Navigation({
     if (!enabled && document.pointerLockElement) document.exitPointerLock();
   }, [enabled, index]);
   useFrame((_, delta) => {
+    listenerPose.x = camera.position.x - index * 30;
+    listenerPose.y = camera.position.y;
+    listenerPose.z = camera.position.z;
+    camera.getWorldDirection(direction.current);
+    listenerPose.fx = direction.current.x;
+    listenerPose.fy = direction.current.y;
+    listenerPose.fz = direction.current.z;
     if (!enabled) return;
     const dt = Math.min(delta, 0.05);
     const f =
@@ -98,11 +116,15 @@ export default function Navigation({
     if (destination.current.lengthSq() > 1) destination.current.normalize();
     destination.current.multiplyScalar(3);
     velocity.current.lerp(destination.current, Math.min(1, dt * 8));
+    if (velocity.current.lengthSq() > 0.00001) invalidate();
     const dx = velocity.current.x * dt,
       dz = velocity.current.z * dt;
     if (
-      Math.abs(camera.position.x + dx - index * 30) > 12 ||
-      Math.abs(camera.position.z + dz) > 15
+      (Math.abs(camera.position.x + dx - index * 30) > 12 &&
+        Math.abs(camera.position.x + dx - index * 30) >
+          Math.abs(camera.position.x - index * 30)) ||
+      (Math.abs(camera.position.z + dz) > 42 &&
+        Math.abs(camera.position.z + dz) > Math.abs(camera.position.z))
     )
       return;
     camera.position.x += dx;
