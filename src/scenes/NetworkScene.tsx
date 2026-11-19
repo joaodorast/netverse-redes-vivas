@@ -1,3 +1,6 @@
+import Fallback from "./NetworkMap";
+import { deviceColors } from "../data/visual";
+import StudioLighting from "./StudioLighting";
 import { Matrix4, type InstancedMesh } from "three";
 import { useContext } from "react";
 import { WorldMode } from "../world/mode";
@@ -14,6 +17,7 @@ import {
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
   Grid,
+  Html,
   Line,
   OrbitControls,
   RoundedBox,
@@ -24,17 +28,7 @@ import { Crosshair, Expand, Layers, RotateCcw } from "lucide-react";
 import { engine, useSimulation } from "../stores/useSimulation";
 import type { NetworkDevice, NetworkPacket } from "../engine/types";
 import { protocolColors } from "../data/content";
-const deviceColors: Record<string, string> = {
-  pc: "#78b7dc",
-  server: "#b49bfa",
-  switch: "#52e4c1",
-  router: "#68a7ff",
-  firewall: "#ffa67b",
-  hub: "#d9bc77",
-  sensor: "#75dcd5",
-  controller: "#d09bea",
-};
-function Label({
+function SpriteLabel({
   title,
   subtitle = "",
   color,
@@ -45,6 +39,7 @@ function Label({
   color: string;
   position: [number, number, number];
 }) {
+  const inWorld = useContext(WorldMode);
   const texture = useMemo(() => {
     const canvas = document.createElement("canvas");
     canvas.width = 512;
@@ -68,9 +63,37 @@ function Label({
   }, [title, subtitle, color]);
   useEffect(() => () => texture.dispose(), [texture]);
   return (
-    <sprite position={position} scale={[2.25, 0.56, 1]}>
+    <sprite
+      position={position}
+      scale={inWorld ? [2.8, 0.7, 1] : [2.25, 0.56, 1]}
+    >
       <spriteMaterial map={texture} transparent depthTest={false} />
     </sprite>
+  );
+}
+function Label(props: {
+  title: string;
+  subtitle?: string;
+  color: string;
+  position: [number, number, number];
+}) {
+  const inWorld = useContext(WorldMode);
+  const portal = document.getElementById("world-label-layer");
+  if (!inWorld || !portal) return <SpriteLabel {...props} />;
+  return (
+    <Html
+      portal={{ current: portal }}
+      zIndexRange={[3, 1]}
+      position={props.position}
+      center
+      distanceFactor={12}
+      style={{ pointerEvents: "none" }}
+    >
+      <div className="world-label" style={{ borderColor: props.color }}>
+        <strong style={{ color: props.color }}>{props.title}</strong>
+        {props.subtitle && <small>{props.subtitle}</small>}
+      </div>
+    </Html>
   );
 }
 function InstanceBoxes({
@@ -102,6 +125,7 @@ function InstanceBoxes({
 }
 const Device = memo(
   function Device({ d }: { d: NetworkDevice }) {
+    const invalidate = useThree((s) => s.invalidate);
     const model = useRef<Group>(null);
     const [hovered, setHovered] = useState(false);
     const selected = useSimulation((s) => s.selected === d.id),
@@ -116,8 +140,10 @@ const Device = memo(
       const scale =
         model.current.scale.x +
         (target - model.current.scale.x) * Math.min(1, delta * 10);
-      if (Math.abs(scale - model.current.scale.x) > 0.0001)
+      if (Math.abs(scale - model.current.scale.x) > 0.0001) {
         model.current.scale.setScalar(scale);
+        invalidate();
+      }
     });
     return (
       <group
@@ -312,14 +338,6 @@ const Device = memo(
             ])}
             size={[0.06, 0.009, 0.045]}
             color="#81bdcf"
-          />
-        )}
-        {(selected || receiving) && (
-          <pointLight
-            position={[0, 1, 0]}
-            color={color}
-            intensity={2}
-            distance={3}
           />
         )}
         <Label
@@ -603,6 +621,7 @@ function World({
         speed={0}
       />
       <ambientLight intensity={1.35} />
+      <StudioLighting />
       <directionalLight position={[3, 9, 4]} intensity={2.5} color="#b7d7ff" />
       <pointLight position={[-5, 5, -3]} intensity={18} color="#00aaff" />
       <pointLight position={[6, 4, 2]} intensity={14} color="#8458ff" />
@@ -678,109 +697,6 @@ function World({
       <AdaptiveQuality />
       <OpeningCamera active={opening} />
     </>
-  );
-}
-function Fallback() {
-  const { state, select } = useSimulation();
-  const point = (id: string) => {
-    const d = state.devices.find((d) => d.id === id);
-    return d
-      ? { x: 400 + d.position[0] * 45, y: 220 + d.position[2] * 35 }
-      : { x: 0, y: 0 };
-  };
-  return (
-    <svg
-      className="fallback"
-      viewBox="0 0 800 440"
-      role="img"
-      aria-label="Mapa 2D interativo da rede"
-    >
-      {state.links.map((l) => {
-        const a = point(l.from),
-          b = point(l.to);
-        return (
-          <line
-            key={l.id}
-            x1={a.x}
-            y1={a.y}
-            x2={b.x}
-            y2={b.y}
-            stroke={l.active && state.config.cable ? "#328da7" : "#e36479"}
-            strokeWidth="2"
-            strokeDasharray={l.active ? undefined : "6 5"}
-          />
-        );
-      })}
-      {state.devices.map((d) => {
-        const p = point(d.id);
-        return (
-          <g
-            key={d.id}
-            onClick={() => select(d.id)}
-            onKeyDown={(e) => e.key === "Enter" && select(d.id)}
-            tabIndex={0}
-            role="button"
-            aria-label={`Inspecionar ${d.name}`}
-          >
-            <rect
-              x={p.x - 28}
-              y={p.y - 22}
-              width="56"
-              height="44"
-              rx="8"
-              fill="#152c42"
-              stroke={deviceColors[d.type]}
-            />
-            <text
-              x={p.x}
-              y={p.y + 4}
-              fill={deviceColors[d.type]}
-              textAnchor="middle"
-              fontSize="10"
-            >
-              {d.type.toUpperCase()}
-            </text>
-            <text
-              x={p.x}
-              y={p.y + 40}
-              fill="#adbed1"
-              textAnchor="middle"
-              fontSize="11"
-            >
-              {d.name}
-            </text>
-          </g>
-        );
-      })}
-      {state.packets
-        .filter((p) => p.status === "transit")
-        .map((p) => {
-          const a = point(p.from),
-            b = point(p.to),
-            t = Math.max(
-              0,
-              Math.min(1, (state.time - p.start) / (p.end - p.start || 1)),
-            );
-          return (
-            <g key={p.id} onClick={() => select(p.id)}>
-              <circle
-                cx={a.x + (b.x - a.x) * t}
-                cy={a.y + (b.y - a.y) * t}
-                r="8"
-                fill={protocolColors[p.protocol]}
-              />
-              <text
-                x={a.x + (b.x - a.x) * t}
-                y={a.y + (b.y - a.y) * t - 14}
-                fill={protocolColors[p.protocol]}
-                fontSize="11"
-              >
-                {p.label}
-              </text>
-            </g>
-          );
-        })}
-    </svg>
   );
 }
 class SceneBoundary extends Component<
