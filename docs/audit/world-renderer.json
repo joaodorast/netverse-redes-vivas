@@ -3,51 +3,51 @@
   "results": [
     {
       "zone": "Início00",
-      "renderer": "60 FPS · 16.7 ms\n93 draw calls · 25432 triângulos\n88 geometrias · 8 texturas\nMemória GPU: indisponível pela API"
+      "renderer": "60 FPS · 16.6 ms\n97 draw calls · 26206 triângulos\n98 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
     },
     {
       "zone": "Camadas OSI01",
-      "renderer": "60 FPS · 16.6 ms\n49 draw calls · 18184 triângulos\n36 geometrias · 17 texturas\nMemória GPU: indisponível pela API"
+      "renderer": "38 FPS · 26.4 ms\n49 draw calls · 18586 triângulos\n57 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
     },
     {
       "zone": "TCP × UDP02",
-      "renderer": "60 FPS · 16.7 ms\n20 draw calls · 4644 triângulos\n19 geometrias · 5 texturas\nMemória GPU: indisponível pela API"
+      "renderer": "37 FPS · 27.2 ms\n39 draw calls · 5622 triângulos\n49 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
     },
     {
       "zone": "Viagem da web03",
-      "renderer": "60 FPS · 16.7 ms\n13 draw calls · 3920 triângulos\n11 geometrias · 6 texturas\nMemória GPU: indisponível pela API"
+      "renderer": "43 FPS · 23.5 ms\n26 draw calls · 4368 triângulos\n40 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
     },
     {
       "zone": "Switch e roteador04",
-      "renderer": "60 FPS · 16.7 ms\n9 draw calls · 1328 triângulos\n8 geometrias · 5 texturas\nMemória GPU: indisponível pela API"
+      "renderer": "56 FPS · 18.0 ms\n20 draw calls · 1782 triângulos\n32 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
     },
     {
       "zone": "Topologias05",
-      "renderer": "60 FPS · 16.6 ms\n72 draw calls · 26676 triângulos\n67 geometrias · 9 texturas\nMemória GPU: indisponível pela API"
+      "renderer": "39 FPS · 25.8 ms\n78 draw calls · 28128 triângulos\n87 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
     },
     {
       "zone": "Meios físicos06",
-      "renderer": "60 FPS · 16.6 ms\n27 draw calls · 6154 triângulos\n25 geometrias · 6 texturas\nMemória GPU: indisponível pela API"
+      "renderer": "55 FPS · 18.3 ms\n43 draw calls · 7042 triângulos\n47 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
     },
     {
       "zone": "Diagnóstico07",
-      "renderer": "60 FPS · 16.7 ms\n10 draw calls · 1330 triângulos\n8 geometrias · 6 texturas\nMemória GPU: indisponível pela API"
+      "renderer": "44 FPS · 22.9 ms\n19 draw calls · 1770 triângulos\n33 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
     },
     {
       "zone": "Segurança08",
-      "renderer": "60 FPS · 16.6 ms\n10 draw calls · 1330 triângulos\n8 geometrias · 6 texturas\nMemória GPU: indisponível pela API"
+      "renderer": "47 FPS · 21.1 ms\n27 draw calls · 1762 triângulos\n29 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
     },
     {
       "zone": "Desempenho09",
-      "renderer": "60 FPS · 16.7 ms\n7 draw calls · 34 triângulos\n7 geometrias · 4 texturas\nMemória GPU: indisponível pela API"
+      "renderer": "39 FPS · 25.9 ms\n21 draw calls · 474 triângulos\n32 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
     },
     {
       "zone": "Tendências10",
-      "renderer": "60 FPS · 16.6 ms\n12 draw calls · 3914 triângulos\n10 geometrias · 6 texturas\nMemória GPU: indisponível pela API"
+      "renderer": "55 FPS · 18.2 ms\n23 draw calls · 5802 triângulos\n32 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
     },
     {
       "zone": "Glossário e quiz11",
-      "renderer": "60 FPS · 16.7 ms\n11 draw calls · 3912 triângulos\n9 geometrias · 6 texturas\nMemória GPU: indisponível pela API"
+      "renderer": "48 FPS · 20.6 ms\n26 draw calls · 4300 triângulos\n36 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
     }
   ]
 }
