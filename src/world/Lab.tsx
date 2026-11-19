@@ -1,29 +1,100 @@
-import { lazy, Suspense, useState, useEffect } from "react";
-import { ArrowRight, Pause, Play, SlidersHorizontal, X } from "lucide-react";
+import ExpandPanel from "../components/ExpandPanel";
+import Boot from "./Boot";
+import type { Scenario } from "../engine/types";
+import {
+  lazy,
+  Suspense,
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+} from "react";
+import {
+  Pause,
+  Play,
+  SlidersHorizontal,
+  X,
+  Expand,
+  Minimize,
+} from "lucide-react";
 import { sections, layers } from "../data/content";
-import { act, useSimulation } from "../stores/useSimulation";
+import { act, engine, useSimulation } from "../stores/useSimulation";
 const LabCanvas = lazy(() => import("./LabCanvas"));
 export default function Lab({
   onTerminal,
   active,
+  onNavigate,
+  onExitWorld,
 }: {
   onTerminal: () => void;
   active: boolean;
+  onNavigate: (id: Scenario) => void;
+  onExitWorld: () => void;
 }) {
   const { state, selected, select } = useSimulation();
-  const [help, setHelp] = useState(true);
-  const [debug, setDebug] = useState(false);
+  const root = useRef<HTMLElement>(null);
+  const [full, setFull] = useState(false);
   useEffect(() => {
-    document.addEventListener("world-terminal", onTerminal);
-    return () => document.removeEventListener("world-terminal", onTerminal);
+    const change = () =>
+      setFull(
+        document.fullscreenElement === root.current ||
+          Boolean(root.current?.classList.contains("world-screen-fallback")),
+      );
+    document.addEventListener("fullscreenchange", change);
+    return () => document.removeEventListener("fullscreenchange", change);
+  }, []);
+  const openTerminal = () => {
+    if (document.fullscreenElement)
+      void document.exitFullscreen().then(onTerminal);
+    else onTerminal();
+  };
+  const exitWorld = () => {
+    if (document.fullscreenElement)
+      void document.exitFullscreen().then(onExitWorld);
+    else onExitWorld();
+  };
+
+  const [help, setHelp] = useState(false);
+  const [infoOpen, setInfoOpen] = useState(false);
+  const [stationOpen, setStationOpen] = useState(false);
+  useEffect(() => {
+    setStationOpen(false);
+    setInfoOpen(false);
+  }, [state.scenario]);
+  const [debug, setDebug] = useState(false);
+  const toggleDebug = useCallback(() => setDebug((v) => !v), []);
+  useEffect(() => {
+    if (state.scenario !== "home") return;
+    act((e) => e.start());
+    const timer = setInterval(() => {
+      if (engine.state.complete && !document.hidden) act((e) => e.start());
+    }, 1800);
+    return () => clearInterval(timer);
+  }, [state.scenario]);
+
+  useEffect(() => {
+    const open = () => {
+      if (document.fullscreenElement)
+        void document.exitFullscreen().then(onTerminal);
+      else onTerminal();
+    };
+    document.addEventListener("world-terminal", open);
+    return () => document.removeEventListener("world-terminal", open);
   }, [onTerminal]);
   const area = sections.find((s) => s.id === state.scenario);
   const layer = selected?.startsWith("layer-")
     ? layers.find((l) => l.n === Number(selected.slice(6)))
     : undefined;
   const device = state.devices.find((d) => d.id === selected);
+  const [visited, setVisited] = useState<string[]>([]);
+  useEffect(() => {
+    if (device)
+      setVisited((v) => (v.includes(device.id) ? v : [...v, device.id]));
+  }, [device?.id]);
+
   return (
-    <section className="world-lab" aria-label="Mundo NETVERSE">
+    <section ref={root} className="world-lab" aria-label="Mundo NETVERSE">
+      <Boot />
       <Suspense
         fallback={
           <div className="world-boot" role="status">
@@ -32,28 +103,86 @@ export default function Lab({
         }
       >
         <LabCanvas
+          stationOpen={stationOpen}
           active={active}
           debug={debug}
-          onDebug={() => setDebug((v) => !v)}
+          onDebug={toggleDebug}
         />
       </Suspense>
       <div className="world-shade" />
+      <div className="world-viewbar">
+        <button onClick={exitWorld}>← Ver telas</button>
+        <button
+          className="world-fullscreen"
+          aria-label={
+            full ? "Sair da tela cheia do mundo" : "Tela cheia do mundo 3D"
+          }
+          onClick={async () => {
+            const panel = root.current;
+            if (!panel) return;
+            if (panel.classList.contains("world-screen-fallback")) {
+              panel.classList.remove("world-screen-fallback");
+              setFull(false);
+              return;
+            }
+            if (document.fullscreenElement === panel) {
+              await document.exitFullscreen();
+              return;
+            }
+            try {
+              if (!panel.requestFullscreen) throw Error("unsupported");
+              await panel.requestFullscreen();
+            } catch {
+              panel.classList.add("world-screen-fallback");
+              setFull(true);
+            }
+          }}
+        >
+          {full ? <Minimize size={17} /> : <Expand size={17} />}{" "}
+          {full ? "Sair da tela cheia" : "Tela cheia"} <kbd>F11</kbd>
+        </button>
+      </div>
+      <details className="world-minimap">
+        <summary>Mapa do laboratório</summary>
+        <div>
+          {sections.map((s, i) => (
+            <button
+              key={s.id}
+              aria-label={`Viajar para ${s.short}`}
+              aria-current={state.scenario === s.id ? "location" : undefined}
+              onClick={() => onNavigate(s.id)}
+            >
+              <span>{String(i + 1).padStart(2, "0")}</span>
+              {s.short}
+            </button>
+          ))}
+        </div>
+      </details>
       <header className="world-zone">
         <span>{area?.tag ?? "LABORATÓRIO LIVRE"}</span>
         <h1>{area?.label ?? "Laboratório livre"}</h1>
         <p>{area?.description ?? "Crie e teste sua própria rede."}</p>
       </header>
-      <aside className="world-task">
-        <span>EXPLORE COM UM OBJETIVO</span>
-        <h2>
-          {state.scenario === "home"
-            ? "O invisível está em movimento."
-            : "Observe. Experimente. Entenda."}
-        </h2>
-        <p>{state.explanation}</p>
-        <button onClick={onTerminal}>
-          Abrir terminal da zona <ArrowRight size={15} />
-        </button>
+      <aside
+        className="world-task compact-explanation"
+        data-expandable
+        data-open={infoOpen}
+      >
+        <div className="explanation-toolbar">
+          <button
+            aria-expanded={infoOpen}
+            onClick={() => setInfoOpen(!infoOpen)}
+          >
+            O que está acontecendo?
+          </button>
+          <ExpandPanel />
+        </div>
+        <div className="world-explanation-content">
+          <small>{state.phase}</small>
+          <h2>{state.explanation}</h2>
+          <p>{state.detail}</p>
+          <button onClick={openTerminal}>Ver detalhes da experiência</button>
+        </div>
       </aside>
       {layer && (
         <aside className="world-inspect">
@@ -69,11 +198,11 @@ export default function Lab({
             <dt>PROTOCOLOS</dt>
             <dd>{layer.protocol}</dd>
           </dl>
-          <button onClick={onTerminal}>Explorar encapsulamento</button>
+          <button onClick={openTerminal}>Explorar encapsulamento</button>
         </aside>
       )}
       {device && (
-        <aside className="world-inspect">
+        <aside className="world-inspect" aria-label="Equipamento selecionado">
           <button
             aria-label="Fechar inspeção no mundo"
             onClick={() => select(null)}
@@ -151,7 +280,36 @@ export default function Lab({
           </button>
         ))}
       </div>
+      <details className="world-equipment">
+        <summary>
+          Equipamentos <span>{Math.min(visited.length, 3)}/3 explorados</span>
+        </summary>
+        <div>
+          {state.devices.map((d) => (
+            <button
+              key={d.id}
+              aria-label={`Inspecionar no mundo ${d.name}`}
+              aria-pressed={selected === d.id}
+              onClick={() => select(d.id)}
+            >
+              {visited.includes(d.id) ? "✓ " : ""}
+              {d.name}
+            </button>
+          ))}
+        </div>
+      </details>
       <footer className="world-dock">
+        <time className="world-time" aria-label="Tempo virtual da simulação">
+          {(state.time / 1000).toFixed(2)} s virtuais
+        </time>
+        <button
+          className="outline"
+          aria-pressed={stationOpen}
+          onClick={() => setStationOpen(!stationOpen)}
+        >
+          <SlidersHorizontal size={15} />{" "}
+          {stationOpen ? "Ocultar controles" : "Controles da cena"}
+        </button>
         <button
           className="outline world-lock"
           onClick={() => {
@@ -177,9 +335,7 @@ export default function Lab({
           <b>{state.metrics.delivered}</b>
           <small>ENTREGAS</small>
         </div>
-        <button className="outline" onClick={onTerminal}>
-          <SlidersHorizontal size={15} /> Experimentos
-        </button>
+
         <button
           className="world-debug-toggle"
           aria-pressed={debug}
