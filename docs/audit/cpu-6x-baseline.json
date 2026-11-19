@@ -1,0 +1,72 @@
+{
+  "environment": "Chrome headless local; CDP limita a CPU do renderer, não simula uma GPU ou um celular físico; amostras curtas e qualidade automática",
+  "samples": [
+    {
+      "rate": 1,
+      "zone": 0,
+      "frame": {
+        "frames": 91,
+        "durationMs": 3000,
+        "averageFps": 30,
+        "maxFrameMs": 36
+      },
+      "renderer": "30 FPS · 33.4 ms\n97 draw calls · 26206 triângulos\n98 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "rate": 1,
+      "zone": 1,
+      "frame": {
+        "frames": 92,
+        "durationMs": 3033.2000000000007,
+        "averageFps": 30.001318739285235,
+        "maxFrameMs": 33.70000000000073
+      },
+      "renderer": "30 FPS · 33.3 ms\n49 draw calls · 18586 triângulos\n57 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "rate": 1,
+      "zone": 5,
+      "frame": {
+        "frames": 92,
+        "durationMs": 3033.100000000002,
+        "averageFps": 30.00230786983612,
+        "maxFrameMs": 33.70000000000073
+      },
+      "renderer": "30 FPS · 33.3 ms\n78 draw calls · 28128 triângulos\n87 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "rate": 6,
+      "zone": 0,
+      "frame": {
+        "frames": 18,
+        "durationMs": 3066.800000000003,
+        "averageFps": 5.543237250554318,
+        "maxFrameMs": 233.59999999999854
+      },
+      "renderer": "5 FPS · 185.0 ms\n98 draw calls · 26230 triângulos\n93 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "rate": 6,
+      "zone": 1,
+      "frame": {
+        "frames": 92,
+        "durationMs": 3033.2999999999956,
+        "averageFps": 30.000329673952503,
+        "maxFrameMs": 34.60000000000582
+      },
+      "renderer": "30 FPS · 33.3 ms\n49 draw calls · 18586 triângulos\n57 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "rate": 6,
+      "zone": 5,
+      "frame": {
+        "frames": 81,
+        "durationMs": 3033.2000000000044,
+        "averageFps": 26.37478570486611,
+        "maxFrameMs": 100.30000000000291
+      },
+      "renderer": "27 FPS · 37.6 ms\n78 draw calls · 28128 triângulos\n79 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    }
+  ],
+  "errors": []
+}
