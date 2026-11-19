@@ -30,7 +30,11 @@ COMECE POR AQUI
 - Use 4x para demonstracao rapida ou Proximo passo para explicar.
 - Clique em equipamentos ou pacotes; use os logs para rever decisoes.
 - Modo apresentacao oferece roteiro de nove cenarios.
-- Se o 3D for pesado, Preferencias > Baixo ou alterne o mapa 2D.
+- Mundo 3D abre o laboratorio; Ver telas retorna a versao leve.
+- No mundo, use Mapa do laboratorio para escolher uma das 12 areas.
+- Controles da cena abre a bancada da area; ela comeca recolhida.
+- Tela cheia expande o mundo. O icone quadrado expande a explicacao.
+- Se o 3D for pesado, use Preferencias > Baixo ou Ver telas.
 
 Consulte README.md, APRESENTACAO.md, REQUISITOS.md e TESTING.md.
 E uma simulacao didatica, nao uma pilha TCP/IP real.
