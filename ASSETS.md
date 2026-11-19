@@ -34,3 +34,11 @@ Não foi adicionada uma licença geral de código em nome do usuário sem escolh
 ## Atualização visual · 13/11/2026
 
 A abertura agora usa um atlas original gerado por Imagegen (`public/assets/devices-cinematic.png`), com laptop azul, switch ciano, roteador violeta e servidor verde, sobre fundo preto. Prompt: quatro equipamentos isolados em colunas iguais, renderização 3D isométrica cinematográfica, metal detalhado, luz controlada, sem texto ou marcas. O arquivo original foi preservado sem recorte; CSS seleciona cada coluna. Motion anima os equipamentos; SVG desenha conexões e pacotes calculados a partir do motor. São representações 2.5D interativas, não uma captura de uma cena física. A exploração 3D orbital continua nas aulas.
+
+## Atualização de 18/11/2026
+
+O fluxo atual usa SVG na visão leve e equipamentos procedurais no mundo 3D. Os antigos atlas de equipamentos permanecem como arquivo histórico local e não são carregados na entrada atual.
+
+Inter Latin variável está em `public/fonts/InterLatin.woff2` (98.932 bytes), com licença SIL Open Font License 1.1 redistribuída em `public/fonts/Inter-LICENSE.txt`. O subconjunto latino mantém a acentuação usada na interface portuguesa. A fonte é servida localmente com `font-display: swap`; não há consulta a um provedor externo. As fontes de sistema continuam como alternativas.
+
+A iluminação PBR usa `RoomEnvironment` do Three.js para gerar uma pequena textura de ambiente em memória. Não baixa HDRIs nem texturas; a textura é descartada ao sair do renderizador. As estruturas de cada sala são arquitetura estática, sem representar eventos de rede fictícios.
