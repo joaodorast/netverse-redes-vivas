@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { engine, useSimulation } from "../stores/useSimulation";
-import { Fallback } from "../scenes/NetworkScene";
+import Fallback from "../scenes/NetworkMap";
 export default function WorldFallback() {
   useEffect(() => {
+    document.dispatchEvent(new Event("world-renderer-ready"));
     let frame = 0,
       previous = performance.now(),
       elapsed = 0;
