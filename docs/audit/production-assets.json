@@ -1,0 +1,27 @@
+{
+  "url": "https://netverse-redes-vivas.vercel.app",
+  "assets": [
+    {
+      "path": "/",
+      "status": 200,
+      "url": "https://netverse-redes-vivas.vercel.app/",
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 707,
+      "title": "NETVERSE · O universo vivo das redes"
+    },
+    {
+      "path": "/fonts/InterLatin.woff2",
+      "status": 200,
+      "url": "https://netverse-redes-vivas.vercel.app/fonts/InterLatin.woff2",
+      "contentType": "font/woff2",
+      "bytes": 98932
+    },
+    {
+      "path": "/favicon.svg",
+      "status": 200,
+      "url": "https://netverse-redes-vivas.vercel.app/favicon.svg",
+      "contentType": "image/svg+xml",
+      "bytes": 455
+    }
+  ]
+}
