@@ -1,0 +1,201 @@
+{
+  "complete": false,
+  "buildHash": "1cec74d4425f535c16555471973559ee362bbd8c3fe17b4e39755fb37bfb651c",
+  "environment": "Chrome headless local; sem benchmark de GPU física; pode haver QA concorrente nas amostras iniciais",
+  "samples": [
+    {
+      "elapsedSeconds": 55,
+      "zone": 0,
+      "heapUsedMB": 12.974868774414062,
+      "domNodes": 732,
+      "attachedDomNodes": 491,
+      "documents": 1,
+      "renderer": "45 FPS · 22.0 ms\n98 draw calls · 26214 triângulos\n98 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 111,
+      "zone": 1,
+      "heapUsedMB": 11.418689727783203,
+      "domNodes": 772,
+      "attachedDomNodes": 519,
+      "documents": 1,
+      "renderer": "53 FPS · 19.0 ms\n49 draw calls · 18586 triângulos\n57 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 167,
+      "zone": 2,
+      "heapUsedMB": 11.79107666015625,
+      "domNodes": 757,
+      "attachedDomNodes": 487,
+      "documents": 1,
+      "renderer": "45 FPS · 22.4 ms\n53 draw calls · 5734 triângulos\n63 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 223,
+      "zone": 3,
+      "heapUsedMB": 11.419876098632812,
+      "domNodes": 750,
+      "attachedDomNodes": 480,
+      "documents": 1,
+      "renderer": "58 FPS · 17.1 ms\n26 draw calls · 4368 triângulos\n40 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 279,
+      "zone": 4,
+      "heapUsedMB": 10.907257080078125,
+      "domNodes": 747,
+      "attachedDomNodes": 476,
+      "documents": 1,
+      "renderer": "60 FPS · 16.6 ms\n20 draw calls · 1782 triângulos\n32 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 334,
+      "zone": 5,
+      "heapUsedMB": 16.932971954345703,
+      "domNodes": 789,
+      "attachedDomNodes": 497,
+      "documents": 1,
+      "renderer": "54 FPS · 18.4 ms\n78 draw calls · 28128 triângulos\n87 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 390,
+      "zone": 6,
+      "heapUsedMB": 11.519535064697266,
+      "domNodes": 760,
+      "attachedDomNodes": 480,
+      "documents": 1,
+      "renderer": "54 FPS · 18.6 ms\n43 draw calls · 7042 triângulos\n47 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 446,
+      "zone": 7,
+      "heapUsedMB": 11.452163696289062,
+      "domNodes": 756,
+      "attachedDomNodes": 489,
+      "documents": 1,
+      "renderer": "60 FPS · 16.6 ms\n19 draw calls · 1770 triângulos\n33 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 502,
+      "zone": 8,
+      "heapUsedMB": 11.645915985107422,
+      "domNodes": 769,
+      "attachedDomNodes": 489,
+      "documents": 1,
+      "renderer": "60 FPS · 16.6 ms\n27 draw calls · 1762 triângulos\n29 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 557,
+      "zone": 9,
+      "heapUsedMB": 11.509605407714844,
+      "domNodes": 777,
+      "attachedDomNodes": 496,
+      "documents": 1,
+      "renderer": "53 FPS · 18.9 ms\n22 draw calls · 762 triângulos\n32 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 613,
+      "zone": 10,
+      "heapUsedMB": 11.689594268798828,
+      "domNodes": 758,
+      "attachedDomNodes": 493,
+      "documents": 1,
+      "renderer": "60 FPS · 16.7 ms\n23 draw calls · 5802 triângulos\n32 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 669,
+      "zone": 11,
+      "heapUsedMB": 11.32308578491211,
+      "domNodes": 734,
+      "attachedDomNodes": 482,
+      "documents": 1,
+      "renderer": "52 FPS · 19.2 ms\n26 draw calls · 4300 triângulos\n36 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 724,
+      "zone": 0,
+      "heapUsedMB": 29.02862548828125,
+      "domNodes": 795,
+      "attachedDomNodes": 501,
+      "documents": 1,
+      "renderer": "60 FPS · 16.7 ms\n98 draw calls · 26214 triângulos\n98 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 779,
+      "zone": 1,
+      "heapUsedMB": 11.773990631103516,
+      "domNodes": 795,
+      "attachedDomNodes": 528,
+      "documents": 1,
+      "renderer": "54 FPS · 18.4 ms\n49 draw calls · 18586 triângulos\n57 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 835,
+      "zone": 2,
+      "heapUsedMB": 12.28045654296875,
+      "domNodes": 775,
+      "attachedDomNodes": 495,
+      "documents": 1,
+      "renderer": "46 FPS · 21.8 ms\n53 draw calls · 5734 triângulos\n63 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 891,
+      "zone": 3,
+      "heapUsedMB": 12.060783386230469,
+      "domNodes": 762,
+      "attachedDomNodes": 487,
+      "documents": 1,
+      "renderer": "48 FPS · 21.0 ms\n26 draw calls · 4368 triângulos\n40 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 946,
+      "zone": 4,
+      "heapUsedMB": 11.779670715332031,
+      "domNodes": 761,
+      "attachedDomNodes": 482,
+      "documents": 1,
+      "renderer": "51 FPS · 19.5 ms\n20 draw calls · 1782 triângulos\n32 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 1003,
+      "zone": 5,
+      "heapUsedMB": 13.737369537353516,
+      "domNodes": 823,
+      "attachedDomNodes": 502,
+      "documents": 1,
+      "renderer": "59 FPS · 16.9 ms\n78 draw calls · 28128 triângulos\n87 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 1058,
+      "zone": 6,
+      "heapUsedMB": 12.295989990234375,
+      "domNodes": 763,
+      "attachedDomNodes": 484,
+      "documents": 1,
+      "renderer": "60 FPS · 16.7 ms\n43 draw calls · 7042 triângulos\n47 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 1114,
+      "zone": 7,
+      "heapUsedMB": 11.899372100830078,
+      "domNodes": 770,
+      "attachedDomNodes": 492,
+      "documents": 1,
+      "renderer": "39 FPS · 25.3 ms\n19 draw calls · 1770 triângulos\n33 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    },
+    {
+      "elapsedSeconds": 1169,
+      "zone": 8,
+      "heapUsedMB": 11.409618377685547,
+      "domNodes": 778,
+      "attachedDomNodes": 491,
+      "documents": 1,
+      "renderer": "57 FPS · 17.6 ms\n27 draw calls · 1762 triângulos\n29 geometrias · 2 texturas\nMemória GPU: indisponível pela API"
+    }
+  ],
+  "errors": [],
+  "lastValidatedSeconds": 1169,
+  "expectedDurationSeconds": 1800,
+  "interruptionReason": "O script detectou suspensão ou atraso prolongado entre amostras; o ensaio não certifica 30 minutos contínuos.",
+  "closedDate": "2026-11-23"
+}
