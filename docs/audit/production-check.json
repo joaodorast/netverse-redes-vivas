@@ -1,0 +1,17 @@
+{
+  "url": "https://netverse-redes-vivas.vercel.app",
+  "sourceCommit": "27c1230",
+  "pr": "https://github.com/joaodorast/netverse-redes-vivas/pull/2",
+  "deployment": "dpl_3mpSKHMXb5r1LD3ZUBqXBSPMzSL9",
+  "playwright": {
+    "passed": 3,
+    "failed": 0,
+    "scope": [
+      "12 áreas, controles, inspeção, terminal e quiz",
+      "tela cheia, explicação expansível e bancadas recolhidas",
+      "entrada leve sem WebGL e escolha explícita do mundo"
+    ]
+  },
+  "assets": "production-assets.json",
+  "scope": "Jornadas de navegador em produção; complementam as 22 jornadas do build local."
+}
