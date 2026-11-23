@@ -120,3 +120,7 @@ As jornadas da página inicial permitem escolher um objetivo e explorar suas tr�
 ## Prévia do mundo persistente
 
 O mundo oferece navegação por zonas, WASD/setas, arraste, aproximação e pointer lock opcional (Esc libera o mouse). Use Terminal da zona para acessar experiências e controles completos; Voltar ao mundo fecha o terminal. Visão simplificada retorna ao layout acessível existente. P mostra instrumentação real. Controles de movimento também aparecem por toque. A etapa ainda é um protótipo: veja WORLD_PROGRESS.md para as funcionalidades e verificações pendentes.
+
+## Gerar novamente o pacote
+
+Após `npm run build`, execute `python scripts/package.py`. Em um checkout Git, o empacotador inclui os arquivos controlados pelo repositório e o build em `dist`, evitando incluir cópias locais de sincronização ou arquivos avulsos. Sem metadados Git, usa a lista de pastas do projeto. O ZIP e seu SHA-256 ficam em `release`.
