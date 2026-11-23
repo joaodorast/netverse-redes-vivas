@@ -35,3 +35,7 @@ A matriz registra implementação e evidências verificáveis, não uma nota est
 `docs/audit/world-renderer.json` contém amostras curtas por área. `contrast.json` calcula contraste dos tokens opacos. `axe-zones.json` registra o escopo do teste automático de acessibilidade. Os relatórios Lighthouse são medições locais, com histórico mantido para comparação. O arquivo de estabilidade só certifica 30 minutos se contiver `complete: true` e duração correspondente.
 
 Não se declara certificação WCAG completa, memória GPU medida, 60 FPS universal nem validação em celular físico. Chrome headless e CPU emulada não substituem o dispositivo de apresentação. Não foi adicionado pós-processamento caro para mascarar geometria; a prioridade é leitura e resposta. O CSS foi reduzido por regras comprovadamente sem uso e duplicações seguras; os três arquivos ainda compõem a cascata.
+
+## Encerramento da entrega — 23/11/2026
+
+O PR #2 foi mesclado na main e publicado na Vercel. As três jornadas adicionais em produção passaram. O ensaio prolongado terminou por suspensão ou atraso detectado após 19 min 29 s validados, sem exceções registradas nesse intervalo. O relatório parcial está em `docs/audit/stability-interrupted.json`; não se afirma aprovação de 30 minutos contínuos.
