@@ -1,6 +1,6 @@
 # Validação da reconstrução
 
-Atualização: 19/11/2026. Windows, Node.js 24.14.0, Vite 7.3.8, Vitest 4.1.12 e Chrome local via Playwright. As versões resolvidas estão no lockfile.
+Encerramento: 23/11/2026. As jornadas completas e medições abaixo foram executadas em 19/11/2026. Windows, Node.js 24.14.0, Vite 7.3.8, Vitest 4.1.12 e Chrome local via Playwright. As versões resolvidas estão no lockfile.
 
 ## Verificações concluídas
 
@@ -31,7 +31,9 @@ No Lighthouse local final (`docs/audit/lighthouse-final.json`): **performance 72
 
 ## Estabilidade contínua
 
-O ensaio de 30 minutos está em execução durante a publicação inicial. O script `node scripts/audit-browser.mjs` percorre as 12 áreas, executa experiências e registra heap, documentos, DOM anexado e contadores reais do renderer. Ele verifica se o build mudou e rejeita intervalos prolongados de suspensão. Um arquivo com `complete: false` não certifica 30 minutos concluídos. O resultado final será incorporado ao relatório.
+O ensaio de 30 minutos foi interrompido pelo detector de suspensão ou atraso prolongado, com último registro validado em **19 min 29 s**. Não certifica 30 minutos contínuos. Os registros preservados em `docs/audit/stability-interrupted.json` não contêm exceções da aplicação; documentam somente o intervalo observado. Não se declara aprovação do ensaio completo.
+
+A publicação inicial foi mesclada pelo PR #2 e disponibilizada em `https://netverse-redes-vivas.vercel.app`. Três jornadas adicionais em produção passaram: percurso das 12 áreas, tela cheia/bancadas e adiamento do WebGL. HTML, fonte WOFF2 e ícone responderam HTTP 200; a fonte preservou seus 98.932 bytes. `production-check.json` e `production-assets.json` registram essa verificação.
 
 ## Evidências
 
@@ -43,6 +45,7 @@ O ensaio de 30 minutos está em execução durante a publicação inicial. O scr
 - `docs/screenshots/world-zone-0.png` até `world-zone-11.png`: capturas reais por área.
 - `docs/screenshots/lab-final-desktop.png`, `lab-final-osi.png` e `world-clean-mobile.png`: composição final sem painel de métricas.
 - `WORLD_PROGRESS.md`: matriz por área, implementação e limites.
+- `docs/audit/production-check.json`, `production-assets.json` e `stability-interrupted.json`: publicação e encerramento do ensaio.
 
 ## Reproduzir
 
